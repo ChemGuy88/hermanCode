@@ -92,6 +92,31 @@ def run_from_ipython():
     except NameError:
         return False
 
+<<<<<<< HEAD
+=======
+def ts(dt=None, roundTo=60):
+    '''
+    Terminal-style prompt timeStamp for troubleshooting code. Can round a datetime object to any time lapse in seconds.
+    ============================================================================
+    Based on: Thierry Husson (2012) https://stackoverflow.com/a/10854034/5478086
+    ============================================================================
+    INPUT:
+        dt : datetime.datetime object, default now.
+        roundTo : Closest number of seconds to round to, default 1 minute.
+    OUTPUT:
+        A datetime object
+    '''
+
+    if dt == None:
+        dt = datetime.datetime.now()
+    if roundTo == None:
+        return dt
+    seconds = (dt.replace(tzinfo=None) - dt.min).seconds
+    rounding = (seconds+roundTo/2) // roundTo * roundTo
+
+    return dt + datetime.timedelta(0,rounding-seconds,-dt.microsecond)
+
+>>>>>>> 9dfc23347f0ca492f3c172dd6afa628de2f6da04
 def importSASpdf(fname, copy='False'):
     '''
     Reads PDF files saved by SAS Studio and removes the leading numbers and whitespace. Saves result in the same directory with the file extension '.sas'.
