@@ -92,6 +92,8 @@ def run_from_ipython():
     except NameError:
         return False
 
+<<<<<<< HEAD
+=======
 def ts(dt=None, roundTo=60):
     '''
     Terminal-style prompt timeStamp for troubleshooting code. Can round a datetime object to any time lapse in seconds.
@@ -114,6 +116,7 @@ def ts(dt=None, roundTo=60):
 
     return dt + datetime.timedelta(0,rounding-seconds,-dt.microsecond)
 
+>>>>>>> 9dfc23347f0ca492f3c172dd6afa628de2f6da04
 def importSASpdf(fname, copy='False'):
     '''
     Reads PDF files saved by SAS Studio and removes the leading numbers and whitespace. Saves result in the same directory with the file extension '.sas'.
