@@ -1,0 +1,22 @@
+"*":
+  "autocomplete-plus":
+    confirmCompletion: "tab"
+  core:
+    disabledPackages: [
+      "platformio-ide-terminal"
+      "tree-view"
+    ]
+    restorePreviousWindowsOnStart: "no"
+    telemetryConsent: "limited"
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+    softWrapHangingIndent: 2
+    tabLength: 5
+  "exception-reporting":
+    userId: "3f936c45-75b6-4b3e-a055-77a76f23f476"
+  "markdown-preview": {}
+  welcome:
+    showOnStartup: false
