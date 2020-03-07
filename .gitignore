@@ -6,3 +6,7 @@ storage
 .node-gyp
 .npm
 .atom-socket-secret-*
+.atom-socket-secret-Herman-1.36.1
+.atom-socket-secret-herman-1.37.0
+packages/
+recovery/
