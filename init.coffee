@@ -9,8 +9,6 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
-<<<<<<< HEAD
-=======
 #
 ################################################################################
 #### Customizations ############################################################
@@ -29,4 +27,3 @@
 #   # if workspaceView == VALUE
 #   # atom.views.set(OTHERVALUE) # I'm not sure if the right function is .set()
 #   atom.commands.dispatch(workspaceView, 'tree-view:toggle');
->>>>>>> 8560e0b32bd6083347a17254f4a5ba3132cc3bf5

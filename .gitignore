@@ -5,10 +5,7 @@ storage
 .apm
 .node-gyp
 .npm
-<<<<<<< HEAD
-=======
 .atom-socket-secret-Herman-1.36.1
 .atom-socket-secret-herman-1.37.0
 packages/
 recovery/
->>>>>>> 8560e0b32bd6083347a17254f4a5ba3132cc3bf5
