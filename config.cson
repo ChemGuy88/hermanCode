@@ -14,6 +14,10 @@
     showInvisibles: true
     softWrap: true
     softWrapHangingIndent: 2
+<<<<<<< HEAD
+=======
+    tabLength: 5
+>>>>>>> 8560e0b32bd6083347a17254f4a5ba3132cc3bf5
   "exception-reporting":
     userId: "3f936c45-75b6-4b3e-a055-77a76f23f476"
   "markdown-preview": {}
