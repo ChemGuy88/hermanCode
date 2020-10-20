@@ -34,3 +34,17 @@ atom-text-editor .cursor {
 atom-dock .tab-bar {
   display: none;
 }
+
+// Customize color, kudos to https://qiita.com/kouichi-c-nakamura/items/0c0080308e651d8704ad
+atom-text-editor.editor {
+     .syntax--source.syntax--python {
+          .syntax--comment.syntax--line.syntax--number-sign.syntax--python {
+               color: #B3889E;
+          }
+     }
+     .syntax--source.syntax--python {
+          .syntax--punctuation.syntax--definition.syntax--comment.syntax--python {
+               color: #B3889E;
+          }
+     }
+}

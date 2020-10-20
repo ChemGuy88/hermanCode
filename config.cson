@@ -5,18 +5,31 @@
     disabledPackages: [
       "platformio-ide-terminal"
       "tree-view"
+      "spell-check"
+      "autocomplete-plus"
     ]
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "limited"
+    useTreeSitterParsers: false
   editor:
     scrollPastEnd: true
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
-    softWrapHangingIndent: 2
+    softWrapHangingIndent: 4
     tabLength: 5
   "exception-reporting":
     userId: "73497c37-6ea8-4666-9e22-a325fa2ddbea"
-  "markdown-preview": {}
+  "git-diff": {}
+  kite:
+    showWelcomeNotificationOnStartup: false
+  "markdown-preview":
+    useGitHubStyle: true
+  minimap:
+    plugins:
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
   welcome:
     showOnStartup: false
