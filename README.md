@@ -7,7 +7,7 @@ See this Stack Overflow [solution](https://stackoverflow.com/questions/30006827/
 First save the list of installed Atom packages to a file
 
 ```
-apm list --installed --bare
+apm list --installed --bare > ~/.atom/package.list
 ```
 
 Then push to GitHub
