@@ -18,9 +18,8 @@ PATH="/usr/local/Cellar/graphviz/2.40.1/bin:\
 /usr/local/opt/qt/bin:\
 $HOME:\
 $HOME/Documents:\
-$HOME/Library/Python/2.7/bin:\
-$HOME/Library/Python/3.7/bin:\
-$HOME/Users/herman/libQGLViewer-2.7.2:\
+$HOME/libQGLViewer-2.7.2:\
+$HOME/Library/Python/3.8/bin:\
 ${PATH}"
 export PATH
 
