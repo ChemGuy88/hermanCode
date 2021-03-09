@@ -26,6 +26,7 @@
     showWelcomeNotificationOnStartup: false
   "linter-flake8":
     ignoreErrorCodes: [
+<<<<<<< HEAD
       "E704"
       "E226"
       "W504"
@@ -39,6 +40,13 @@
     ]
   "linter-ui-default":
     panelHeight: 383
+=======
+      "266"
+      "501"
+    ]
+  "linter-ui-default":
+    panelHeight: 263
+>>>>>>> 428d9cfe4936fd0f0b4008707cb0b705466e7fe2
   "markdown-preview":
     useGitHubStyle: true
   minimap:
