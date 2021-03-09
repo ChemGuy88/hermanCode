@@ -4,9 +4,9 @@
   core:
     disabledPackages: [
       "platformio-ide-terminal"
-      "tree-view"
       "spell-check"
       "autocomplete-plus"
+      "atom-ide-ui"
     ]
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "limited"
@@ -22,7 +22,23 @@
     userId: "73497c37-6ea8-4666-9e22-a325fa2ddbea"
   "git-diff": {}
   kite:
+    enableCodeFinderLineDecoration: false
     showWelcomeNotificationOnStartup: false
+  "linter-flake8":
+    ignoreErrorCodes: [
+      "E704"
+      "E226"
+      "W504"
+      "E121"
+      "E24"
+      "E126"
+      "W503"
+      "E123"
+      "E266"
+      "E501"
+    ]
+  "linter-ui-default":
+    panelHeight: 383
   "markdown-preview":
     useGitHubStyle: true
   minimap:
