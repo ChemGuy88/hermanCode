@@ -4,7 +4,6 @@
   core:
     disabledPackages: [
       "platformio-ide-terminal"
-      "tree-view"
       "spell-check"
       "autocomplete-plus"
       "atom-ide-ui"
@@ -27,11 +26,19 @@
     showWelcomeNotificationOnStartup: false
   "linter-flake8":
     ignoreErrorCodes: [
-      "266"
-      "501"
+      "E704"
+      "E226"
+      "W504"
+      "E121"
+      "E24"
+      "E126"
+      "W503"
+      "E123"
+      "E266"
+      "E501"
     ]
   "linter-ui-default":
-    panelHeight: 263
+    panelHeight: 383
   "markdown-preview":
     useGitHubStyle: true
   minimap:
