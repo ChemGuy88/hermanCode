@@ -1,3 +1,5 @@
 *
 !.bashrc
 !.gitignore
+!README.md
+!tox.ini
