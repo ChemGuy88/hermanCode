@@ -12,7 +12,7 @@ CYAN="\[$(tput setaf 4)\]"
 WINERED="\[$(tput setaf 88)\]"
 ATOMGREEN="\[$(tput setaf 114)\]"
 RESET="\[$(tput sgr0)\]"
-export PS1="\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
+export PS1="(${CONDA_DEFAULT_ENV}) \@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
 
 ################################################################################
 ### Custom shortcuts ###########################################################
