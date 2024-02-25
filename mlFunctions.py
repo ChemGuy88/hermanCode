@@ -36,19 +36,27 @@ plt.rc('text', usetex=True)
 Functions
 '''
 
+
 def tic():
-    # should create a class so I don't have to capture object
-    # so it works like in Matlab
+    '''
+    Start marker for keeping time.
+    '''
+    # should create a class so I don't have to capture object so it works like in Matlab
     TIC = time.time()
     return TIC
 
+
 def toc(TIC, mute=False):
+    '''
+    Counts how much time has passed since tic() was called, when one of its instances has been passed.
+    '''
     TOC = time.time()
     d = TOC - TIC
     t = datetime.timedelta(seconds=d)
     if not mute:
         print('Elapsed time was %s (h:mm:ss)' % t)
     return t
+
 
 def macAlarm(soundName = 'Pop'):
     bashCommand = 'afplay /System/Library/Sounds/%s.aiff' % soundName
@@ -80,6 +88,55 @@ def alarm1():
     # Should replace lines below with a pop-up notification instead of hacking with "\a"
     sys.stdout.write("\a") # If you're on another screen this puts a notification on Terminal
     sys.stdout.flush()
+
+def blocks(file, size=65536):
+    '''
+    From https://stackoverflow.com/a/9631635/5478086
+    '''
+    while True:
+        b = file.read(size)
+        if not b:
+            break
+        yield b
+
+def getNumLines0(fname):
+    '''
+    From https://stackoverflow.com/a/9631635/5478086
+    '''
+    with open(fname, 'r', encoding="utf-8", errors='ignore') as f:
+        genObj = (bl.count('\n') for bl in blocks(f))
+        s = sum(genObj)
+        print('%s has %d lines.' % (fname, s))
+
+def getNumLines(fname, verbose=1):
+    '''
+    docstring
+    '''
+    # Verbose start
+    if verbose > 0:
+        TicSum = datetime.timedelta(0,0,0)
+        timeStamp = ts()
+        print('\n[%s] Counting number of lines in %s.' % (str(timeStamp), fname))
+        # spinner = Spinner('')
+        Tic = tic()
+    with open(fname) as f:
+        lines = (1 for line in f)
+        numLines = 0
+        for line in lines:
+            numLines += 1
+            if verbose > 0:
+                pass
+                # spinner.next()
+    if verbose > 0:
+        # spinner.finish()
+        Toc = toc(Tic)
+        TicSum += Toc
+
+    # verbose exit
+    if verbose > 0:
+        print('\n[%s] There were %s lines in %s.' % (str(timeStamp), numLines, fname))
+
+    return numLines
 
 def run_from_ipython():
     '''
@@ -238,3 +295,34 @@ def makeDigraph(dft, type='clusters'):
                     sys.stdout.flush()
     sys.stdout.write("\n")
     return G
+
+def match(first, second):
+    '''
+    From https://www.geeksforgeeks.org/wildcard-character-matching/
+    The main function that checks if two given strings match.
+    The first string may contain wildcard characters
+    '''
+
+    # If we reach at the end of both strings, we are done
+    if len(first) == 0 and len(second) == 0:
+        return True
+
+    # Make sure that the characters after '*' are present
+    # in second string. This function assumes that the first
+    # string will not contain two consecutive '*'
+    if len(first) > 1 and first[0] == '*' and  len(second) == 0:
+        return False
+
+    # If the first string contains '?', or current characters
+    # of both strings match
+    if (len(first) > 1 and first[0] == '?') or (len(first) != 0
+        and len(second) !=0 and first[0] == second[0]):
+        return match(first[1:],second[1:]);
+
+    # If there is *, then there are two possibilities
+    # a) We consider current character of second string
+    # b) We ignore current character of second string.
+    if len(first) !=0 and first[0] == '*':
+        return match(first[1:],second) or match(first,second[1:])
+
+    return False
