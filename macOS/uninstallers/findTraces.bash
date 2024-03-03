@@ -12,7 +12,8 @@ fi
 
 echo "This directory was created by 'findTraces.sh'" > "$FIND_TRACES_DIRECTORY/README.md"
 
-nohup find / -iname *matlab* 1> "$FIND_TRACES_DIRECTORY/matlab.out" 2> "$FIND_TRACES_DIRECTORY/matlab.err" &
+nohup find / -iname *mactex* 1> "$FIND_TRACES_DIRECTORY/mactex.out" 2> "$FIND_TRACES_DIRECTORY/mactex.err" &
+# nohup find / -iname *matlab* 1> "$FIND_TRACES_DIRECTORY/matlab.out" 2> "$FIND_TRACES_DIRECTORY/matlab.err" &
 # nohup find / -iname *qgl* 1> "$FIND_TRACES_DIRECTORY/libQGL.out" 2> "$FIND_TRACES_DIRECTORY/libQGL.err" &
 # nohup find / -iname *weka* 1> "$FIND_TRACES_DIRECTORY/weka.out" 2> "$FIND_TRACES_DIRECTORY/weka.err" &
 # nohup find / -iname *anaconda* 1> "$FIND_TRACES_DIRECTORY/anaconda.out" 2> "$FIND_TRACES_DIRECTORY/anaconda.err" &
