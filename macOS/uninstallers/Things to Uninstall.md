@@ -13,8 +13,12 @@ As of 2/25/2024
 # Things to scour for
 
 ```
-tex
 canopy
+charles
+CloudFlare
+CrimeFlare
+iStats
+testgen
 ```
 
 and anything from the **GUI Apps** above after you drag-and-drop them.
