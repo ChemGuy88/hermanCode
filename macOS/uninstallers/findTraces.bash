@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# REMEMBER, this script must be run as `sudo` to avoid getting access denied errors when running `find`.
+
 source /Users/herman/.hermanCode/macOS/functions.bash
 
 FIND_TRACES_DIRECTORY=~/"Find Traces/$(getTimestamp)"
@@ -12,7 +14,13 @@ fi
 
 echo "This directory was created by 'findTraces.sh'" > "$FIND_TRACES_DIRECTORY/README.md"
 
-nohup find / -iname *mactex* 1> "$FIND_TRACES_DIRECTORY/mactex.out" 2> "$FIND_TRACES_DIRECTORY/mactex.err" &
+nohup find / -iname *canopy* 1> "$FIND_TRACES_DIRECTORY/canopy.out" 2> "$FIND_TRACES_DIRECTORY/canopy.err" &
+nohup find / -iname *charles* 1> "$FIND_TRACES_DIRECTORY/charles.out" 2> "$FIND_TRACES_DIRECTORY/charles.err" &
+nohup find / -iname *CloudFlare* 1> "$FIND_TRACES_DIRECTORY/CloudFlare.out" 2> "$FIND_TRACES_DIRECTORY/CloudFlare.err" &
+nohup find / -iname *CrimeFlare* 1> "$FIND_TRACES_DIRECTORY/CrimeFlare.out" 2> "$FIND_TRACES_DIRECTORY/CrimeFlare.err" &
+nohup find / -iname *iStats* 1> "$FIND_TRACES_DIRECTORY/iStats.out" 2> "$FIND_TRACES_DIRECTORY/iStats.err" &
+nohup find / -iname *testgen* 1> "$FIND_TRACES_DIRECTORY/testgen.out" 2> "$FIND_TRACES_DIRECTORY/testgen.err" &
+# nohup find / -iname *mactex* 1> "$FIND_TRACES_DIRECTORY/mactex.out" 2> "$FIND_TRACES_DIRECTORY/mactex.err" &
 # nohup find / -iname *matlab* 1> "$FIND_TRACES_DIRECTORY/matlab.out" 2> "$FIND_TRACES_DIRECTORY/matlab.err" &
 # nohup find / -iname *qgl* 1> "$FIND_TRACES_DIRECTORY/libQGL.out" 2> "$FIND_TRACES_DIRECTORY/libQGL.err" &
 # nohup find / -iname *weka* 1> "$FIND_TRACES_DIRECTORY/weka.out" 2> "$FIND_TRACES_DIRECTORY/weka.err" &
@@ -23,4 +31,4 @@ nohup find / -iname *mactex* 1> "$FIND_TRACES_DIRECTORY/mactex.out" 2> "$FIND_TR
 # nohup find / -iname *miniconda* 1> "$FIND_TRACES_DIRECTORY/miniconda.out" 2> "$FIND_TRACES_DIRECTORY/miniconda.err" &
 # nohup find / \( -iname *R-project* \) 1> "$FIND_TRACES_DIRECTORY/R-project.out" 2> "$FIND_TRACES_DIRECTORY/R-project.err" &
 
-echo "Script is running"
+echo "Scripts are running."
