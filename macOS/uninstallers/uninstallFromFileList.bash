@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2320
 
 # KNOWN BUGS: If the file at FILE_PATH does not end with an empty newline, the last line will not be read.
 
@@ -9,54 +10,53 @@ GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
+usage0() {
+    cat <<USAGE
+    $0 -f <FILE_PATH> -t TRUE|FALSE
+    -f The keyword to search for. Use multiple -f for search for multiple keywords.
+    -t The script test flag. One of TRUE or FALSE.
+USAGE
+}
+
+usage() {
+    usage0 1>&2
+    exit 1
+}
+
 # >>> Argument parsing >>>
-POSITIONAL_ARGS=()
-
-while [[ "$#" -gt 0 ]]; do
-  case $1 in
-    -f|--filepath)
-      FILE_PATH="$2"
-      shift # past argument
-      shift # past value
-      ;;
-    -t|--test_mode)
-      TEST_MODE="$2"
-      shift # past argument
-      ;;
-    -*|--*)
-      echo "Unknown option $1"
-      exit 1
-      ;;
-    *)
-      POSITIONAL_ARGS+=("$1") # save positional arg
-      shift # past argument
-      ;;
-  esac
+while getopts ":f:t:" opt; do
+    case "${opt}" in
+        f) FILE_PATH+=("$OPTARG");;
+        t) TEST_MODE=${OPTARG};;
+        *) usage;;
+    esac
 done
+shift $((OPTIND -1))
 
-set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
-
+if [ -z "${FILE_PATH[*]}" ] || [ -z "${TEST_MODE}" ]; then
+    usage
+fi
 # <<< Argument parsing <<<
 
 # >>> Argument confirmation >>>
 SHOULD_EXIT=0
 
 # $FILE_PATH
-if [[ ! -n "$FILE_PATH" ]]; then
+if [[ -z "${FILE_PATH[*]}" ]]; then
     echo "${RED}You must supply a file path${NC}."
     SHOULD_EXIT=1
 fi
 
 # $TEST_MODE
-MESSAGE="${RED}TEST_MODE must be one of "TRUE" or "FALSE"${NC}."
-if [ ! -n "$TEST_MODE" ]; then
-    echo $MESSAGE
+MESSAGE="${RED}TEST_MODE must be one of {TRUE, FALSE}${NC}."
+if [ -z "$TEST_MODE" ]; then
+    echo "$MESSAGE"
     SHOULD_EXIT=1
 else
     if [ "$TEST_MODE" == "TRUE" ] || [ "$TEST_MODE" == "FALSE" ]; then
         :
     else
-        echo $MESSAGE
+        echo "$MESSAGE"
         SHOULD_EXIT=1
     fi
 fi
@@ -79,10 +79,10 @@ deletedFiles=()
 deletedLinks=()
 failedFiles=()
 failedLinks=()
-while IFS=$'\n' read line
+while IFS=$'\n' read -r line
 do
     if [ -f "$line" ] || [ -L "$line" ]; then
-        echo "  Working on "$line""
+        echo "  Working on $line"
         if [ -f "$line" ]; then
             echo "    $line is a file."
             if [ "$TEST_MODE" == "TRUE" ]; then
@@ -119,17 +119,17 @@ do
             :
         fi
     fi
-done < "$FILE_PATH"
+done < <(grep -v -e '^#' -e '^$' "$FILE_PATH")
 unset IFS
 
 # Delete empty directories
 echo "${bold}Deleting empty directories.${normal}"
 deletedDirectories=()
 failedDirectories=()
-while IFS=$'\n' read line
+while IFS=$'\n' read -r line
 do 
     if [ -d "$line" ]; then
-        echo "  Working on "$line"."
+        echo "  Working on $line."
         echo "    $line is a directory."
         if [ "$TEST_MODE" == "TRUE" ]; then
             echo "    ${GRN}TEST MODE${NC}"
@@ -146,10 +146,10 @@ do
             failedDirectories+=("$line")
         fi
     fi
-done < "$FILE_PATH"
+done < <(grep -v -e '^#' -e '^$' "$FILE_PATH")
 unset IFS
 
-# Report results
+# Report results: Failed operations
 echo "${bold}The following paths ${RED}were not${NC} removed.${normal}"
 echo $'\n'"${bold}Files${normal}:"
 for path in "${failedFiles[@]}";
@@ -167,15 +167,20 @@ do
     echo "  $path"
 done
 
+# Report results: Successful operations
 echo $'\n'"${bold}The following paths ${GRN}were${NC} removed:${normal}"
-
-# Method 1
-allpaths=()
-allPaths+=("${deletedFiles}")
-allPaths+=("${deletedLinks}")
-allPaths+=("${deletedDirectories}")
-IFS=$'\n' allPathsSorted=($(sort <<<"${allPaths[*]}"))
+allPaths+=("${deletedFiles[@]}")
+allPaths+=("${deletedLinks[@]}")
+allPaths+=("${deletedDirectories[@]}")
+allPathsSorted=()
+# Sort results
+while read -r line;
+do
+    allPathsSorted+=("$line");
+done < <(IFS=$'\n' sort <<<"${allPaths[*]}")
 unset IFS
+
+# Print results
 for path in "${allPathsSorted[@]}";
 do
     echo "  $path"
