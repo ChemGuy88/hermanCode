@@ -35,7 +35,7 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
   - [ ] TextWrangler
 
 ###  Remove traces
-  - [ ] **Python**: **Do manually**
+  - [ ] Python: **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
   - [ ] VMWare
 
 ###  What is in...?
@@ -44,13 +44,17 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ##  Consolidate my code
 
-| Repository Name | Date Created | URL                                      |
-| --------------- | ------------ | ---------------------------------------- |
-| hermanCode      | 2024-02-11   | https://github.com/ChemGuy88/hermanCode  |
-| mySettings      | 2020-10-20   | https://github.com/ChemGuy88/mySettings  |
-| bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc      |
-| myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom      |
-| mlFunctions     | 2018-09-17   | https://github.com/ChemGuy88/mlFunctions |
+Push the code from the iMac to a remote, one of 
+
+| Repository Name | Date Created | URI                                          |
+| --------------- | ------------ | -------------------------------------------- |
+| hermanCode      | 2024-02-11   | https://github.com/ChemGuy88/hermanCode      |
+| mySettings      | 2020-10-20   | https://github.com/ChemGuy88/mySettings      |
+| bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc          |
+| myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom          |
+| mlFunctions     | 2018-09-17   | https://github.com/ChemGuy88/mlFunctions     |
+| N/A             | 2024-XX-XX   | herman@remote-imac:/Users/herman/.hermanCode |
+| N/A             | 2024-XX-XX   | herman@pyspark:/.../.hermanCode              |
 
 ## Done
 
