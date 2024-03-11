@@ -7,18 +7,31 @@
   - [ ] VirtualBox.app
 
 ###  Remove packages
+  - [ ] ...
+
+Use the following code to search the packages
 ```bash
 pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 ```
 
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
-###  Remove traces
+### Find traces
+  - [ ] Akamai
+  - [ ] BlueStacks  # Android emulator
+  - [ ] continuum, continuum.io
   - [ ] iTools Pro
   - [ ] Microsoft Teams classic
-  - [ ] Python
   - [ ] SignalScope X
   - [ ] TestGen
+  - [ ] texlive
+  - [ ] texmf
+  - [ ] TeXShop
+  - [ ] TextWrangler
+
+###  Remove traces
+  - [ ] **Python**: **Do manually**
+  - [ ] VMWare
 
 ###  What is in...?
    - [ ] "/Users/Shared"
@@ -34,3 +47,20 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 | myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom     |
 
 ## Done
+
+### Remove GUI Apps, packages, and find and remove traces
+- [x] CloudFlare
+- [x] CrimeFlare
+- [x] R-project
+- [x] anaconda
+- [x] atom
+- [x] brew
+- [x] canopy
+- [x] charles
+- [x] iStats
+- [x] mactex
+- [x] matlab
+- [x] miniconda
+- [x] qgl
+- [x] testgen
+- [x] weka
