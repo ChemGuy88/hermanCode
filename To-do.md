@@ -2,12 +2,29 @@
 
 ## To-do
 
-1. Uninstall GUIs
-2. Remove GUI packages
-3. Remove GUI traces
-4. Remove Python traces
+###  Uninstall GUIs
+  - [ ] BetterTouchTool: `/Users/herman/Applications/BetterTouchTool.app`
+  - [ ] VirtualBox.app
 
-5. Merge the following repositories:
+###  Remove packages
+```bash
+pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
+```
+
+Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
+
+###  Remove traces
+  - [ ] iTools Pro
+  - [ ] Microsoft Teams classic
+  - [ ] Python
+  - [ ] SignalScope X
+  - [ ] TestGen
+
+###  What is in...?
+   - [ ] "/Users/Shared"
+   - [ ] "/Users/herman2"
+
+###  Merge the following repositories:
 
 | Repository Name | Date Created | URL                                     |
 | --------------- | ------------ | --------------------------------------- |
@@ -16,3 +33,4 @@
 | bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc     |
 | myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom     |
 
+## Done
