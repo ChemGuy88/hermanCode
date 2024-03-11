@@ -2,6 +2,11 @@
 
 ## To-do
 
+- Clean-up my computer
+- Consolidate my code
+
+## Clean-up my computer
+
 ###  Uninstall GUIs
   - [ ] BetterTouchTool: `/Users/herman/Applications/BetterTouchTool.app`
   - [ ] VirtualBox.app
@@ -37,7 +42,7 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
    - [ ] "/Users/Shared"
    - [ ] "/Users/herman2"
 
-###  Merge the following repositories:
+##  Consolidate my code
 
 | Repository Name | Date Created | URL                                      |
 | --------------- | ------------ | ---------------------------------------- |
