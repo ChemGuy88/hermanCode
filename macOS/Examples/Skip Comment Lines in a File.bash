@@ -25,7 +25,7 @@ echo " ${bold}${BLU}<<<${normal}${NC} Segmentation of the text ${bold}${BLU}<<<$
 
 # Skip lines commented with "#" or empty lines
 echo " ${bold}${RED}>>>${normal}${NC} Selective reading of the text ${bold}${RED}>>>${normal}${NC}"
-while IFS=$'\n' read -r line
+while read -r line
 do 
     echo "  Working on \"$line\""
 done < <(echo "$TEXT" | grep -v -e '^#' -e '^$')
