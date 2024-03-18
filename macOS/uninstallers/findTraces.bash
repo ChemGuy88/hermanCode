@@ -15,7 +15,7 @@ NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
-
+    HINT: Run this as \"sudo\" to prevent getting \"access denid\" errors.
     $0 -k <TRACE_KEYWORDS> -t TRUE|FALSE
     -k The keyword to search for. Use multiple -k for search for multiple keywords.
     -t The script test flag. One of TRUE or FALSE.
