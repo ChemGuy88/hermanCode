@@ -4,15 +4,16 @@
 
 - Clean-up my computer
 - Consolidate my code
+- Track all coding projects
 
 ## Clean-up my computer
 
-###  Uninstall GUIs
-  - [ ] BetterTouchTool: `/Users/herman/Applications/BetterTouchTool.app`
-  - [ ] VirtualBox.app
-
-###  Remove packages
+###  Uninstall with Trash click-and-drag
   - [ ] ...
+
+###  Find and remove packages
+  - [ ] ...
+  - [ ] JumpDesktop
 
 Use the following code to search the packages
 ```bash
@@ -22,17 +23,35 @@ pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
 ### Find traces
-  - [ ] Akamai
-  - [ ] BlueStacks  # Android emulator
-  - [ ] continuum, continuum.io
-  - [ ] iTools Pro
-  - [ ] Microsoft Teams classic
-  - [ ] SignalScope X
-  - [ ] TestGen
-  - [ ] texlive
-  - [ ] texmf
-  - [ ] TeXShop
-  - [ ] TextWrangler
+- Batch 1
+    - [ ] Akamai
+    - [ ] BlueStacks  # Android emulator
+    - [ ] continuum, continuum.io
+    - [ ] iTools Pro
+    - [ ] Microsoft Teams classic
+    - [ ] SignalScope X
+    - [ ] TestGen
+    - [ ] texlive
+    - [ ] texmf
+    - [ ] TeXShop
+    - [ ] TextWrangler
+- Batch 2
+    - [ ] BetterTouchTool
+    - [ ] Chromium
+    - [ ] Chrome Apps
+      - [ ] Chrome App Launcher
+      - [ ] Chrome Remote Desktop v1
+      - [ ] Chrome Remote Desktop v2
+      - [ ] Gmail
+      - [ ] Google Drive
+      - [ ] Google Play Music v1
+      - [ ] Google Play Music v2
+      - [ ] Google Search
+      - [ ] YouTube
+    - [ ] mySIMBL
+    - [ ] iTerm
+    - [ ] Opera
+    - [ ] VirtualBox
 
 ###  Remove traces
   - [ ] Python: **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
@@ -56,7 +75,27 @@ Push the code from the iMac to a remote, one of
 | N/A             | 2024-XX-XX   | herman@remote-imac:/Users/herman/.hermanCode |
 | N/A             | 2024-XX-XX   | herman@pyspark:/.../.hermanCode              |
 
-## Done
+## Track my coding projects
+
+I have code and coding-related files and folders throughout my computer. I should organize them. I can start my searching in these folders:
+
+- /Users/herman
+- /Users/herman/Documents
+- /Users/herman/Documents/Herman's Code
+
+Maybe  I can try something like
+
+```bash
+find / -iname *.py
+```
+
+| Folder Name                 | X   | URI                                                               |
+| --------------------------- | --- | ----------------------------------------------------------------- |
+| Apple Health Blood Pressure | -   | /Users/herman/Documents/Herman's Code/Apple Health Blood Pressure |
+| .ssh.copy                   | -   | /Users/herman/Documents/Herman's Code/.ssh.copy                   |
+| .vim                        | -   | herman@pyspark:/home/herman/.vim/.vimrc                           |
+
+# Done
 
 ### Remove GUI Apps, packages, and find and remove traces
 - [x] CloudFlare
