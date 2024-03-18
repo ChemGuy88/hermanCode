@@ -88,7 +88,7 @@ if ! [ -d "$FIND_TRACES_DIRECTORY" ]; then
     fi
     echo "Made directory at $FIND_TRACES_DIRECTORY"
 elif [ -d "$FIND_TRACES_DIRECTORY" ]; then
-    echo "Directory already exists: $FIND_TRACES_DIRECTORY"
+    echo "Directory already exists: \"$FIND_TRACES_DIRECTORY\""
 fi
 
 # Make sure file ends with a newline
@@ -98,25 +98,30 @@ FILE_PATH_TEMP1="$FILE_PATH_TO.tmp1"
 sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_TEMP1"
 
 # Preview data to be processed
-echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}>>>${normal}${NC}"
-cat "$FILE_PATH_TEMP1"
-echo " ${bold}${GRN}<<<${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}<<<${normal}${NC}"
+if [ "$TEST_MODE" == TRUE ]; then
+    echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}>>>${normal}${NC}"
+    cat "$FILE_PATH_TEMP1"
+    echo " ${bold}${GRN}<<<${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}<<<${normal}${NC}"
+fi
 
 # Preview data line by line
-echo " ${bold}${BLU}>>>${normal}${NC} Segmentation of the text ${bold}${BLU}>>>${normal}${NC}"
-it1=0
-while read -r line
-do
-    it1=$((it1+1))
-    echo "  Line $it1: \"$line\""
-done < "$FILE_PATH_TEMP1"
-echo " ${bold}${BLU}<<<${normal}${NC} Segmentation of the text ${bold}${BLU}<<<${normal}${NC}"
+if [ "$TEST_MODE" == TRUE ]; then
+    echo " ${bold}${BLU}>>>${normal}${NC} Segmentation of the text ${bold}${BLU}>>>${normal}${NC}"
+    it1=0
+    while read -r line
+    do
+        it1=$((it1+1))
+        echo "  Line $it1: \"$line\""
+    done < "$FILE_PATH_TEMP1"
+    echo " ${bold}${BLU}<<<${normal}${NC} Segmentation of the text ${bold}${BLU}<<<${normal}${NC}"
+fi
 
 # >>> Main body of processing code >>>
-echo "Processing traces in \"$FILE_PATH_TEMP1\"."
+echo "Processing traces in \"$FILE_PATH\"."
+
 # Step 1: Remove leading text, "/System/Volumes/Data"
+echo "  Removing leading text, \"/System/Volumes/Data\""
 FILE_PATH_TEMP2="$FILE_PATH_TO.tmp2"
-echo "" > "$FILE_PATH_TEMP2"
 if [ -f "$FILE_PATH_TEMP2" ]; then
     rm "$FILE_PATH_TEMP2"
 else
@@ -126,7 +131,6 @@ it2=0
 while read -r line
 do
     it2=$((it2+1))
-    echo "  Line $it2 (↱): \"$line\""
     # If line starts with "/System/Volumes/Data", remove text
     if [[ "$line" == /System/Volumes/Data* ]]; then
         newLine="$(echo "$line" | sed 's/\/System\/Volumes\/Data//')"
@@ -135,18 +139,26 @@ do
         newLine="$line"
         A="↳"
     fi
-    echo "  Line $it2 ($A): \"$newLine\""
+    if [ "$TEST_MODE" == TRUE ]; then
+        echo "  Line $it2 (↱): \"$line\""
+        echo "  Line $it2 ($A): \"$newLine\""
+    fi
     echo "$newLine" >> "$FILE_PATH_TEMP2"
 done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP1")
 
 # Step 2: Remove duplicates
-echo "Removing duplicates..."
+echo "  Removing duplicates..."
 FILE_PATH_TEMP3="$FILE_PATH_TO.tmp3"
 awk '!seen[$0]++' "$FILE_PATH_TEMP2" > "$FILE_PATH_TEMP3"
 
 # Step 3: Remove lines that start with leading text, "/Volumes/BOOTCAMP"
-echo "Removing lines starting with \"/Volumes/BOOTCAMP\"..."
-sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP3" > "$FILE_PATH_TO"
+echo "  Removing lines starting with \"/Volumes/BOOTCAMP\"..."
+FILE_PATH_TEMP4="$FILE_PATH_TO.temp4"
+sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP3" > "$FILE_PATH_TEMP4"
+
+# Step 4: Sort final result
+echo "  Sorting final results..."
+sort "$FILE_PATH_TEMP4" > "$FILE_PATH_TO"
 
 echo "Processing traces in \"$FILE_PATH\" - done."
 # <<< Main body of processing code <<<
@@ -155,7 +167,8 @@ echo "Processing traces in \"$FILE_PATH\" - done."
 echo "Removing temporary files"
 LIST_OF_TEMP_FILES=("$FILE_PATH_TEMP1" \
                     "$FILE_PATH_TEMP2" \
-                    "$FILE_PATH_TEMP3")
+                    "$FILE_PATH_TEMP3" \
+                    "$FILE_PATH_TEMP4")
 for fpath in "${LIST_OF_TEMP_FILES[@]}"
 do
     rm "$fpath"
