@@ -2,7 +2,18 @@
 # h/t to https://stackoverflow.com/questions/7529856/retrieving-multiple-arguments-for-a-single-option-using-getopts-in-bash
 # h/t to https://stackoverflow.com/questions/16483119/an-example-of-how-to-use-getopts-in-bash
 
-usage() { echo "Usage: $0 [-k <trace_keyword>] [-t <TRUE|FALSE>]" 1>&2; exit 1; }
+usage0() {
+    cat <<USAGE
+
+    $0 -k <TRACE_KEYWORDS> -t TRUE|FALSE
+    -k The keyword to search for. Use multiple -k for search for multiple keywords.
+    -t The script test flag. One of TRUE or FALSE.
+USAGE
+}
+usage() {
+    usage0 1>&2
+    exit 1
+}
 
 while getopts ":k:t:" opt; do
     case "${opt}" in
