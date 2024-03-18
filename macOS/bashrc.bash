@@ -85,14 +85,14 @@ else
     PROMPT_CONDA_PREFIX="(${CONDA_DEFAULT_ENV}) "
 fi
 
-export PS1="${PROMPT_CONDA_PREFIX}\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
+export PS1="${PROMPT_CONDA_PREFIX}${WINERED}\@${RESET} [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
 
 ################################################################################
 ### Constants: Imported ########################################################
 ################################################################################
 
 if [ -f ~/.hermanCode/limericks_in.bash ]; then
-    source ~/.hermanCode/limericks_in.bash
+    source "/Users/herman/.hermanCode/macOS/limericks_in.bash"
 fi
 
 ################################################################################
@@ -105,7 +105,8 @@ source /Users/herman/.hermanCode/macOS/functions.bash
 ### Shortcuts ##################################################################
 ################################################################################
 
-cd ~
+alias vim="vi -S ~/.vim/.vimrc"
+cd ~ || return
 pgrep -U root -f find | xargs ps
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
