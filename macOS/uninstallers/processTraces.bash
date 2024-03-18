@@ -46,12 +46,19 @@ SHOULD_EXIT=0
 
 # $FILE_PATH
 if [[ -z "$FILE_PATH" ]]; then
-    echo "${RED}You must supply the path to the file${NC}."
+    echo "${RED}Note${NC}: You must supply the path to the file."
     SHOULD_EXIT=1
 fi
+if [ -f "$FILE_PATH" ]; then
+    :
+else
+    echo "${RED}Note${NC}: The file provided does not exist."
+    SHOULD_EXIT=1
+fi
+    
 
 # $TEST_MODE
-MESSAGE="${RED}TEST_MODE must be one of {TRUE, FALSE}${NC}."
+MESSAGE="${RED}Note${NC}: TEST_MODE must be one of {TRUE, FALSE}."
 if [ -z "$TEST_MODE" ]; then
     echo "$MESSAGE"
     SHOULD_EXIT=1
@@ -153,7 +160,7 @@ awk '!seen[$0]++' "$FILE_PATH_TEMP2" > "$FILE_PATH_TEMP3"
 
 # Step 3: Remove lines that start with leading text, "/Volumes/BOOTCAMP"
 echo "  Removing lines starting with \"/Volumes/BOOTCAMP\"..."
-FILE_PATH_TEMP4="$FILE_PATH_TO.temp4"
+FILE_PATH_TEMP4="$FILE_PATH_TO.tmp4"
 sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP3" > "$FILE_PATH_TEMP4"
 
 # Step 4: Sort final result
