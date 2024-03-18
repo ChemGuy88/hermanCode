@@ -55,7 +55,23 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ###  Remove traces
   - [ ] Python: **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
-  - [ ] VMWare
+  - [ ] VMWare. See https://kb.vmware.com/s/article/1017838
+    - /Library/Application Support/VMware
+    - /Library/Application Support/VMware Fusion
+    - /Library/Preferences/VMware Fusion
+    - ~/Library/Application\ Support/VMware Fusion
+    - ~/Library/Application\ Support/VMware Fusion\ Applications\ Menu
+    - ~/Library/Caches/com.vmware.fusion
+    - ~/Library/Preferences/VMware Fusion
+    - ~/Library/Preferences/com.vmware.fusion.plist
+    - ~/Library/Preferences/com.vmware.fusion.plist.lockfile
+    - ~/Library/Preferences/com.vmware.fusionDaemon.plist
+    - ~/Library/Preferences/com.vmware.fusionDaemon.plist.lockfile
+    - ~/Library/Preferences/com.vmware.fusionApplicationsMenu.helper.plist
+    - ~/Library/Preferences/com.vmware.fusionApplicationsMenu.plist
+    - ~/Library/Preferences/com.vmware.fusionStartMenu.plist
+    - ~/Library/Preferences/com.vmware.fusionStartMenu.plist.lockfile
+
 
 ###  What is in...?
    - [ ] "/Users/Shared"
