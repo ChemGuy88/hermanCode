@@ -27,9 +27,14 @@ usage() {
 
 
 # >>> Argument parsing >>>
-while getopts ":f:t:" opt; do
+LEADING_TEXT_DEFAULT=("/Volumes/BOOTCAMP" \
+                      "/Users/herman2" \
+                      "/Users/Shared" \
+                      "/private/var/db")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
+while getopts ":f:l:t:" opt; do
     case "${opt}" in
         f) FILE_PATH=${OPTARG};;
+        l) LEADING_TEXT+=("$OPTARG");;
         t) TEST_MODE=${OPTARG};;
         *) usage;;
     esac
@@ -55,7 +60,17 @@ else
     echo "${RED}Note${NC}: The file provided does not exist."
     SHOULD_EXIT=1
 fi
-    
+
+# $LEADING_TEXT
+# If leading text is empty, set to default.
+if [ -z "${LEADING_TEXT[*]}" ]; then
+    for EL in "${LEADING_TEXT_DEFAULT[@]}"
+    do
+        LEADING_TEXT+=("$EL")
+    done
+    else
+        :
+fi
 
 # $TEST_MODE
 MESSAGE="${RED}Note${NC}: TEST_MODE must be one of {TRUE, FALSE}."
@@ -74,6 +89,10 @@ fi
 # Argument confirmation
 echo "FILE_PATH:"
 for val in "${FILE_PATH[@]}"; do
+    echo "  - \"${GRN}$val${NC}\""
+done
+echo "LEADING_TEXT:"
+for val in "${LEADING_TEXT[@]}"; do
     echo "  - \"${GRN}$val${NC}\""
 done
 echo "TEST_MODE = ${GRN}${TEST_MODE}${NC}"
@@ -158,8 +177,19 @@ echo "  Removing duplicates..."
 FILE_PATH_TEMP3="$FILE_PATH_TO.tmp3"
 awk '!seen[$0]++' "$FILE_PATH_TEMP2" > "$FILE_PATH_TEMP3"
 
-# Step 3: Remove lines that start with leading text, "/Volumes/BOOTCAMP"
-echo "  Removing lines starting with \"/Volumes/BOOTCAMP\"..."
+# Step 3: Remove lines that start with leading text
+echo "  Removing lines starting with leading text..."
+it3=1
+FILE_PATH_TEMP4_0="$FILE_PATH_TEMP3"
+FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
+for text0 in "${LEADING_TEXT[@]}";
+do
+    text="$(echo "$text0" | sed 's/\//\\\//g')"  # escape path separators
+    sed "/^'$text'/d" "$FILE_PATH_TEMP4_0" > "$FILE_PATH_TEMP4_1"
+    it3=$((it3+1))
+    FILE_PATH_TEMP4_0="$FILE_PATH_TEMP4_1"
+    FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
+done
 FILE_PATH_TEMP4="$FILE_PATH_TO.tmp4"
 sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP3" > "$FILE_PATH_TEMP4"
 
