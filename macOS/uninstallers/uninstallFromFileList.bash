@@ -1,8 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2320
 
-# KNOWN BUGS: If the file at FILE_PATH does not end with an empty newline, the last line will not be read.
-
 # Formatting
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -12,8 +10,12 @@ NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
-    $0 -f <FILE_PATH> -t TRUE|FALSE
+Takes in a list of paths and deletes each item. If the item is a directory, it will not be deleted unless it's empty. Items that are not deleted are written to <OUT_PATH>
+
+$0 -f <FILE_PATH> -t TRUE|FALSE -o <OUT_PATH>
+
     -f The keyword to search for. Use multiple -f for search for multiple keywords.
+    -o The file path for the output file.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
 }
@@ -24,9 +26,11 @@ usage() {
 }
 
 # >>> Argument parsing >>>
-while getopts ":f:t:" opt; do
+OUT_PATH="UndeletedFiles.txt"
+while getopts ":f:o:t:" opt; do
     case "${opt}" in
         f) FILE_PATH+=("$OPTARG");;
+        o) OUT_PATH=${OPTARG};;
         t) TEST_MODE=${OPTARG};;
         *) usage;;
     esac
@@ -72,6 +76,10 @@ else
 fi
 
 # <<< Argument confirmation <<<
+
+# Make sure file ends with a newline
+FILE_PATH_TEMP="$FILE_PATH.tmp1"
+sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_TEMP"
 
 # Delete files and links first
 echo "${bold}Deleting files and links first.${normal}"
@@ -119,7 +127,7 @@ do
             :
         fi
     fi
-done < <(grep -v -e '^#' -e '^$' "$FILE_PATH")
+done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
 # Delete empty directories
@@ -146,7 +154,7 @@ do
             failedDirectories+=("$line")
         fi
     fi
-done < <(grep -v -e '^#' -e '^$' "$FILE_PATH")
+done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
 # Report results: Failed operations
@@ -166,6 +174,24 @@ for path in "${failedDirectories[@]}";
 do
     echo "  $path"
 done
+
+allFailedPaths+=("${failedFiles[@]}")
+allFailedPaths+=("${failedLinks[@]}")
+allFailedPaths+=("${failedDirectories[@]}")
+allFailedPathsSorted=()
+# Sort results
+while read -r line;
+do
+    allFailedPathsSorted+=("$line");
+done < <(IFS=$'\n' sort <<<"${allFailedPaths[*]}")
+unset IFS
+
+# Print results
+for path in "${allFailedPathsSorted[@]}";
+do
+    echo "$path" >> "$OUT_PATH"
+done
+echo $'\n'"Failed operations were written to $OUT_PATH."
 
 # Report results: Successful operations
 echo $'\n'"${bold}The following paths ${GRN}were${NC} removed:${normal}"
