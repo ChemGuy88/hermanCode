@@ -5,6 +5,7 @@
 - Clean-up my computer
 - Consolidate my code
 - Track all coding projects
+- Clean up Dropbox folder: Move everything out. Do not use Dropbox
 
 ## Clean-up my computer
 
@@ -13,7 +14,6 @@
 
 ###  Find and remove packages
   - [ ] ...
-  - [ ] JumpDesktop
 
 Use the following code to search the packages
 ```bash
@@ -23,19 +23,7 @@ pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
 ### Find traces
-- Batch 1
-    - [ ] Akamai
-    - [ ] BlueStacks  # Android emulator
-    - [ ] continuum, continuum.io
-    - [ ] iTools Pro
-    - [ ] Microsoft Teams classic
-    - [ ] SignalScope X
-    - [ ] TestGen
-    - [ ] texlive
-    - [ ] texmf
-    - [ ] TeXShop
-    - [ ] TextWrangler
-- Batch 2
+- Batch 3
     - [ ] BetterTouchTool
     - [ ] Chromium
     - [ ] Chrome Apps
@@ -52,6 +40,10 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
     - [ ] iTerm
     - [ ] Opera
     - [ ] VirtualBox
+    - [ ] JumpDesktop
+- [ ] Batch 4
+    - [ ] hegenberg
+
 
 ###  Remove traces
   - [ ] Python: **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
@@ -114,18 +106,31 @@ find / -iname *.py
 # Done
 
 ### Remove GUI Apps, packages, and find and remove traces
-- [x] CloudFlare
-- [x] CrimeFlare
-- [x] R-project
-- [x] anaconda
-- [x] atom
-- [x] brew
-- [x] canopy
-- [x] charles
-- [x] iStats
-- [x] mactex
-- [x] matlab
-- [x] miniconda
-- [x] qgl
-- [x] testgen
-- [x] weka
+- Batch 1
+  - [x] CloudFlare
+  - [x] CrimeFlare
+  - [x] R-project
+  - [x] anaconda
+  - [x] atom
+  - [x] brew
+  - [x] canopy
+  - [x] charles
+  - [x] iStats
+  - [x] mactex
+  - [x] matlab
+  - [x] miniconda
+  - [x] qgl
+  - [x] testgen
+  - [x] weka
+- Batch 2
+  - [x] Akamai
+  - [x] BlueStacks  # Android emulator
+  - [x] continuum, continuum.io
+  - [x] iTools Pro
+  - [x] Microsoft Teams classic
+  - [x] SignalScope X
+  - [x] TestGen
+  - [x] texlive
+  - [x] texmf
+  - [x] TeXShop
+  - [x] TextWrangler
