@@ -66,26 +66,31 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 
 ###  What is in...?
-   - [ ] "/Users/Shared"
    - [ ] "/Users/herman2"
+     - [ ] It's 43 GB big, most of that from the Photos folder, and about 3 GB from "Library". After making sure all the Photos are in the main user account, I can delete this user.
 
 ##  Consolidate my code
 
 Push the code from the iMac to a remote, one of 
 
-| Repository Name | Date Created | URI                                          |
-| --------------- | ------------ | -------------------------------------------- |
-| hermanCode      | 2024-02-11   | https://github.com/ChemGuy88/hermanCode      |
-| mySettings      | 2020-10-20   | https://github.com/ChemGuy88/mySettings      |
-| bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc          |
-| myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom          |
-| mlFunctions     | 2018-09-17   | https://github.com/ChemGuy88/mlFunctions     |
-| N/A             | 2024-XX-XX   | herman@remote-imac:/Users/herman/.hermanCode |
-| N/A             | 2024-XX-XX   | herman@pyspark:/.../.hermanCode              |
+| Repository Name | Date Created | URI                                          | Archived |
+| --------------- | ------------ | -------------------------------------------- | -------- |
+| hermanCode      | 2024-02-11   | https://github.com/ChemGuy88/hermanCode      |          |
+| mySettings      | 2020-10-20   | https://github.com/ChemGuy88/mySettings      |          |
+| bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc          | True     |
+| myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom          |          |
+| mlFunctions     | 2018-09-17   | https://github.com/ChemGuy88/mlFunctions     |          |
+| N/A             | 2024-XX-XX   | herman@remote-imac:/Users/herman/.hermanCode |          |
+| N/A             | 2024-XX-XX   | herman@pyspark:/.../.hermanCode              |          |
+
+
+See https://www.google.com/search?q=can+you+merge+multiple+repositories+and+keep+their+history
+or
+https://www.linkedin.com/pulse/merge-multiple-git-repositories-without-breaking-file-akshay-kaushik-qto1f/
 
 ## Track my coding projects
 
-I have code and coding-related files and folders throughout my computer. I should organize them. I can start my searching in these folders:
+I have code and coding-related files and folders throughout my computer. I should organize them. I can start by searching in these folders:
 
 - /Users/herman
 - /Users/herman/Documents
@@ -134,3 +139,6 @@ find / -iname *.py
   - [x] texmf
   - [x] TeXShop
   - [x] TextWrangler
+
+### Remove Folders
+  - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
