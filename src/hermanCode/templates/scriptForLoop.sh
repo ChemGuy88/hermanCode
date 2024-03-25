@@ -1,6 +1,12 @@
 #!/bin/bash
+# Time-to-completion tables
+# n        | Time (h:mm:ss) | System
+# 100000   | 0:01:03        | PySpark
+# 100000   | 0:00:02        | PySpark
+# 10000000 | 0:04:33        | PySpark
+# 10000001 | 0:07:55        | PySpark
 timeStamp() {
-	date "+%Y-%m-%d %H-%M-%S"
+date "+%Y-%m-%d %H-%M-%S"
 }
 timestamp="$(timeStamp)"
 fpath="$timestamp.txt"
