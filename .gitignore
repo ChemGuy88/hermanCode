@@ -3,15 +3,14 @@
 **/*.7z
 **/.DS_Store
 **/*.bat
-!**/launchIPython.bat
 **/*.csv
+**/*.out
 **/*.pdf
 **/*.tsv
+**/*.txt
 **/*.xlsx
 **/*.zip
 data/*
-!data/input/
-!data/output/
 documents/*
 # <<< [end] Things added by Herman <<<
 
@@ -129,7 +128,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-!.env
+.env
 .venv
 env/
 venv/
