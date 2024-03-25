@@ -89,6 +89,8 @@ See https://www.google.com/search?q=can+you+merge+multiple+repositories+and+keep
 or
 https://www.linkedin.com/pulse/merge-multiple-git-repositories-without-breaking-file-akshay-kaushik-qto1f/
 
+I left off in the `fetch` step from the LinkedIn article above.
+
 ## Track my coding projects
 
 I have code and coding-related files and folders throughout my computer. I should organize them. I can start by searching in these folders:
