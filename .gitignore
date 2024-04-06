@@ -1,17 +1,5 @@
-.DS_Store
-blob-store
-compile-cache
-dev
-storage
-.apm
-.node-gyp
-.npm
-.atom-socket-secret-*
-.atom-socket-secret-Herman-1.36.1
-.atom-socket-secret-herman-1.37.0
-packages/
-recovery/
-# This gitignore is based on a template. I think from GitHub.
+**/limericks_in.bash
+**/limericks_out.bash
 # >>> [start] Things added by Herman >>>
 **/logs/*
 **/*.7z
@@ -21,11 +9,11 @@ recovery/
 **/*.out
 **/*.pdf
 **/*.tsv
+**/*.txt
 **/*.xlsx
 **/*.zip
 data/*
-!data/input/
-!data/output/
+documents/*
 # <<< [end] Things added by Herman <<<
 
 # Byte-compiled / optimized / DLL files

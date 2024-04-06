@@ -1,3 +1,6 @@
+# README
+
+A collection of templates and utility code used by Herman.
 # mySettings
 
 ## 2022/10/24
