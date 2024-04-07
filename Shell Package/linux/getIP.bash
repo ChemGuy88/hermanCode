@@ -10,7 +10,7 @@ publicip2=$(curl -s http://checkip.dyndns.org/ | sed 's/[a-zA-Z<>/ :]//g')
 HauriIP() {
     # h/t to https://stackoverflow.com/a/13322667/5478086
     read -r _{,} gateway _ iface _ ip _ < <(ip r g 1.0.0.0)
-    echo $ip
+    echo "$ip"
 }
 
 # Private IP method 1

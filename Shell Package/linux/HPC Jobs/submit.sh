@@ -7,12 +7,12 @@ fileToRun="$1.py"
 jobScript="$1.sh"
 
 # Set the work directory, workDir
-if [ $USER = $userMe ]
+if [ "$USER" = $userMe ]
 then
      workDir="/Users/$USER/Documents"
      pythonDir="$workDir/dis2001"
      shellsDir="$workDir/HPC Jobs"
-elif [ $USER = $userRCC ]
+elif [ "$USER" = $userRCC ]
 then
      workDir="/gpfs/home/$USER"
      pythonDir="$workDir/foose"
@@ -36,22 +36,24 @@ then
 fi
 
 # Write SBATCH script with appropriate jobnames
-echo "#!/bin/bash" > $jobScript
-echo "#SBATCH --job-name=\"$1\"" >> $jobScript
-echo "#SBATCH -e slurm/$1/job-%j.err" >> $jobScript
-echo "#SBATCH -o slurm/$1/job-%j.out" >> $jobScript
-echo "#SBATCH -c 4" >> $jobScript
-echo "#SBATCH -n 1" >> $jobScript
-echo "#SBATCH --mem=12G" >> $jobScript
-echo "##SBATCH --gres=gpu:1" >> $jobScript
-echo "#SBATCH --mail-type=\"ALL\"" >> $jobScript
-echo "#SBATCH -t 01:00:00  #days-hours:minutes:seconds" >> $jobScript
+cat "$jobScript"<<DIRECTIVES
+#!/bin/bash
+#SBATCH --job-name=\"$1\"
+#SBATCH -e slurm/$1/job-%j.err
+#SBATCH -o slurm/$1/job-%j.out
+#SBATCH -c 4
+#SBATCH -n 1
+#SBATCH --mem=12G
+##SBATCH --gres=gpu:1
+#SBATCH --mail-type=\"ALL\"
+#SBATCH -t 01:00:00  #days-hours:minutes:seconds
+DIRECTIVES
 
 # Not sure what this does
-echo "srun mycommand" >> $jobScript
+echo "srun mycommand" >> "$jobScript"
 
 # Actual job code
-echo "python3 -u \"$shellsDir/$1\"" >> $jobScript
+echo "python3 -u \"$shellsDir/$1\"" >> "$jobScript"
 
 #submit the job
 sbatch "$jobScript"
