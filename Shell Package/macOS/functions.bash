@@ -16,5 +16,5 @@ getDirectorySizes () {
 }
 
 getPgrep() {
-    pgrep -U "$1" -f "$2" | xargs --no-run-if-empty ps
+    pgrep -U "$1" -f "$2" | xargs --no-run-if-empty ps f -o lstart -o "%p %r %y %x %a" --sort +pid p
 }
