@@ -5,8 +5,8 @@ source "/home/herman/.hermanCode/functions.bash"
 
 usage() {
     cat <<USAGE
-
-    $0 -k <TRACE_KEYWORDS> -t TRUE|FALSE
+Merges folders.
+$0 -p <PATHS> -f <FROM_PREFIX> -o <TO_PREFIX> -t TRUE|FALSE
     -k The keyword to search for. Use multiple -k for search for multiple keywords.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
@@ -16,9 +16,9 @@ USAGE
 # >>> Argument parsing >>>
 while getopts ":o:f:p:t" opt; do
     case "${opt}" in
-        o) TO_PREFIX=${OPTARG};;
-        f) FROM_PREFIX=${OPTARG};;
         p) PATHS+=("$OPTARG");;
+        f) FROM_PREFIX=${OPTARG};;
+        o) TO_PREFIX=${OPTARG};;
         t) TEST_MODE=${OPTARG};;
         *) usage;;
     esac
@@ -59,7 +59,7 @@ fi
 
 # >>> Script body >>>
 echo "$(timeStamp) Begin script."
-for fromPath0 in "${PATH_ARRAY[@]}"; do
+for fromPath0 in "${PATHS[@]}"; do
     # Convert relative path to absolute path
     echo "  Working on path \"$fromPath0\"."
     fromPath="$FROM_PREFIX/$fromPath0"
