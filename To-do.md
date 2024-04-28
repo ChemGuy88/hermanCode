@@ -5,6 +5,7 @@
 - Clean-up my computer
 - Consolidate my code
 - Track all coding projects
+- Delete old GitHub repositories
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
 
 ## Clean-up my computer
@@ -71,19 +72,30 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ##  Consolidate my code
 
-Push the code from the iMac to a remote, one of 
+Push the code from the iMac to a remote, one of
 
-| Repository Name | Date Created | URI                                                        | Archived in GitHub | Merge Destination |
-| --------------- | ------------ | ---------------------------------------------------------- | ------------------ | ----------------- |
-| hermanCode      | 2024-02-11   | https://github.com/ChemGuy88/hermanCode                    |                    |                   |
-| mySettings      | 2020-10-20   | https://github.com/ChemGuy88/mySettings                    |                    |                   |
-| bashrc          | 2020-10-20   | https://github.com/ChemGuy88/bashrc                        | True               |                   |
-| myAtom          | 2020-03-06   | https://github.com/ChemGuy88/myatom                        |                    |                   |
-| mlFunctions     | 2018-09-17   | https://github.com/ChemGuy88/mlFunctions                   |                    | True              |
-| mlFunctions     | 2024-XX-XX   | herman@remote-imac:/Users/herman/.hermanCode               |                    | True              |
-| hermanCode      | 2024-XX-XX   | herman@pyspark:/home/herman/.hermanCode                    |                    |                   |
-| hermanCode      | 2024-XX-XX   | herman@pyspark:/data/herman/Documents/GitHub/Herman's Code |                    |                   |
+| Repository Name | Date Repo Created | URI                                                             | Archived in GitHub | Merge Destination |
+| --------------- | ----------------- | --------------------------------------------------------------- | ------------------ | ----------------- |
+| hermanCode      | 2024-02-11        | https://github.com/ChemGuy88/hermanCodeOriginal                 | True               |                   |
+| mySettings      | 2020-10-20        | https://github.com/ChemGuy88/mySettings                         | True               |                   |
+| bashrc          | 2020-10-20        | https://github.com/ChemGuy88/bashrc                             | True               |                   |
+| myAtom          | 2020-03-06        | https://github.com/ChemGuy88/myatom                             | True               |                   |
+| mlFunctions     | 2018-09-17        | https://github.com/ChemGuy88/hermanCode                         |                    | True              |
+| hermanCode      | 2024-02-11        | herman@pyspark:/home/herman/.hermanCode                         |                    |                   |
+| hermanCode      | 2024-02-11        | herman@pyspark:/data/herman/Documents/GitHub/Herman's Code      |                    |                   |
+| mlFunctions     | 2018-09-17        | herman@remote-imac:/Users/herman/.hermanCode                    |                    | True              |
+| hermanCode      | 2024-02-11        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
+| mlFunctions     | 2018-09-17        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
+| myAtom          | 2020-03-06        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
+| mySettings      | 2020-10-20        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
 
+- Do `git branch -b REPO_NAME REPO_NAME/BRANCH_NAME` for each of the following:
+  - hermanCodeNew
+  - hermanCodeOriginal
+  - myAtom
+  - mySettings
+- Push the branches to hermanCode
+- Merge to hermanCode/main
 
 
 ## Track my coding projects
@@ -105,6 +117,8 @@ find / -iname *.py
 | Apple Health Blood Pressure | -   | /Users/herman/Documents/Herman's Code/Apple Health Blood Pressure |
 | .ssh.copy                   | -   | /Users/herman/Documents/Herman's Code/.ssh.copy                   |
 | .vim                        | -   | herman@pyspark:/home/herman/.vim/.vimrc                           |
+
+## Delete old GitHub repositories
 
 # Done
 
