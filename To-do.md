@@ -85,11 +85,6 @@ Push the code from the iMac to a remote, one of
 | hermanCode      | 2024-XX-XX   | herman@pyspark:/data/herman/Documents/GitHub/Herman's Code |                    |                   |
 
 
-See https://www.google.com/search?q=can+you+merge+multiple+repositories+and+keep+their+history
-or
-https://www.linkedin.com/pulse/merge-multiple-git-repositories-without-breaking-file-akshay-kaushik-qto1f/
-
-I left off in the `fetch` step from the LinkedIn article above.
 
 ## Track my coding projects
 
@@ -112,6 +107,16 @@ find / -iname *.py
 | .vim                        | -   | herman@pyspark:/home/herman/.vim/.vimrc                           |
 
 # Done
+
+### Consolidate my code
+
+- [x] Merge the repositories
+  - [x] **mlFunctions**
+  - [x] **hermanCode**
+  - [x] **myAtom**
+  - [x] **mySettings**
+  - [x] **bashrc**
+- [x] Rename **mlFunctions** to **hermanCode**
 
 ### Remove GUI Apps, packages, and find and remove traces
 - Batch 1
