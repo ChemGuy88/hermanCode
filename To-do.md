@@ -1,6 +1,6 @@
 # README
 
-## To-do
+# To-do
 
 - Clean-up my computer
 - Consolidate my code
@@ -72,31 +72,7 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ##  Consolidate my code
 
-Push the code from the iMac to a remote, one of
-
-| Repository Name | Date Repo Created | URI                                                             | Archived in GitHub | Merge Destination |
-| --------------- | ----------------- | --------------------------------------------------------------- | ------------------ | ----------------- |
-| hermanCode      | 2024-02-11        | https://github.com/ChemGuy88/hermanCodeOriginal                 | True               |                   |
-| mySettings      | 2020-10-20        | https://github.com/ChemGuy88/mySettings                         | True               |                   |
-| bashrc          | 2020-10-20        | https://github.com/ChemGuy88/bashrc                             | True               |                   |
-| myAtom          | 2020-03-06        | https://github.com/ChemGuy88/myatom                             | True               |                   |
-| mlFunctions     | 2018-09-17        | https://github.com/ChemGuy88/hermanCode                         |                    | True              |
-| hermanCode      | 2024-02-11        | herman@pyspark:/home/herman/.hermanCode                         |                    |                   |
-| hermanCode      | 2024-02-11        | herman@pyspark:/data/herman/Documents/GitHub/Herman's Code      |                    |                   |
-| mlFunctions     | 2018-09-17        | herman@remote-imac:/Users/herman/.hermanCode                    |                    | True              |
-| hermanCode      | 2024-02-11        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
-| mlFunctions     | 2018-09-17        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
-| myAtom          | 2020-03-06        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
-| mySettings      | 2020-10-20        | herman@remote-imac:/Users/herman/Documents/GitHub/Herman's Code |                    |                   |
-
-- Do `git branch -b REPO_NAME REPO_NAME/BRANCH_NAME` for each of the following:
-  - hermanCodeNew
-  - hermanCodeOriginal
-  - myAtom
-  - mySettings
-- Push the branches to hermanCode
-- Merge to hermanCode/main
-
+- Design code to install features
 
 ## Track my coding projects
 
@@ -122,7 +98,7 @@ find / -iname *.py
 
 # Done
 
-### Consolidate my code
+## Consolidate my code
 
 - [x] Merge the repositories
   - [x] **mlFunctions**
@@ -131,8 +107,17 @@ find / -iname *.py
   - [x] **mySettings**
   - [x] **bashrc**
 - [x] Rename **mlFunctions** to **hermanCode**
+- Do `git branch -b REPO_NAME REPO_NAME/BRANCH_NAME` for each of the following:
+  - [x] hermanCodeNew
+  - [x] hermanCodeOriginal
+  - [x] myAtom
+  - [x] mySettings
+- [x] Push the branches to hermanCode
+- [x] Merge to hermanCode/main
+- [x] Delete all old repositories
+- [x] Delete all installations in user folders
 
-### Remove GUI Apps, packages, and find and remove traces
+## Remove GUI Apps, packages, and find and remove traces
 - Batch 1
   - [x] CloudFlare
   - [x] CrimeFlare
@@ -162,5 +147,5 @@ find / -iname *.py
   - [x] TeXShop
   - [x] TextWrangler
 
-### Remove Folders
+## Remove Folders
   - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
