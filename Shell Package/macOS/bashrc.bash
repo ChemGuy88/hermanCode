@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# This file evolved from `.bashrc`. It contains customizations for the bash environment.
-
 ################################################################################
 ### Gate-keeping ###############################################################
 ################################################################################
@@ -12,7 +10,7 @@ NC=$'\e[0m'
 
 TheWorldIsFlat=false  # Change this to `true` to gate-keep the gate keeper.
 if [[ "$TheWorldIsFlat" = true ]]; then
-    read -p "Do you want to ${RED}continue${NC} loading BASH run commands? [Y/n]: " confirm
+    read -p -r "Do you want to ${RED}continue${NC} loading BASH run commands? [Y/n]: " confirm
 
     if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
         :
@@ -43,7 +41,7 @@ fi
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export HISTSIZE=1000  # the maximum number of commands saved during your current session
-export HISTFILESIZE=1000  #  The maximum number of lines contained in the history file
+export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
 # export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }history -a"
 
 ################################################################################
@@ -51,17 +49,14 @@ export HISTFILESIZE=1000  #  The maximum number of lines contained in the histor
 ################################################################################
 
 # Modify `PATH`
-PATH="/Users/herman/.local/bin:\
-/Users/herman/Documents:\
-/Users/herman/.hermanCode:\
+PATH="$HERMAN_CODE_DIR:\
 ${PATH}"
 export PATH
 
 # Modify `PYTHONPATH`
-PYTHONPATH="/Users/herman/Documents/GitHub/drapi-lemur/drapiPackage/code:\
-/Users/herman/Documents/Professional Development/appleHealthExport:\
-${PYTHONPATH}"
-export PYTHONPATH
+# PYTHONPATH="/PATH_TO_SOMEWHERE:\
+# ${PYTHONPATH}"
+# export PYTHONPATH
 
 ################################################################################
 ### Constants: Custom Prompts ##################################################
@@ -75,7 +70,6 @@ export PYTHONPATH
 # Custom prompt (credit to https://wiki.archlinux.org/index.php/Bash/Prompt_customization)
 # This works on iTerm2 and Terminal, but Terminal has to be set to "xterm-256color" under "Terminfo"
 CYAN="\[$(tput setaf 4)\]"
-WINERED="\[$(tput setaf 88)\]"
 ATOMGREEN="\[$(tput setaf 114)\]"
 RESET="\[$(tput sgr0)\]"
 if [ -z "${CONDA_DEFAULT_ENV-}" ];
@@ -85,27 +79,30 @@ else
     PROMPT_CONDA_PREFIX="(${CONDA_DEFAULT_ENV}) "
 fi
 
-export PS1="${PROMPT_CONDA_PREFIX}${WINERED}\@${RESET} [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
+export PS1="${PROMPT_CONDA_PREFIX}\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
 
 ################################################################################
 ### Constants: Imported ########################################################
 ################################################################################
 
-if [ -f ~/.hermanCode/limericks_in.bash ]; then
-    source "/Users/herman/.hermanCode/macOS/limericks_in.bash"
+LIMERICKS_IN_PATH="$HERMAN_CODE_DIR/limericks_in.bash"
+if [ -f "$LIMERICKS_IN_PATH" ]; then
+    # shellcheck source="$HERMAN_CODE_DIR/limericks_in.bash"
+    source "$LIMERICKS_IN_PATH"
 fi
 
 ################################################################################
 ### Functions ##################################################################
 ################################################################################
 
-source /Users/herman/.hermanCode/macOS/functions.bash
+# shellcheck source="$HERMAN_CODE_DIR/Shell Package/macOS/functions.bash"
+source "$HERMAN_CODE_DIR/Shell Package/macOS/functions.bash"
 
 ################################################################################
 ### Shortcuts ##################################################################
 ################################################################################
 
-alias vim="vi -S ~/.vim/.vimrc"
+alias vim='vi -S $HERMAN_CODE_DIR/vim/.vimrc'
 cd ~ || return
 pgrep -U root -f find | xargs ps
 

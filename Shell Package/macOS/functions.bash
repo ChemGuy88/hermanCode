@@ -2,7 +2,7 @@ listpath () {
      awk -F\: '{
      for (i = 0; ++i <= NF;)
           print "Path", i,":", $i
-     }' <<<$1
+     }' <<<"$1"
 }
 # listpath $PATH
 # listpath $PYTHONPATH
@@ -12,12 +12,9 @@ getTimestamp() {
 }
 
 getDirectorySizes () {
-    currentDirectory=$(pwd)
-    cd $1
-    du -sh */
-    cd "$currentDirectory"
+    du -csh "$1"/*/
 }
 
 getPgrep() {
-    pgrep -U $1 -f $2 | xargs --no-run-if-empty ps
+    pgrep -U "$1" -f "$2" | xargs --no-run-if-empty ps
 }
