@@ -84,10 +84,8 @@ source "/home/herman/.hermanCode/functions.bash"
 
 # Aliases
 alias vim="vi -S ~/.vim/.vimrc"
-alias cddr='cd "/data/herman/mnt/ufhsd/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Bian/IRB201902162"'
-alias cddr='cd "/data/herman/mnt/ufhsd/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Liu/IRB202300703"'
-alias cddr='cd "/data/herman/Projects/IRB202300703"'
 alias cddr='cd "/data/herman/mnt/ufhsd/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Bian/IRB202003281"'
+alias cddr='cd "/data/herman/Projects/IRB202003281"'
 alias mountufhsd='sudo /sbin/mount.cifs //ahcdfs.ahc.ufl.edu/files /data/herman/mnt/ufhsd -o user=herman,dom=ad.ufl.edu,uid=herman,gid=herman,password=$HFA_UFADPWD,sec=ntlmssp,vers=2.0'
 alias mountufhsd='sudo /sbin/mount.cifs //ahcdfs.ahc.ufl.edu/files "/data/herman/Mounted Drives/UF Health Shared Drive" -o user=herman,dom=ad.ufl.edu,uid=herman,gid=herman,password=$HFA_UFADPWD,sec=ntlmssp,vers=2.0'
 
@@ -98,15 +96,9 @@ cdwork() {
     cddr
 }
 
-cdherman(){
-    conda activate just-selenium
-    echo "\`cdherman\`: Going to project directory"
-    cdproject
-}
-
 # Conveniences
 cdwork
-getPgrep ".py"
+getPgrep herman .
 echo
 df -h /data/herman/Projects
 echo
