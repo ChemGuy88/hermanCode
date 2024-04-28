@@ -25,6 +25,16 @@ diskutil umount force /mount/point
 
 ## Notes - Bash
 
+### Calculate the file size of files found using `find`
+
+```bash
+find "$PATH_ARGUMENT" -exec du -ch {} + > output.log
+```
+
+The interesting bit here is `-exec COMMAND {} +`. In our case, `COMMAND` is `du`, but more importantly we are using the `{} +` form of `-exec`, as opposed to the more common `{} \;` form. The latter passes each file found with `find` to `COMMAND`, iteratively, but the form we use passes all the files together. This allows us to calculate the sum of the file sizes.
+
+### `nohup`
+
 To execute a command with `nohup` and have its "stdout" routed to a file use
 
 ```bash
