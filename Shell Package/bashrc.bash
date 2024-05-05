@@ -100,9 +100,9 @@ export PS1="${PROMPT_CONDA_PREFIX}\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RES
 ### Constants: Imported ########################################################
 ################################################################################
 
-LIMERICKS_IN_PATH="$HERMAN_CODE_DIR/limericks_in.bash"
+LIMERICKS_IN_PATH="Shell Package/limericks_in.bash"
 if [ -f "$LIMERICKS_IN_PATH" ]; then
-    # shellcheck source="$HERMAN_CODE_DIR/limericks_in.bash"
+    # shellcheck source="Shell Package/limericks_in.bash"
     source "$LIMERICKS_IN_PATH"
 fi
 
@@ -114,8 +114,10 @@ fi
 ### Functions ##################################################################
 ################################################################################
 
-# shellcheck source="$HERMAN_CODE_DIR/Shell Package/functions.bash"
-source "$HERMAN_CODE_DIR/Shell Package/functions.bash"
+# shellcheck source="Shell Package/functions/functions.bash"
+source "Shell Package/functions/functions.bash"
+source "Shell Package/functions/getIP.bash"
+source "Shell Package/functions/getPgrep.bash"
 
 ################################################################################
 ################################################################## Functions ###
@@ -125,7 +127,7 @@ source "$HERMAN_CODE_DIR/Shell Package/functions.bash"
 ### Conveniences ###############################################################
 ################################################################################
 
-alias vim="vi -S $HERMAN_CODE_DIR/vim/.vimrc"
+alias vim='vi -S "Shell Package/vim/.vimrc"'
 
 # OS-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
