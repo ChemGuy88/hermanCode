@@ -32,8 +32,7 @@ allArraysSorted=()
 while read -r line;
 do
     allArraysSorted+=("$line");
-done < <(IFS=$'\n' sort <<<"${allArrays[*]}")
-unset IFS
+done < <(printf '%s\n' "${allArrays[@]}" | sort)
 
 # Check work
 echo " >>> Array ${bold}${RED}after${normal}${NC} sorting >>>"
