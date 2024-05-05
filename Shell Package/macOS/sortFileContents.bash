@@ -9,7 +9,7 @@ elif ! [ -d "$toDir" ]; then
     mkdir "$toDir"
 fi
 
-find "$dataDir" -type f -depth 1 \( -iname "*.out" -o -iname *.err \) | while read fpath
+find "$dataDir" -type f -depth 1 \( -iname "*.out" -o -iname "*.err" \) | while read -r fpath
 do
     echo "Working on path '$fpath'."
     fname="$(basename "$fpath")"

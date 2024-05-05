@@ -4,11 +4,11 @@
 
 usage0() {
     cat <<USAGE
-This is an example of how ot use argument parsing using "getopts"
+This is an example of how to use argument parsing using "getopts".
 
-$0 -k <TRACE_KEYWORDS> -t TRUE|FALSE
+"$(basename "$0")" -k <TRACE_KEYWORDS> -t TRUE|FALSE
 
-    -k The keyword to search for. Use multiple -k for search for multiple keywords.
+    -k The keyword to search for. Use multiple -k to search for multiple keywords.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
 }

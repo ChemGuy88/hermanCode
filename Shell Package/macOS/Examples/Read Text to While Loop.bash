@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# An example of how to read text to a while-loop.
+
 # Formatting
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -6,9 +10,9 @@ RED=$'\e[0;31m'
 NC=$'\e[0m'
 
 TEXT=$'a\nx\nc'
-echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}>>>${normal}${NC}"
+echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for-loop ${bold}${GRN}>>>${normal}${NC}"
 echo "$TEXT"
-echo " ${bold}${GRN}<<<${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}<<<${normal}${NC}"
+echo " ${bold}${GRN}<<<${normal}${NC} This is the text being fed to the for-loop ${bold}${GRN}<<<${normal}${NC}"
 
 
 echo " ${bold}${RED}>>>${normal}${NC} This is the for-loop segmentation of the text ${bold}${RED}>>>${normal}${NC}"

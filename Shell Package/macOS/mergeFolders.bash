@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# shellcheck source="/home/herman/.hermanCode/functions.bash"
-source "/home/herman/.hermanCode/functions.bash"
+# shellcheck source="Shell Package/functions/functions.bash"
+source "Shell Package/functions/functions.bash"
 
 usage() {
     cat <<USAGE

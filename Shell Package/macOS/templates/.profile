@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # This file is read by bash and other shells, whereas .bashrc is read only by bash.
 # This is read when launching a graphical desktop session.

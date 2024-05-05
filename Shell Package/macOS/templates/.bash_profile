@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # shellcheck source=$HOME/.bashrc
 DOT_BASHRC_PATH="$HOME/.bashrc"
