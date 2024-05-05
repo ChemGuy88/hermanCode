@@ -1,0 +1,3 @@
+This is test data for an example of how to append a newline to a file. This is
+relevant because a file is defined as ending with an empty line, and a line, 
+in turn is defined as a string of text ending with a newline.
