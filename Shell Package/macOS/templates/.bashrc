@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # shellcheck source="$HERMAN_CODE_DIR/bashrc.bash"
 HERMAN_CODE_BASHRC_PATH="$HERMAN_CODE_DIR/bashrc.bash"
