@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# An example of how to skip comment lines in a file, that is,
+# lines starting with a "#" character.
+
 # Formatting
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -6,8 +11,8 @@ GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
-TEXT=$(cat ".hermanCode/macOS/uninstallers/List To Delete.txt")
-TEXT=$'This is line 1, the first line.\n# This is a commented line followed by a blank line.\n\n# The previous line was blank!\nThis is another line.'
+TEXT=$(cat "Shell Package/macOS/Examples/Data/Comment Lines in a File.txt")
+# TEXT=$'This is line 1, the first line.\n# This is a commented line followed by a blank line.\n\n# The previous line was blank!\nThis is another line.'
 
 echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}>>>${normal}${NC}"
 echo "$TEXT"
@@ -30,6 +35,3 @@ do
     echo "  Working on \"$line\""
 done < <(echo "$TEXT" | grep -v -e '^#' -e '^$')
 echo " ${bold}${RED}<<<${normal}${NC} Selective reading of the text ${bold}${RED}<<<${normal}${NC}"
-
-# FILE_PATH=".hermanCode/macOS/uninstallers/List To Delete.txt"
-

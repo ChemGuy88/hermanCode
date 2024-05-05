@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# An example of how to sort an array.
+
 # Formatting
 bold=$(tput bold)
 normal=$(tput sgr0)

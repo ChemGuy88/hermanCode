@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# This is an example of how to sort text in-place instead of saving it to a file.
+
 # Formatting
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -25,7 +29,7 @@ array=()
 while read -r line;
 do
     array+=("$line");
-done < <(sort -r <<<"$TEXT")
+done < <(sort <<<"$TEXT")
 
 # Loop over array
 echo " >>> Sorted text results stored in array >>>"
