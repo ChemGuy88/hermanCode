@@ -8,10 +8,10 @@ source "Shell Package/functions/functions.bash"
 
 timestamp=$(getTimestamp)
 fpath="$timestamp.txt"
-echo "$(timeStamp) - Starting script with \`N\` = $1." > "$fpath"
+echo "$(getTimestamp) - Starting script with \`N\` = $1." | tee "$fpath"
 
 for it in $(seq "$1");
 do
    echo "$it" >> "$fpath"
 done
-echo "$(timeStamp) - Script finished." | tee -a "$fpath" "$timestamp - done.txt"
+echo "$(getTimestamp) - Script finished." | tee -a "$fpath" "$timestamp - done.txt"
