@@ -2,20 +2,21 @@
 
 # REMEMBER, this script must be run as `sudo` to avoid getting access denied errors when running `find`.
 
-# shellcheck source="/Users/herman/.hermanCode/macOS/functions.bash"
-source "/Users/herman/.hermanCode/macOS/functions.bash"
+# shellcheck source="Shell Package/functions/functions.bash"
+source "Shell Package/functions/functions.bash"
 
 # Formatting
-# bold=$(tput bold)
-# normal=$(tput sgr0)
 RED=$'\e[0;31m'
-# GRN=$'\e[0;32m'
-# ORN=$'\e[0;33m'
 NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
-HINT: Run this as \"sudo\" to prevent getting \"access denid\" errors.
+HINT: Run this as \"sudo\" to prevent getting \"access denied\" errors.
+
+This BASH script uses \`find\` to search your entire machine (including mounted volumes)
+to find the passed <TRACE_KEYWORDS>. By default this runs in the background. You can check
+the progress by inspect the output directory \`~/Find Traces\`, or using \`getPgrep
+<USERNAME> "Find Traces"\`.
 
 $0 -k <TRACE_KEYWORDS> -t TRUE|FALSE
 

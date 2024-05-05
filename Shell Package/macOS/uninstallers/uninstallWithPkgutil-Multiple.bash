@@ -2,5 +2,5 @@
 
 while read line
 do
-    xargs -o -I{} "/Users/herman/.hermanCode/macOS/uninstallWithPkgutil.bash" {}
+    xargs -o -I {} "Shell Package/macOS/uninstallWithPkgutil.bash" {}
 done < "$1"

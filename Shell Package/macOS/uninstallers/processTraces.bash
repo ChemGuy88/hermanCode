@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# shellcheck source="/Users/herman/.hermanCode/macOS/functions.bash"
-source "/Users/herman/.hermanCode/macOS/functions.bash"
+# shellcheck source="Shell Package/functions/functions.bash"
+source "Shell Package/functions/functions.bash"
 
 # Formatting
 bold=$(tput bold)
@@ -13,8 +13,15 @@ NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
+This processes the results from \`findTraces.bash\` by doing the following:
 
-    $0 -f <FILE_PATH> -t TRUE|FALSE
+    1. Removing the leading text \"/System/Volumes/Data\".
+    2. Removing duplicates.
+    3. Removing lines starting with the leading text passed as \`<LEADING_TEXT>\`.
+    4. Sorts the results.
+
+$0 -f <FILE_PATH> -l [<LEADING_TEXT>] -t TRUE|FALSE
+
     -f The path to the file that contains the traces.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
@@ -27,10 +34,7 @@ usage() {
 
 
 # >>> Argument parsing >>>
-LEADING_TEXT_DEFAULT=("/Volumes/BOOTCAMP" \
-                      "/Users/herman2" \
-                      "/Users/Shared" \
-                      "/private/var/db")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
+LEADING_TEXT_DEFAULT=("/private/var/db")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
 while getopts ":f:l:t:" opt; do
     case "${opt}" in
         f) FILE_PATH=${OPTARG};;
