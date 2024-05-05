@@ -2,11 +2,20 @@
 
 # To-do
 
-- Clean-up my computer
 - Consolidate my code
+- Clean-up my computer
 - Track all coding projects
 - Delete old GitHub repositories
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
+
+##  Consolidate my code
+
+- [ ] Test code in macOS and Linux. Once that's done move it into the general section.
+  - [ ] Examples
+  - [ ] Utility Functions
+    - [ ] "Shell Package/macOS/mergeFolders.bash"
+    - [ ] "Shell Package/macOS/sortFileContents.bash"
+- [ ] Design code to install features
 
 ## Clean-up my computer
 
@@ -69,10 +78,6 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 ###  What is in...?
    - [ ] "/Users/herman2"
      - [ ] It's 43 GB big, most of that from the Photos folder, and about 3 GB from "Library". After making sure all the Photos are in the main user account, I can delete this user.
-
-##  Consolidate my code
-
-- Design code to install features
 
 ## Track my coding projects
 
