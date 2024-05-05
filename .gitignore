@@ -10,6 +10,7 @@
 **/*.pdf
 **/*.tsv
 **/*.txt
+!**/Data/*.txt
 **/*.xlsx
 **/*.zip
 data/*
