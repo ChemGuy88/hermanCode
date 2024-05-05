@@ -6,10 +6,10 @@ usage0() {
     cat <<USAGE
 This is an example of how to use argument parsing using "getopts".
 
-"$(basename "$0")" -k <TRACE_KEYWORDS> -t TRUE|FALSE
+"$(basename "$0")" -a <ARGUMENT> -b TRUE|FALSE
 
-    -k The keyword to search for. Use multiple -k to search for multiple keywords.
-    -t The script test flag. One of TRUE or FALSE.
+    -a An argument to add to an array. Use multiple \`-a\` for multiple arguments.
+    -b A boolean argument, one of {TRUE, FALSE}. Case sensitive.
 USAGE
 }
 usage() {
@@ -17,33 +17,33 @@ usage() {
     exit 1
 }
 
-while getopts ":k:t:" opt; do
+while getopts ":a:b:" opt; do
     case "${opt}" in
-        k) trace_keyword+=("$OPTARG");;
-        t) test_mode=${OPTARG};;
+        a) ARGUMENT_ARRAY+=("$OPTARG");;
+        b) BOOLEAN_ARGUMENT=${OPTARG};;
         *) usage;;
     esac
 done
 shift $((OPTIND -1))
 
-if [ -z "${trace_keyword[*]}" ] || [ -z "${test_mode}" ]; then
+if [ -z "${ARGUMENT_ARRAY[*]}" ] || [ -z "${BOOLEAN_ARGUMENT}" ]; then
     usage
 fi
 
-echo "The first value of the array 'trace_keyword' is '$trace_keyword'"
-echo "The whole list of values is '${trace_keyword[*]}'"
+echo "The first value of the array 'ARGUMENT_ARRAY' is '$ARGUMENT_ARRAY'"
+echo "The whole list of values is '${ARGUMENT_ARRAY[*]}'"
 
 echo "Or:"
 
-for val in "${trace_keyword[@]}"; do
+for val in "${ARGUMENT_ARRAY[@]}"; do
     echo " - $val"
 done
 
-echo "The first value of the array 'test_mode' is '$test_mode'"
-echo "The whole list of values is '${test_mode[*]}'"
+echo "The first value of the array 'BOOLEAN_ARGUMENT' is '$BOOLEAN_ARGUMENT'"
+echo "The whole list of values is '${BOOLEAN_ARGUMENT[*]}'"
 
 echo "Or:"
 
-for val in "${test_mode[@]}"; do
+for val in "${BOOLEAN_ARGUMENT[@]}"; do
     echo " - $val"
 done
