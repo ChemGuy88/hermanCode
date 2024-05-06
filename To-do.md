@@ -10,12 +10,9 @@
 
 ##  Consolidate my code
 
-- [ ] Test code in macOS and Linux. Once that's done move it into the general section.
-  - [ ] Examples
-  - [ ] Utility Functions
-    - [ ] "Shell Package/macOS/mergeFolders.bash"
-    - [ ] "Shell Package/macOS/sortFileContents.bash"
 - [ ] Design code to install features
+  - [ ] Add verbosity to installation
+  - [ ] Test installation
 
 ## Clean-up my computer
 
@@ -121,6 +118,8 @@ find / -iname *.py
 - [x] Merge to hermanCode/main
 - [x] Delete all old repositories
 - [x] Delete all installations in user folders
+- [x] Test code in macOS and Linux. Once that's done move it into the general section.
+  - [x] Examples
 
 ## Remove GUI Apps, packages, and find and remove traces
 - Batch 1
