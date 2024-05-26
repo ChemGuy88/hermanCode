@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# See https://unix.stackexchange.com/questions/192465/remove-paragraph-from-file
+
 RED=$'\e[0;31m'
 GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
