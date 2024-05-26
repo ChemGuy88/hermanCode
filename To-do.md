@@ -10,9 +10,9 @@
 
 ##  Consolidate my code
 
-- [ ] Design code to install features
-  - [ ] Add verbosity to installation
-  - [ ] Test installation
+- [x] Design code to install features
+  - [x] Test installation
+- [ ] Add uninstallation feature (See "Shell Package/Examples/Remove Text From File.bash")
 
 ## Clean-up my computer
 

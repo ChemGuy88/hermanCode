@@ -1,0 +1,10 @@
+# There's multiple ways to get the absolute path of a file from inside the file.
+echo "\$0 is \"$0\""
+echo "\$1 is \"$1\""
+echo "\`realpath\` for \$0 is $(realpath -- "$0")"
+echo "\`realpath\` for \$1 is $(realpath -- "$1")"
+FILE_DIRECTORY="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; pwd -P )"
+FILE_PARENT_DIRECTORY="$(dirname -- "$FILE_DIRECTORY")"
+echo "\`\$FILE_DIRECTORY\` is $FILE_DIRECTORY"
+echo "\`\$FILE_PARENT_DIRECTORY\` is $FILE_PARENT_DIRECTORY"
+echo "\`\$BASH_SOURCE\` is \"${BASH_SOURCE[0]%/*}\""  # This is the only one that works for a file run via ".bashrc"

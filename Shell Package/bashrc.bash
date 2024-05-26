@@ -40,19 +40,45 @@ fi
 ### Constants: Define values ###################################################
 ################################################################################
 
+# Package paths
+HERMANS_CODE_SHELL_PKG_PATH="${BASH_SOURCE[0]%/*}"
+HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
+
+export HERMANS_CODE_INSTALL_PATH
+
+# BASH configurations
+export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
+
+# OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     :
 else
     echo "Unsupported operating system."
-    exit 1
+    return
 fi
-
-export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
 
 ################################################################################
 ################################################### Constants: Define values ###
+################################################################################
+
+################################################################################
+### Constants: Modify values ###################################################
+################################################################################
+
+if [[ $OSTYPE == "darwin"* ]]; then
+    :
+elif [[ $OSTYPE == "linux-gnu"* ]]; then
+    PATH_ADDENDUM_1="/opt/mssql-tools18/bin"  # Add `sqlcmd` to `PATH`
+    export PATH="$PATH:$PATH_ADDENDUM_1"
+else
+    echo "Unsupported operating system."
+    return
+fi
+
+################################################################################
+################################################### Constants: Modify values ###
 ################################################################################
 
 ################################################################################
@@ -102,9 +128,9 @@ fi
 ################################################################################
 
 # shellcheck source="Shell Package/functions/functions.bash"
-source "Shell Package/functions/functions.bash"
-source "Shell Package/functions/getIP.bash"
-source "Shell Package/functions/getPgrep.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getIP.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
 ################################################################################
 ################################################################## Functions ###
@@ -128,10 +154,11 @@ elif [[ $OSTYPE == "linux-gnu"* ]]; then
     df -h /data/herman/Projects
     echo
     du -sh /data/herman/Projects
-    cd "/data/herman/Projects" || return
+    cd "/data/herman/Mounted Drives/UF Health Shared Drive/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Xu/IRB202202722" || return
+    cd "/data/herman/Documents/Git Repositories/Herman Code" || return
 else
     echo "Unsupported operating system."
-    exit 1
+    return
 fi
 
 
