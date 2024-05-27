@@ -1,0 +1,7 @@
+Keep the text outside
+>>> Start marker >>>
+Remove this text
+contained within
+the markers
+<<< End marker <<<
+the start and end markers
