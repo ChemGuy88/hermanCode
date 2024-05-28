@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck source="Shell Package/functions/functions.bash"
-source "Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
 
 usage() {
     cat <<USAGE

@@ -16,8 +16,8 @@ BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
 # Load start and end markers
-fname1="Shell Package/Install/Code Block Markers/Marker - Start.txt"
-fname2="Shell Package/Install/Code Block Markers/Marker - End.txt"
+fname1="$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Markers/Marker - Start.txt"
+fname2="$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Markers/Marker - End.txt"
 marker1="$(cat "$fname1")"
 marker2="$(cat "$fname2")"
 marker_array=("$marker1" \

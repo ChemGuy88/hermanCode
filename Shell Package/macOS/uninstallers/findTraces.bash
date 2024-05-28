@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# REMEMBER, this script must be run as `sudo` to avoid getting access denied errors when running `find`.
-
 # shellcheck source="Shell Package/functions/functions.bash"
-source "Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
 
 # Formatting
 RED=$'\e[0;31m'
@@ -11,7 +9,8 @@ NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
-HINT: Run this as \"sudo\" to prevent getting \"access denied\" errors.
+HINT 1: Run this as \`sudo\` to prevent getting \`access denied\` errors.
+HINT 2: You might need to preserve the environment variables when using \`sudo\`, so do \`sudo -E findTraces.sh -k KEYWORD -t TRUE\`.
 
 This BASH script uses \`find\` to search your entire machine (including mounted volumes)
 to find the passed <TRACE_KEYWORDS>. By default this runs in the background. You can check

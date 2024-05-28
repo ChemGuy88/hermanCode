@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck source="Shell Package/functions/functions.bash"
-source "Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
 
 # Formatting
 bold=$(tput bold)
@@ -15,7 +15,7 @@ usage0() {
     cat <<USAGE
 This processes the results from \`findTraces.bash\` by doing the following:
 
-    1. Removing the leading text \"/System/Volumes/Data\".
+    1. Removing the leading text "/System/Volumes/Data".
     2. Removing duplicates.
     3. Removing lines starting with the leading text passed as \`<LEADING_TEXT>\`.
     4. Sorts the results.

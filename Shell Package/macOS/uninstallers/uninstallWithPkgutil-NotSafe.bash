@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck source="Shell Package/functions/functions.bash"
-source "Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
 
 RED=$'\e[0;31m'
 NC=$'\e[0m'

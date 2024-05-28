@@ -113,7 +113,7 @@ export PS1="${PROMPT_CONDA_PREFIX}\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RES
 ### Constants: Imported ########################################################
 ################################################################################
 
-LIMERICKS_IN_PATH="Shell Package/limericks_in.bash"
+LIMERICKS_IN_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in.bash"
 if [ -f "$LIMERICKS_IN_PATH" ]; then
     # shellcheck source="Shell Package/limericks_in.bash"
     source "$LIMERICKS_IN_PATH"
@@ -140,14 +140,24 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 ### Conveniences ###############################################################
 ################################################################################
 
-alias vim='vi -S "Shell Package/vim/.vimrc"'
+alias vim='vi -S "$HERMANS_CODE_SHELL_PKG_PATH/Shell Package/vim/.vimrc"'
 
-# OS-Specific conveniences
+# Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
-    # macOS
+    # :: macOS ::
     getPgrep root find
+    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+        # :: macOS at home ::
+        eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
+    elif [[ "AHC-Mac-Admins-MacBook-Pro.local" == "$(hostname)" ]]; then
+        # :: macOS at work ::
+        # Run commands for the Dreambooth project
+        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/dreambooth.bash"
+    else
+        echo "Unsupported machine."
+    fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
-    # Linux
+    # :: Linux ::
     conda activate idr-bian
     getPgrep herman .
     echo
@@ -157,7 +167,7 @@ elif [[ $OSTYPE == "linux-gnu"* ]]; then
     cd "/data/herman/Mounted Drives/UF Health Shared Drive/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Xu/IRB202202722" || return
     cd "/data/herman/Documents/Git Repositories/Herman Code" || return
 else
-    echo "Unsupported operating system."
+    echo "Unsupported machine."
     return
 fi
 
