@@ -20,7 +20,7 @@ This processes the results from \`findTraces.bash\` by doing the following:
     3. Removing lines starting with the leading text passed as \`<LEADING_TEXT>\`.
     4. Sorts the results.
 
-$0 -f <FILE_PATH> -l [<LEADING_TEXT>] -t TRUE|FALSE
+$0 -f <FILE_PATH> [-l <LEADING_TEXT>] -t TRUE|FALSE
 
     -f The path to the file that contains the traces.
     -t The script test flag. One of TRUE or FALSE.
@@ -34,7 +34,8 @@ usage() {
 
 
 # >>> Argument parsing >>>
-LEADING_TEXT_DEFAULT=("/private/var/db")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
+LEADING_TEXT_DEFAULT=("/private/var/db" \
+                      "/private/var/folders/")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
 while getopts ":f:l:t:" opt; do
     case "${opt}" in
         f) FILE_PATH=${OPTARG};;
@@ -181,15 +182,16 @@ echo "  Removing duplicates..."
 FILE_PATH_TEMP3="$FILE_PATH_TO.tmp3"
 awk '!seen[$0]++' "$FILE_PATH_TEMP2" > "$FILE_PATH_TEMP3"
 
-# Step 3: Remove lines that start with leading text
-echo "  Removing lines starting with leading text..."
+# Step 3: Remove lines that start with provided leading text
+echo "  Removing lines starting with leading text you provided..."
 it3=1
 FILE_PATH_TEMP4_0="$FILE_PATH_TEMP3"
 FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
 for text0 in "${LEADING_TEXT[@]}";
 do
     text="$(echo "$text0" | sed 's/\//\\\//g')"  # escape path separators
-    sed "/^'$text'/d" "$FILE_PATH_TEMP4_0" > "$FILE_PATH_TEMP4_1"
+    echo "Using sed pattern \"$text\""
+    sed "/^$text/d" "$FILE_PATH_TEMP4_0" > "$FILE_PATH_TEMP4_1"
     it3=$((it3+1))
     FILE_PATH_TEMP4_0="$FILE_PATH_TEMP4_1"
     FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
