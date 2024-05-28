@@ -7,12 +7,17 @@
 - Track all coding projects
 - Delete old GitHub repositories
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
+- "Herman's Code"
 
 ##  Consolidate my code
 
-- [x] Design code to install features
-  - [x] Test installation
-- [ ] Add uninstallation feature (See "Shell Package/Examples/Remove Text From File.bash")
+- [ ] Install "Herman's Code"
+  - [x] PySpark
+  - [x] iMac at home
+  - [ ] Work MBP
+- [ ] Segregate code
+  - [ ] "Herman's Code" for non-work projects
+  - [ ] DRAPI-Lemur for explicitely work-related projects
 
 ## Clean-up my computer
 
@@ -30,47 +35,30 @@ pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
 ### Find traces
-- Batch 3
-    - [ ] BetterTouchTool
-    - [ ] Chromium
-    - [ ] Chrome Apps
-      - [ ] Chrome App Launcher
-      - [ ] Chrome Remote Desktop v1
-      - [ ] Chrome Remote Desktop v2
-      - [ ] Gmail
-      - [ ] Google Drive
-      - [ ] Google Play Music v1
-      - [ ] Google Play Music v2
-      - [ ] Google Search
-      - [ ] YouTube
-    - [ ] mySIMBL
-    - [ ] iTerm
-    - [ ] Opera
-    - [ ] VirtualBox
-    - [ ] JumpDesktop
-- [ ] Batch 4
-    - [ ] hegenberg
+- [ ] Batch 5
+  - [ ] vmware (double check there are no traces left)
 
 
 ###  Remove traces
-  - [ ] Python: **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
-  - [ ] VMWare. See https://kb.vmware.com/s/article/1017838
-    - /Library/Application Support/VMware
-    - /Library/Application Support/VMware Fusion
-    - /Library/Preferences/VMware Fusion
-    - ~/Library/Application\ Support/VMware Fusion
-    - ~/Library/Application\ Support/VMware Fusion\ Applications\ Menu
-    - ~/Library/Caches/com.vmware.fusion
-    - ~/Library/Preferences/VMware Fusion
-    - ~/Library/Preferences/com.vmware.fusion.plist
-    - ~/Library/Preferences/com.vmware.fusion.plist.lockfile
-    - ~/Library/Preferences/com.vmware.fusionDaemon.plist
-    - ~/Library/Preferences/com.vmware.fusionDaemon.plist.lockfile
-    - ~/Library/Preferences/com.vmware.fusionApplicationsMenu.helper.plist
-    - ~/Library/Preferences/com.vmware.fusionApplicationsMenu.plist
-    - ~/Library/Preferences/com.vmware.fusionStartMenu.plist
-    - ~/Library/Preferences/com.vmware.fusionStartMenu.plist.lockfile
-
+  - [ ] Batch 2.1: Python. **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
+  - [ ] Batch 3: Remove processed traces from "Find Traces/2024-03-23 21-58-19 copy/Processed"
+      - [ ] BetterTouchTool
+      - [ ] Chromium
+      - [ ] Chrome Apps
+        - [ ] Chrome App Launcher
+        - [ ] Chrome Remote Desktop v1
+        - [ ] Chrome Remote Desktop v2
+        - [ ] Gmail
+        - [ ] Google Drive
+        - [ ] Google Play Music v1
+        - [ ] Google Play Music v2
+        - [ ] Google Search
+        - [ ] YouTube
+      - [ ] mySIMBL
+      - [ ] iTerm
+      - [ ] Opera
+      - [ ] VirtualBox
+      - [ ] JumpDesktop
 
 ###  What is in...?
    - [ ] "/Users/herman2"
@@ -80,9 +68,32 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 I have code and coding-related files and folders throughout my computer. I should organize them. I can start by searching in these folders:
 
-- /Users/herman
-- /Users/herman/Documents
-- /Users/herman/Documents/Herman's Code
+- Herman's iMac
+  - /Users/herman
+  - /Users/herman/Documents
+  - /Users/herman/Documents/Herman's Code
+- Work MBP
+  - /Users/herman/Documents/Professional Development
+    - AHCA - Code Search
+    - HelloWorld
+    - Herman's Code
+    - Homeless Problem
+    - Portfolio - Data Science Narrative
+    - Portfolio - Diabetes
+    - Portfolio - Indeed Company Rankings
+    - Portfolio - Recommender
+    - analyzeBloodPressure
+    - appleHealthExport
+    - applications
+    - dbooth
+    - hackerrank
+    - kaggle Used Cars Dataset
+    - portfolio
+    - stasia
+    - stasia1
+    - stasia2
+    - studentDebt
+    - triton
 
 Maybe  I can try something like
 
@@ -98,10 +109,20 @@ find / -iname *.py
 
 ## Delete old GitHub repositories
 
+To do?
+
+## "Herman's Code"
+
+- [ ] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
+- [ ] Improve installation/uninstallation. Uninstallation depends on the data created by installation. The data should exist as part of the package in a data directory. So if you remove the repository and clone it, you can immediately run the uninstallation script.
+
 # Done
 
 ## Consolidate my code
 
+- [x] Design code to install features
+  - [x] Test installation
+- [x] Add uninstallation feature (See "Shell Package/Examples/Remove Text From File.bash")
 - [x] Merge the repositories
   - [x] **mlFunctions**
   - [x] **hermanCode**
@@ -150,6 +171,8 @@ find / -iname *.py
   - [x] texmf
   - [x] TeXShop
   - [x] TextWrangler
+- [x] Batch 2.2: VMWare
+- [x] Batch 4: hegenberg
 
 ## Remove Folders
   - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
