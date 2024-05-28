@@ -94,19 +94,19 @@ fi
 
 FIND_TRACES_DIRECTORY=~/"Find Traces/$(getTimestamp)"
 if ! [ -d "$FIND_TRACES_DIRECTORY" ]; then
-    mkdir -p "$FIND_TRACES_DIRECTORY"
+    if [ "$TEST_MODE" == "FALSE" ]; then
+        mkdir -p "$FIND_TRACES_DIRECTORY"
+        echo "This directory was created by 'findTraces.sh'" > "$FIND_TRACES_DIRECTORY/README.md"
+    fi
     echo "Made directory at $FIND_TRACES_DIRECTORY"
 elif [ -d "$FIND_TRACES_DIRECTORY" ]; then
     echo "Directory already exists: $FIND_TRACES_DIRECTORY"
 fi
 
-echo "This directory was created by 'findTraces.sh'" > "$FIND_TRACES_DIRECTORY/README.md"
-
 for keyword in "${TRACE_KEYWORDS[@]}";
 do
-    echo "  $keyword"
     if [ "$TEST_MODE" == "FALSE" ]; then
-        nohup find "$DIRECTORY" -iname *"$keyword"* 1> "$FIND_TRACES_DIRECTORY/$keyword.out" 2> "$FIND_TRACES_DIRECTORY/$keyword.err" &
+        nohup find "$DIRECTORY" -iname "*$keyword*" 1> "$FIND_TRACES_DIRECTORY/$keyword.out" 2> "$FIND_TRACES_DIRECTORY/$keyword.err" &
     else
         :
     fi
