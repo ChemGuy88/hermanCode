@@ -35,7 +35,7 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ###  Remove traces
   - [ ] Batch 2.1: Python. **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
-  - [ ] Batch 3: Remove processed traces from **"2024-03-23 21-58-19 copy/Processed 2"**. Left off at **opera.out**
+  - [ ] Batch 3: Remove processed traces from **"2024-03-23 21-58-19 copy/Processed 2"**. I finished reviewing all the processed `out` files. I was reviewing the `uninstallFromFileList*.bash` files. I want to merge them into one script.
       - [ ] BetterTouchTool
       - [ ] Chromium
       - [ ] Chrome Apps
@@ -107,7 +107,9 @@ To do?
 
 ## "Herman's Code"
 
-...
+- [ ] Merge files
+  - uninstallFromFileList.bash
+  - uninstallFromFileList_Dirs.bash
 
 # Done
 
