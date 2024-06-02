@@ -31,8 +31,6 @@ pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
 ### Find traces
-- [ ] Batch 5
-  - [ ] vmware (double check there are no traces left)
 
 
 ###  Remove traces
@@ -176,6 +174,8 @@ To do?
   - [x] TextWrangler
 - [x] Batch 2.2: VMWare
 - [x] Batch 4: hegenberg
+- [x] Batch 5
+  - [x] vmware (double check there are no traces left)
 
 ## Remove Folders
   - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
