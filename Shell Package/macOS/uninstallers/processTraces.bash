@@ -4,8 +4,8 @@
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
 
 # Formatting
-bold=$(tput bold)
-normal=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 RED=$'\e[0;31m'
 GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
@@ -130,21 +130,21 @@ sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_TEMP1"
 
 # Preview data to be processed
 if [ "$TEST_MODE" == TRUE ]; then
-    echo " ${bold}${GRN}>>>${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}>>>${normal}${NC}"
+    echo " ${bld}${GRN}>>>${nrl}${NC} This is the text being fed to the for loop ${bld}${GRN}>>>${nrl}${NC}"
     cat "$FILE_PATH_TEMP1"
-    echo " ${bold}${GRN}<<<${normal}${NC} This is the text being fed to the for loop ${bold}${GRN}<<<${normal}${NC}"
+    echo " ${bld}${GRN}<<<${nrl}${NC} This is the text being fed to the for loop ${bld}${GRN}<<<${nrl}${NC}"
 fi
 
 # Preview data line by line
 if [ "$TEST_MODE" == TRUE ]; then
-    echo " ${bold}${BLU}>>>${normal}${NC} Segmentation of the text ${bold}${BLU}>>>${normal}${NC}"
+    echo " ${bld}${BLU}>>>${nrl}${NC} Segmentation of the text ${bld}${BLU}>>>${nrl}${NC}"
     it1=0
     while read -r line
     do
         it1=$((it1+1))
         echo "  Line $it1: \"$line\""
     done < "$FILE_PATH_TEMP1"
-    echo " ${bold}${BLU}<<<${normal}${NC} Segmentation of the text ${bold}${BLU}<<<${normal}${NC}"
+    echo " ${bld}${BLU}<<<${nrl}${NC} Segmentation of the text ${bld}${BLU}<<<${nrl}${NC}"
 fi
 
 # >>> Main body of processing code >>>
@@ -185,23 +185,27 @@ awk '!seen[$0]++' "$FILE_PATH_TEMP2" > "$FILE_PATH_TEMP3"
 # Step 3: Remove lines that start with provided leading text
 echo "  Removing lines starting with leading text you provided..."
 it3=1
-FILE_PATH_TEMP4_0="$FILE_PATH_TEMP3"
-FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
+FILE_PATH_TEMP4_1="$FILE_PATH_TEMP3"
+FILE_PATH_TEMP4_2="$FILE_PATH_TO.tmp4_$it3"
+FILE_PATH_TEMP4_ARRAY=()
 for text0 in "${LEADING_TEXT[@]}";
 do
+    FILE_PATH_TEMP4_ARRAY+=("$FILE_PATH_TEMP4_2")
     text="$(echo "$text0" | sed 's/\//\\\//g')"  # escape path separators
     echo "Using sed pattern \"$text\""
-    sed "/^$text/d" "$FILE_PATH_TEMP4_0" > "$FILE_PATH_TEMP4_1"
+    sed "/^$text/d" "$FILE_PATH_TEMP4_1" > "$FILE_PATH_TEMP4_2"
     it3=$((it3+1))
-    FILE_PATH_TEMP4_0="$FILE_PATH_TEMP4_1"
-    FILE_PATH_TEMP4_1="$FILE_PATH_TO.tmp$it3"
+    FILE_PATH_TEMP4_1="$FILE_PATH_TEMP4_2"
+    FILE_PATH_TEMP4_2="$FILE_PATH_TO.tmp4_$it3"
 done
 FILE_PATH_TEMP4="$FILE_PATH_TO.tmp4"
-sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP3" > "$FILE_PATH_TEMP4"
+cat "$FILE_PATH_TEMP4_1" > "$FILE_PATH_TEMP4"
+FILE_PATH_TEMP5="$FILE_PATH_TO.tmp5"
+sed '/^\/Volumes\/BOOTCAMP/d' "$FILE_PATH_TEMP4" > "$FILE_PATH_TEMP5"
 
 # Step 4: Sort final result
 echo "  Sorting final results..."
-sort "$FILE_PATH_TEMP4" > "$FILE_PATH_TO"
+sort "$FILE_PATH_TEMP5" > "$FILE_PATH_TO"
 
 echo "Processing traces in \"$FILE_PATH\" - done."
 # <<< Main body of processing code <<<
@@ -211,7 +215,9 @@ echo "Removing temporary files"
 LIST_OF_TEMP_FILES=("$FILE_PATH_TEMP1" \
                     "$FILE_PATH_TEMP2" \
                     "$FILE_PATH_TEMP3" \
-                    "$FILE_PATH_TEMP4")
+                    "$FILE_PATH_TEMP4" \
+                    "$FILE_PATH_TEMP5")
+LIST_OF_TEMP_FILES+=("${FILE_PATH_TEMP4_ARRAY[@]}")
 for fpath in "${LIST_OF_TEMP_FILES[@]}"
 do
     rm "$fpath"

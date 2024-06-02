@@ -2,8 +2,8 @@
 # shellcheck disable=SC2320
 
 # Formatting
-bold=$(tput bold)
-normal=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
@@ -82,7 +82,7 @@ FILE_PATH_TEMP="$FILE_PATH.tmp1"
 sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_TEMP"
 
 # Delete files and links first
-echo "${bold}Deleting files and links first.${normal}"
+echo "${bld}Deleting files and links first.${nrl}"
 deletedFiles=()
 deletedLinks=()
 failedFiles=()
@@ -131,7 +131,7 @@ done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
 # Delete empty directories
-echo "${bold}Deleting empty directories.${normal}"
+echo "${bld}Deleting empty directories.${nrl}"
 deletedDirectories=()
 failedDirectories=()
 while IFS=$'\n' read -r line
@@ -158,18 +158,18 @@ done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
 # Report results: Failed operations
-echo "${bold}The following paths ${RED}were not${NC} removed.${normal}"
-echo $'\n'"${bold}Files${normal}:"
+echo "${bld}The following paths ${RED}were not${NC} removed.${nrl}"
+echo $'\n'"${bld}Files${nrl}:"
 for path in "${failedFiles[@]}";
 do
     echo "  $path"
 done
-echo $'\n'"${bold}Links${normal}:"
+echo $'\n'"${bld}Links${nrl}:"
 for path in "${failedLinks[@]}";
 do
     echo "  $path"
 done
-echo $'\n'"${bold}Directories${normal}:"
+echo $'\n'"${bld}Directories${nrl}:"
 for path in "${failedDirectories[@]}";
 do
     echo "  $path"
@@ -194,7 +194,7 @@ done
 echo $'\n'"Failed operations were written to $OUT_PATH."
 
 # Report results: Successful operations
-echo $'\n'"${bold}The following paths ${GRN}were${NC} removed:${normal}"
+echo $'\n'"${bld}The following paths ${GRN}were${NC} removed:${nrl}"
 allPaths+=("${deletedFiles[@]}")
 allPaths+=("${deletedLinks[@]}")
 allPaths+=("${deletedDirectories[@]}")

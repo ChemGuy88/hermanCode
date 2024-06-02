@@ -3,22 +3,22 @@
 # This is an example of how to sort text in-place instead of saving it to a file.
 
 # Formatting
-bold=$(tput bold)
-normal=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
-echo " >>> Text ${bold}${GRN}Before${normal}${NC} Sorting >>>"
+echo " >>> Text ${bld}${GRN}Before${nrl}${NC} Sorting >>>"
 TEXT=$'a\nx\nc'
 echo "$TEXT"
-echo " <<< Text ${bold}${GRN}Before${normal}${NC} Sorting <<<"
+echo " <<< Text ${bld}${GRN}Before${nrl}${NC} Sorting <<<"
 export TEXT
 
 # Sort in place
-echo " >>> Text ${bold}${RED}After${normal}${NC} Sorting >>>"
+echo " >>> Text ${bld}${RED}After${nrl}${NC} Sorting >>>"
 sort -r <<<"$TEXT"
-echo " <<< Text ${bold}${RED}After${normal}${NC} Sorting <<<"
+echo " <<< Text ${bld}${RED}After${nrl}${NC} Sorting <<<"
 
 # Sort in place and export result
 RESULT1=$(sort -r <<<"$TEXT")

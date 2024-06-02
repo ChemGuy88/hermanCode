@@ -5,8 +5,8 @@
 # defined as a string of text ending with a newline.
 
 # Formatting
-BLD=$(tput bold)
-NRL=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
@@ -18,19 +18,19 @@ FILE_PATH_ARRAY=("$FILE_PATH_1" "$FILE_PATH_2")
 
 for FILE_PATH in "${FILE_PATH_ARRAY[@]}";
 do
-    echo "${BLD}Processing \"$(basename "$FILE_PATH")\"${NRL}:"
+    echo "${bld}Processing \"$(basename "$FILE_PATH")\"${nrl}:"
     # Preview data for processing
-    echo "   ${BLD}${GRN}>>>${NRL}${NC} This is the text before processing ${BLD}${GRN}>>>${NRL}${NC}"
+    echo "   ${bld}${GRN}>>>${nrl}${NC} This is the text before processing ${bld}${GRN}>>>${nrl}${NC}"
     cat "$FILE_PATH"
-    echo "   ${BLD}${GRN}<<<${NRL}${NC} This is the text before processing  ${BLD}${GRN}<<<${NRL}${NC}"
+    echo "   ${bld}${GRN}<<<${nrl}${NC} This is the text before processing  ${bld}${GRN}<<<${nrl}${NC}"
 
     # Process data
     FILE_PATH_RESULT="Append Newline to File - Example Result.txt"
     sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_RESULT"
 
     # Print results
-    echo "   ${BLD}${RED}>>>${NRL}${NC} This is the text after processing ${BLD}${RED}>>>${NRL}${NC}"
+    echo "   ${bld}${RED}>>>${nrl}${NC} This is the text after processing ${bld}${RED}>>>${nrl}${NC}"
     cat "$FILE_PATH_RESULT"
-    echo "   ${BLD}${RED}<<<${NRL}${NC} This is the text after processing  ${BLD}${RED}<<<${NRL}${NC}"
+    echo "   ${bld}${RED}<<<${nrl}${NC} This is the text after processing  ${bld}${RED}<<<${nrl}${NC}"
     echo ""
 done

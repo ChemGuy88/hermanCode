@@ -2,8 +2,8 @@
 # shellcheck disable=SC2320
 
 # Formatting
-bold=$(tput bold)
-normal=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
@@ -86,7 +86,7 @@ FILE_PATH_TEMP="$FILE_PATH.tmp1"
 sed -e '$ a \ '$'\n' "$FILE_PATH" > "$FILE_PATH_TEMP"
 
 # Delete directories
-echo "${bold}Deleting empty directories.${normal}"
+echo "${bld}Deleting empty directories.${nrl}"
 deletedDirectories=()
 failedDirectories=()
 while IFS=$'\n' read -r line
@@ -113,8 +113,8 @@ done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
 # Report results: Failed operations
-echo "${bold}The following paths ${RED}were not${NC} removed.${normal}"
-echo $'\n'"${bold}Directories${normal}:"
+echo "${bld}The following paths ${RED}were not${NC} removed.${nrl}"
+echo $'\n'"${bld}Directories${nrl}:"
 for path in "${failedDirectories[@]}";
 do
     echo "  $path"
@@ -139,7 +139,7 @@ done
 echo $'\n'"Failed operations were written to $OUT_PATH."
 
 # Report results: Successful operations
-echo $'\n'"${bold}The following paths ${GRN}were${NC} removed:${normal}"
+echo $'\n'"${bld}The following paths ${GRN}were${NC} removed:${nrl}"
 allPaths+=("${deletedFiles[@]}")
 allPaths+=("${deletedLinks[@]}")
 allPaths+=("${deletedDirectories[@]}")

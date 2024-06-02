@@ -5,8 +5,8 @@
 # See https://unix.stackexchange.com/questions/192465/remove-paragraph-from-file
 
 # Formatting codes
-BLD=$(tput bold)
-NRL=$(tput sgr0)
+bld=$(tput bold)
+nrl=$(tput sgr0)
 RED=$'\e[0;31m'
 GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
@@ -26,7 +26,7 @@ done
 echo " <<< These are the start and end markers <<<"
 echo ""
 file_to_edit_path="Shell Package/Examples/Data/Text between Markers.txt"
-echo "This is the file we are going to edit: ${BLD}\"$file_to_edit_path\"${NRL}"
+echo "This is the file we are going to edit: ${bld}\"$file_to_edit_path\"${nrl}"
 echo ""
 text_to_edit="$(cat "$file_to_edit_path")"
 echo " >>> This is the text to be edited >>>"
