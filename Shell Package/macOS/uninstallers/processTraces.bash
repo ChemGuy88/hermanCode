@@ -17,12 +17,16 @@ This processes the results from \`findTraces.bash\` by doing the following:
 
     1. Removing the leading text "/System/Volumes/Data".
     2. Removing duplicates.
-    3. Removing lines starting with the leading text passed as \`<LEADING_TEXT>\`.
+    3. Removing lines starting with leading text included in...
+       3.a. \`<LEADING_TEXT>\`.
+       3.b. the default values, if <USE_DEFAULT_LEADING_TEXT> was passed as "TRUE"
     4. Sorts the results.
 
-$0 -f <FILE_PATH> [-l <LEADING_TEXT>] -t TRUE|FALSE
+$0 -f <FILE_PATH> [-l <LEADING_TEXT>] -t TRUE|FALSE -d TRUE|FALSE
 
+    -d Whether to use the default leading texts. One of TRUE or FALSE.
     -f The path to the file that contains the traces.
+    -l The set of leading text to search for. Any line containing these will be omitted from results.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
 }
@@ -36,8 +40,9 @@ usage() {
 # >>> Argument parsing >>>
 LEADING_TEXT_DEFAULT=("/private/var/db" \
                       "/private/var/folders/")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
-while getopts ":f:l:t:" opt; do
+while getopts "d:f:l:t:" opt; do
     case "${opt}" in
+        d) USE_DEFAULT_LEADING_TEXT=${OPTARG};;
         f) FILE_PATH=${OPTARG};;
         l) LEADING_TEXT+=("$OPTARG");;
         t) TEST_MODE=${OPTARG};;
@@ -77,6 +82,20 @@ if [ -z "${LEADING_TEXT[*]}" ]; then
         :
 fi
 
+# $USE_DEFAULT_LEADING_TEXT
+MESSAGE="${RED}Note${NC}: USE_DEFAULT_LEADING_TEXT must be one of {TRUE, FALSE}."
+if [ -z "$USE_DEFAULT_LEADING_TEXT" ]; then
+    echo "$MESSAGE"
+    SHOULD_EXIT=1
+else
+    if [ "$USE_DEFAULT_LEADING_TEXT" == "TRUE" ] || [ "$USE_DEFAULT_LEADING_TEXT" == "FALSE" ]; then
+        :
+    else
+        echo "$MESSAGE"
+        SHOULD_EXIT=1
+    fi
+fi
+
 # $TEST_MODE
 MESSAGE="${RED}Note${NC}: TEST_MODE must be one of {TRUE, FALSE}."
 if [ -z "$TEST_MODE" ]; then
@@ -91,6 +110,11 @@ else
     fi
 fi
 
+# Parameter creation
+leading_text_all=()
+leading_text_all+=("${LEADING_TEXT_DEFAULT[@]}")
+leading_text_all+=("${LEADING_TEXT[@]}")
+
 # Argument confirmation
 echo "FILE_PATH:"
 for val in "${FILE_PATH[@]}"; do
@@ -100,7 +124,15 @@ echo "LEADING_TEXT:"
 for val in "${LEADING_TEXT[@]}"; do
     echo "  - \"${GRN}$val${NC}\""
 done
+echo "USE_DEFAULT_LEADING_TEXT = ${GRN}${USE_DEFAULT_LEADING_TEXT}${NC}"
 echo "TEST_MODE = ${GRN}${TEST_MODE}${NC}"
+
+# Parameter confirmation
+echo "leading_text_all:"
+for val in "${leading_text_all[@]}"; do
+    echo "  - \"${GRN}$val${NC}\""
+done
+
 
 if [ "$SHOULD_EXIT" -eq 0 ]; then
     :
@@ -188,7 +220,7 @@ it3=1
 FILE_PATH_TEMP4_1="$FILE_PATH_TEMP3"
 FILE_PATH_TEMP4_2="$FILE_PATH_TO.tmp4_$it3"
 FILE_PATH_TEMP4_ARRAY=()
-for text0 in "${LEADING_TEXT[@]}";
+for text0 in "${leading_text_all[@]}";
 do
     FILE_PATH_TEMP4_ARRAY+=("$FILE_PATH_TEMP4_2")
     text="$(echo "$text0" | sed 's/\//\\\//g')"  # escape path separators
