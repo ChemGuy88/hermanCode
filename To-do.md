@@ -11,10 +11,6 @@
 
 ##  Consolidate my code
 
-- [ ] Install "Herman's Code"
-  - [x] PySpark
-  - [x] iMac at home
-  - [ ] Work MBP
 - [ ] Segregate code
   - [ ] "Herman's Code" for non-work projects
   - [ ] DRAPI-Lemur for explicitely work-related projects
@@ -57,8 +53,6 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
       - [ ] Opera
       - [ ] VirtualBox
       - [ ] JumpDesktop
-- [x] Batch 5
-  - [x] vmware (double check there are no traces left)
 
 ###  What is in...?
    - [ ] "/Users/herman2"
@@ -113,8 +107,7 @@ To do?
 
 ## "Herman's Code"
 
-- [x] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
-- [ ] Improve installation/uninstallation. Uninstallation depends on the data created by installation. The data should exist as part of the package in a data directory. So if you remove the repository and clone it, you can immediately run the uninstallation script.
+...
 
 # Done
 
@@ -141,6 +134,14 @@ To do?
 - [x] Delete all installations in user folders
 - [x] Test code in macOS and Linux. Once that's done move it into the general section.
   - [x] Examples
+- [x] Install "Herman's Code"
+  - [x] PySpark
+  - [x] iMac at home
+
+## `Herman's Code`
+
+- [x] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
+- [x] Improve installation/uninstallation. Uninstallation depends on the data created by installation. The data should exist as part of the package in a data directory. So if you remove the repository and clone it, you can immediately run the uninstallation script.
 
 ## Remove GUI Apps, packages, and find and remove traces
 - Batch 1
@@ -173,6 +174,8 @@ To do?
   - [x] TextWrangler
 - [x] Batch 2.2: VMWare
 - [x] Batch 4: hegenberg
+- [x] Batch 5
+  - [x] vmware (double check there are no traces left)
 
 ## Remove Folders
   - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
