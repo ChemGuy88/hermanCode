@@ -1,7 +1,6 @@
-**/limericks_in.bash
-**/limericks_out.bash
 # >>> [start] Things added by Herman >>>
 **/logs/*
+**/Code Blocks/*
 **/*.7z
 **/.DS_Store
 **/*.bat
@@ -10,9 +9,11 @@
 **/*.pdf
 **/*.tsv
 **/*.txt
-!**/Data/*.txt
+!**/Data/**/*.txt
 **/*.xlsx
 **/*.zip
+**/limericks_in.bash
+**/limericks_out.bash
 data/*
 documents/*
 Shell Package/Install/Code Blocks/*
