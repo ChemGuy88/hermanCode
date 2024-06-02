@@ -14,7 +14,7 @@ Takes in a list of paths and deletes each item. If the item is a directory, it w
 
 $0 -f <FILE_PATH> -t TRUE|FALSE -o <OUT_PATH>
 
-    -f The keyword to search for. Use multiple -f for search for multiple keywords.
+    -f The file path that contains the list of files and directories to delete.
     -o The file path for the output file.
     -t The script test flag. One of TRUE or FALSE.
 USAGE
