@@ -71,7 +71,8 @@ if [[ $OSTYPE == "darwin"* ]]; then
     :
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     PATH_ADDENDUM_1="/opt/mssql-tools18/bin"  # Add `sqlcmd` to `PATH`
-    export PATH="$PATH:$PATH_ADDENDUM_1"
+    export PATH="$PATH:\
+$PATH_ADDENDUM_1"
 else
     echo "Unsupported operating system."
     return
@@ -146,6 +147,7 @@ alias vim='vi -S "$HERMANS_CODE_SHELL_PKG_PATH/Shell Package/vim/.vimrc"'
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     getPgrep root find
+    alias ls="ls -lash"
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
@@ -158,14 +160,15 @@ if [[ $OSTYPE == "darwin"* ]]; then
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: Linux ::
+    alias ls="ls -lashX"
     conda activate idr-bian
     getPgrep herman .
     echo
     df -h /data/herman/Projects
     echo
     du -sh /data/herman/Projects
-    cd "/data/herman/Mounted Drives/UF Health Shared Drive/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Xu/IRB202202722" || return
     cd "/data/herman/Documents/Git Repositories/Herman Code" || return
+    cd "/data/herman/Mounted Drives/UF Health Shared Drive/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Xu/IRB202202722" || return
 else
     echo "Unsupported machine."
     return
