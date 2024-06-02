@@ -35,8 +35,6 @@ pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
 Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
 
 ### Find traces
-- [ ] Batch 5
-  - [ ] vmware (double check there are no traces left)
 
 
 ###  Remove traces
@@ -59,6 +57,8 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
       - [ ] Opera
       - [ ] VirtualBox
       - [ ] JumpDesktop
+- [x] Batch 5
+  - [x] vmware (double check there are no traces left)
 
 ###  What is in...?
    - [ ] "/Users/herman2"
@@ -113,7 +113,7 @@ To do?
 
 ## "Herman's Code"
 
-- [ ] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
+- [x] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
 - [ ] Improve installation/uninstallation. Uninstallation depends on the data created by installation. The data should exist as part of the package in a data directory. So if you remove the repository and clone it, you can immediately run the uninstallation script.
 
 # Done
