@@ -20,3 +20,9 @@ listpath () {
      # listpath $PATH
 }
 
+getFilestem () {
+    file_path="$1"
+    file_base_name="$(basename -- "$file_path")"
+    file_stem="${file_base_name%.*}"
+    echo "$file_stem"
+}
