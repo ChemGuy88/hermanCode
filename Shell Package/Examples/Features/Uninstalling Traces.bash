@@ -3,14 +3,35 @@
 # An example workflow for uninstalling traces on macOS
 
 # Step 1: Find trces
-findTraces.bash -t FALSE -k myapp1 -k myapp2
+findTraces.bash -t FALSE -k app1 -k app2
 
+# >>> Step 2: Process traces >>>
 # Step 2: Process traces: Option 1: Process one result
 processTraces.bash -t FALSE -f "Find Traces/YYYY-MM-DD hh-mm-ss"
 # Step 2: Process traces: Option 1: Process multipel results
 find "Find Traces/YYYY-MM-DD hh-mm-ss" -type f -iname "*.out" -exec echo '{}' \;  # Test path
-find "2024-03-23 21-58-19 copy" -maxdepth 1 -type f -iname "*.out" -exec processTraces -d TRUE \
-                                                                                       -t FALSE \
-                                                                                       -l "/Users/herman/.Trash/" \
-                                                                                       -l "/Users/herman/Find Traces/" \
-                                                                                       -f '{}' \;  # Execute processing
+find "YYYY-MM-DD hh-mm-ss" -maxdepth 1 -type f -iname "*.out" -exec processTraces -d TRUE \
+                                                                                  -t FALSE \
+                                                                                  -l "/Users/exampleUser/.Trash/" \
+                                                                                  -l "/Users/exampleUser/Find Traces/" \
+                                                                                  -f '{}' \;  # Execute processing
+
+# <<< Step 2: Process traces <<<
+
+# >>> Step 3: Remove traces <<<
+dir_from="YYYY-MM-DD hh-mm-ss/Processed"
+dir_to="YYYY-MM-DD hh-mm-ss/Remove Traces Result 1"  # Repeat as necessary
+find "$dir_from" -maxdepth 1 \
+                 -type f \
+                 -iname "*.out" > file1.text
+while read -r line;
+do
+    file_stem="$(getFilestem "$line")"
+    file_path="$dir_from/$file_stem.out"
+    file_path_out="$dir_to/$file_stem.out"
+    uninstallFromFileList -d "FALSE" \
+                          -f "$file_path" \
+                          -o "$file_path_out" \
+                          -t "FALSE"
+done < <(cat file1.text)
+# >>> Step 3: Remove traces <<<
