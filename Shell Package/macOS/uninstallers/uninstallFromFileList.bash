@@ -4,8 +4,9 @@
 # Formatting
 bld=$(tput bold)
 nrl=$(tput sgr0)
-GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
+GRN=$'\e[0;32m'
+BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
 usage0() {
@@ -102,9 +103,9 @@ failedLinks=()
 while IFS=$'\n' read -r line
 do
     if [ -f "$line" ] || [ -L "$line" ]; then
-        echo "  Working on $line"
+        echo "  Working on \"$line\"."
         if [ -f "$line" ]; then
-            echo "    $line is a file."
+            echo "    \"$line\" is a file."
             if [ "$TEST_MODE" == "TRUE" ]; then
                 echo "    ${GRN}TEST MODE${NC}"
             else
@@ -149,8 +150,8 @@ failedDirectories=()
 while IFS=$'\n' read -r line
 do 
     if [ -d "$line" ]; then
-        echo "  Working on $line."
-        echo "    $line is a directory."
+        echo "  Working on \"$line\"."
+        echo "    \"$line\" is a directory."
         if [ "$TEST_MODE" == "TRUE" ]; then
             echo "    ${GRN}TEST MODE${NC}"
         else
@@ -209,7 +210,7 @@ for path in "${allFailedPathsSorted[@]}";
 do
     echo "$path" >> "$OUT_PATH"
 done
-echo $'\n'"Failed operations were written to $OUT_PATH."
+echo $'\n'"${bld}Failed operations were written to${nrl} ${BLU}$OUT_PATH${NC}."
 
 # Report results: Successful operations
 echo $'\n'"${bld}The following paths ${GRN}were${NC} removed:${nrl}"
