@@ -151,6 +151,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
+        cd ~/"Documents/midas" || exit 1
     elif [[ "AHC-Mac-Admins-MacBook-Pro.local" == "$(hostname)" ]]; then
         # :: macOS at work ::
         # Run commands for the Dreambooth project
