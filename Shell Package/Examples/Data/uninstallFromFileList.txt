@@ -1,0 +1,7 @@
+Shell Package/Examples/Data/uninstallFromFileList/001.data
+Shell Package/Examples/Data/uninstallFromFileList/001.json
+Shell Package/Examples/Data/uninstallFromFileList/Lorem Ipsum.txt
+Shell Package/Examples/Data/uninstallFromFileList/Lorem
+Shell Package/Examples/Data/uninstallFromFileList/Lorem/text.text
+Shell Package/Examples/Data/uninstallFromFileList/d2/
+Shell Package/Examples/Data/uninstallFromFileList/d2/something
