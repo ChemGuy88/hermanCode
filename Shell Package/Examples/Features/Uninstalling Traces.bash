@@ -2,13 +2,27 @@
 
 # An example workflow for uninstalling traces on macOS
 
-# Step 1: Find trces
+# Step 1: GUI approach
+# Uninstall programs by clicking and dragging from the "Applications" folder in Finder to the Trash bin.
+
+# Step 2: Uninstall programs using `pkgutil`
+pkgutil --pkgs | grep -i "PROGRAM_NAME" | sort
+
+# Step 2: Option 1: Single package option
+# Use `uninstallWithPkgutil.bash`
+:
+
+# Step 2: Option 1: Multiple package option
+# Use `uninstallWithPkgutil-Multiple.bash`
+:
+
+# Step 3: Find trces
 findTraces.bash -t FALSE -k app1 -k app2
 
-# >>> Step 2: Process traces >>>
-# Step 2: Process traces: Option 1: Process one result
+# >>> Step 4: Process traces >>>
+# Step 4: Process traces: Option 1: Process one result
 processTraces.bash -t FALSE -f "Find Traces/YYYY-MM-DD hh-mm-ss"
-# Step 2: Process traces: Option 1: Process multipel results
+# Step 4: Process traces: Option 1: Process multipel results
 find "Find Traces/YYYY-MM-DD hh-mm-ss" -type f -iname "*.out" -exec echo '{}' \;  # Test path
 find "YYYY-MM-DD hh-mm-ss" -maxdepth 1 -type f -iname "*.out" -exec processTraces -d TRUE \
                                                                                   -t FALSE \
@@ -16,9 +30,9 @@ find "YYYY-MM-DD hh-mm-ss" -maxdepth 1 -type f -iname "*.out" -exec processTrace
                                                                                   -l "/Users/exampleUser/Find Traces/" \
                                                                                   -f '{}' \;  # Execute processing
 
-# <<< Step 2: Process traces <<<
+# <<< Step 4: Process traces <<<
 
-# >>> Step 3: Remove traces <<<
+# >>> Step 5: Remove traces <<<
 dir_from="YYYY-MM-DD hh-mm-ss/Processed"
 dir_to="YYYY-MM-DD hh-mm-ss/Remove Traces Result 1"  # Repeat as necessary
 find "$dir_from" -maxdepth 1 \
@@ -34,4 +48,4 @@ do
                           -o "$file_path_out" \
                           -t "FALSE"
 done < <(cat file1.text)
-# >>> Step 3: Remove traces <<<
+# >>> Step 5: Remove traces <<<
