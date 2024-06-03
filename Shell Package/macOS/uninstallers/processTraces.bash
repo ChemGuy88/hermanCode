@@ -39,7 +39,13 @@ usage() {
 
 # >>> Argument parsing >>>
 LEADING_TEXT_DEFAULT=("/private/var/db" \
-                      "/private/var/folders/")  # These files cannot be deleted per https://discussions.apple.com/thread/252345091
+                      "/private/var/folders/" \
+                      "/usr/libexec" \
+                      "Users/$HOME/Library/Group Containers")
+# For a discussion of folders whose contents shouldn't be altered, see the below references
+# - https://discussions.apple.com/thread/252345091
+# - https://unix.stackexchange.com/a/386015/399435
+# - https://medium.com/@alicemiller_48990/about-group-containers-folder-on-mac-1f2179186537
 while getopts "d:f:l:t:" opt; do
     case "${opt}" in
         d) USE_DEFAULT_LEADING_TEXT=${OPTARG};;
