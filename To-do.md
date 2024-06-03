@@ -3,11 +3,9 @@
 # To-do
 
 - Consolidate my code
-- Clean-up my computer
 - Track all coding projects
 - Delete old GitHub repositories
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
-- "Herman's Code"
 
 ##  Consolidate my code
 
@@ -15,32 +13,7 @@
   - [ ] "Herman's Code" for non-work projects
   - [ ] DRAPI-Lemur for explicitely work-related projects
 
-## Clean-up my computer
-
-###  Uninstall with Trash click-and-drag
-  - [ ] ...
-
-###  Find and remove packages
-  - [ ] Mendeley Desktop
-
-Use the following code to search the packages
-```bash
-pkgutil --pkgs | grep -i $KEYWORD_TO_SEARCH_FOR | sort
-```
-
-Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.bash` to uninstall your packages.
-
-### Find traces
-
-
-###  Remove traces
-  - [ ] Batch 2.1: Python. **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
-
-###  What is in...?
-   - [ ] "/Users/herman2"
-     - [ ] It's 43 GB big, most of that from the Photos folder, and about 3 GB from "Library". After making sure all the Photos are in the main user account, I can delete this user.
-
-## Track my coding projects
+## Track all coding projects
 
 I have code and coding-related files and folders throughout my computer. I should organize them. I can start by searching in these folders:
 
@@ -83,16 +56,6 @@ find / -iname *.py
 | .ssh.copy                   | -   | /Users/herman/Documents/Herman's Code/.ssh.copy                   |
 | .vim                        | -   | herman@pyspark:/home/herman/.vim/.vimrc                           |
 
-## Delete old GitHub repositories
-
-To do?
-
-## "Herman's Code"
-
-- [ ] Merge files
-  - uninstallFromFileList.bash
-  - uninstallFromFileList_Dirs.bash
-
 # Done
 
 ## Consolidate my code
@@ -126,8 +89,25 @@ To do?
 
 - [x] Fix "processTraces.bash". The temporary files are not being kept track of when removing the leading texts.  See "2024-05-27 21-38-53".
 - [x] Improve installation/uninstallation. Uninstallation depends on the data created by installation. The data should exist as part of the package in a data directory. So if you remove the repository and clone it, you can immediately run the uninstallation script.
+- [x] Merge files
+  - uninstallFromFileList.bash
+  - uninstallFromFileList_Dirs.bash
 
-## Remove GUI Apps, packages, and find and remove traces
+## Clean-up my computer
+
+### Uninstall software
+
+#### Procedure
+
+For each of the following **batches** below, perform the following:
+
+  - Uninstall with Trash click-and-drag
+  - Find and remove packages
+  - Find traces
+  - Remove traces
+
+#### Batches
+
 - Batch 1
   - [x] CloudFlare
   - [x] CrimeFlare
@@ -156,6 +136,7 @@ To do?
   - [x] texmf
   - [x] TeXShop
   - [x] TextWrangler
+- [x] Batch 2.1: Python
 - [x] Batch 2.2: VMWare
 - [x] Batch 3
     - [x] BetterTouchTool
@@ -179,5 +160,6 @@ To do?
 - [x] Batch 5
   - [x] vmware (double check there are no traces left)
 
-## Remove Folders
+### Remove Folders
   - [x] "/Users/Shared": The whole folder is about 2GB and there's nothing important there. Try `sudo rm -rf` the subfolders, but not the folder itself.
+  - [x] "/Users/herman2"
