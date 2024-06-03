@@ -9,6 +9,13 @@ GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
+# Check if a script is being run as the super-user "SUDO".
+# This is necessary to create the script links
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Please run this script as root or using \`sudo\`."
+    exit 1
+fi
+
 usage0() {
     cat <<USAGE
 Takes in a list of paths and deletes each item. If the item is a directory, it will not be deleted unless it's empty or if the \`-d\` option is used. Items that are not deleted are written to <OUT_PATH>
