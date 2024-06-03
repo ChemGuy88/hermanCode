@@ -21,7 +21,7 @@
   - [ ] ...
 
 ###  Find and remove packages
-  - [ ] ...
+  - [ ] Mendeley Desktop
 
 Use the following code to search the packages
 ```bash
