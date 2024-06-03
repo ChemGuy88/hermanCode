@@ -145,7 +145,8 @@ fi
 # >>> Add to `PATH` >>>
 # Get list of files to link
 MANUAL_ARRAY=("findTraces.bash" \
-              "processTraces.bash")
+              "processTraces.bash" \
+              "uninstallFromFileList.bash")
 for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/macOS/uninstallers"/*; do
     :
     file_base_name="$(basename -- "$file_path")"
