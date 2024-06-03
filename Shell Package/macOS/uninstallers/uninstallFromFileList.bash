@@ -10,10 +10,10 @@ NC=$'\e[0m'
 
 usage0() {
     cat <<USAGE
-Takes in a list of paths and deletes each item. If the item is a directory, it will not be deleted unless it's empty. Items that are not deleted are written to <OUT_PATH>
+Takes in a list of paths and deletes each item. If the item is a directory, it will not be deleted unless it's empty or if the \`-d\` option is used. Items that are not deleted are written to <OUT_PATH>
 
 $0 -f <FILE_PATH> -t TRUE|FALSE -o <OUT_PATH>
-
+    -d Force delete directories, even if not empty (uses \`rm -rf\`). One of TRUE or FALSE.
     -f The file path that contains the list of files and directories to delete.
     -o The file path for the output file.
     -t The script test flag. One of TRUE or FALSE.
@@ -26,9 +26,11 @@ usage() {
 }
 
 # >>> Argument parsing >>>
-OUT_PATH="UndeletedFiles.txt"
-while getopts ":f:o:t:" opt; do
+OUT_PATH_DEFAULT="UndeletedFiles.txt"
+FORCE_DELETE_DIRECTORIES="FALSE"
+while getopts ":d:f:o:t:" opt; do
     case "${opt}" in
+        d) FORCE_DELETE_DIRECTORIES=${OPTARG};;
         f) FILE_PATH+=("$OPTARG");;
         o) OUT_PATH=${OPTARG};;
         t) TEST_MODE=${OPTARG};;
@@ -45,6 +47,15 @@ fi
 # >>> Argument confirmation >>>
 SHOULD_EXIT=0
 
+# $FORCE_DELETE_DIRECTORIES
+MESSAGE="${RED}FORCE_DELETE_DIRECTORIES must be one of {TRUE, FALSE}${NC}."
+if [ "$FORCE_DELETE_DIRECTORIES" == "TRUE" ] || [ "$FORCE_DELETE_DIRECTORIES" == "FALSE" ]; then
+    :
+else
+    echo "$MESSAGE"
+    SHOULD_EXIT=1
+fi
+
 # $FILE_PATH
 if [[ -z "${FILE_PATH[*]}" ]]; then
     echo "${RED}You must supply a file path${NC}."
@@ -53,21 +64,22 @@ fi
 
 # $TEST_MODE
 MESSAGE="${RED}TEST_MODE must be one of {TRUE, FALSE}${NC}."
-if [ -z "$TEST_MODE" ]; then
+if [ "$TEST_MODE" == "TRUE" ] || [ "$TEST_MODE" == "FALSE" ]; then
+    :
+else
     echo "$MESSAGE"
     SHOULD_EXIT=1
-else
-    if [ "$TEST_MODE" == "TRUE" ] || [ "$TEST_MODE" == "FALSE" ]; then
-        :
-    else
-        echo "$MESSAGE"
-        SHOULD_EXIT=1
-    fi
+fi
+
+# $OUT_PATH
+if [ -z "$OUT_PATH" ]; then
+    OUT_PATH="$OUT_PATH_DEFAULT"
 fi
 
 # Argument confirmation
 echo "FILE_PATH = ${FILE_PATH}"
 echo "TEST_MODE = ${TEST_MODE}"
+echo "OUT_PATH = ${OUT_PATH}"
 
 if [ "$SHOULD_EXIT" -eq 0 ]; then
     :
@@ -130,8 +142,8 @@ do
 done < <(grep -v -e '^#' -e '^$' "$FILE_PATH_TEMP")
 unset IFS
 
-# Delete empty directories
-echo "${bld}Deleting empty directories.${nrl}"
+# Delete directories
+echo "${bld}Deleting directories.${nrl}"
 deletedDirectories=()
 failedDirectories=()
 while IFS=$'\n' read -r line
@@ -142,7 +154,13 @@ do
         if [ "$TEST_MODE" == "TRUE" ]; then
             echo "    ${GRN}TEST MODE${NC}"
         else
-            rmdir "$line"
+            # Check if only empty directories should be deleted.
+            if [ "$FORCE_DELETE_DIRECTORIES" == "TRUE" ];
+            then
+                rm -rf "$line"
+            else
+                rmdir "$line"
+            fi
             # echo "    ${RED}NOT TEST MODE${NC}"
         fi
         result="$?"
