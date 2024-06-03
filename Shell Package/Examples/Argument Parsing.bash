@@ -26,11 +26,19 @@ while getopts ":a:b:" opt; do
 done
 shift $((OPTIND -1))
 
-if [ -z "${ARGUMENT_ARRAY[*]}" ] || [ -z "${BOOLEAN_ARGUMENT}" ]; then
+# >>> Argument confirmation >>>
+# `ARGUMENT_ARRAY`
+if [ -z "${ARGUMENT_ARRAY[*]}" ]; then
+    usage
+fi
+# `BOOLEAN_ARGUMENT`
+if [ "$BOOLEAN_ARGUMENT" == "TRUE" ] || [ "$BOOLEAN_ARGUMENT" == "FALSE" ]; then
+    :
+else
     usage
 fi
 
-echo "The first value of the array 'ARGUMENT_ARRAY' is '$ARGUMENT_ARRAY'"
+echo "The first value of the argument array 'ARGUMENT_ARRAY' is '$ARGUMENT_ARRAY'"
 echo "The whole list of values is '${ARGUMENT_ARRAY[*]}'"
 
 echo "Or:"
@@ -39,11 +47,5 @@ for val in "${ARGUMENT_ARRAY[@]}"; do
     echo " - $val"
 done
 
-echo "The first value of the array 'BOOLEAN_ARGUMENT' is '$BOOLEAN_ARGUMENT'"
-echo "The whole list of values is '${BOOLEAN_ARGUMENT[*]}'"
-
-echo "Or:"
-
-for val in "${BOOLEAN_ARGUMENT[@]}"; do
-    echo " - $val"
-done
+echo "The value of the argument 'BOOLEAN_ARGUMENT' is '$BOOLEAN_ARGUMENT'"
+# <<< Argument confirmation <<<
