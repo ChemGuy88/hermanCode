@@ -35,24 +35,6 @@ Then use either `uninstallWithPkgutil.bash` or `uninstallWithPkgutil-Multiple.ba
 
 ###  Remove traces
   - [ ] Batch 2.1: Python. **Do manually**. Read [this](https://docs.python.org/3/using/mac.html)
-  - [ ] Batch 3: Remove processed traces from **"2024-03-23 21-58-19 copy/Processed 2"**. I finished reviewing all the processed `out` files. I was reviewing the `uninstallFromFileList*.bash` files. I want to merge them into one script.
-      - [ ] BetterTouchTool
-      - [ ] Chromium
-      - [ ] Chrome Apps
-        - [ ] Chrome App Launcher
-        - [ ] Chrome Remote Desktop v1
-        - [ ] Chrome Remote Desktop v2
-        - [ ] Gmail
-        - [ ] Google Drive
-        - [ ] Google Play Music v1
-        - [ ] Google Play Music v2
-        - [ ] Google Search
-        - [ ] YouTube
-      - [ ] mySIMBL
-      - [ ] iTerm
-      - [ ] Opera
-      - [ ] VirtualBox
-      - [ ] JumpDesktop
 
 ###  What is in...?
    - [ ] "/Users/herman2"
@@ -175,6 +157,24 @@ To do?
   - [x] TeXShop
   - [x] TextWrangler
 - [x] Batch 2.2: VMWare
+- [x] Batch 3
+    - [x] BetterTouchTool
+    - [x] Chromium
+    - [x] Chrome Apps
+      - [x] Chrome App Launcher
+      - [x] Chrome Remote Desktop v1
+      - [x] Chrome Remote Desktop v2
+      - [x] Gmail
+      - [x] Google Drive
+      - [x] Google Play Music v1
+      - [x] Google Play Music v2
+      - [x] Google Search
+      - [x] YouTube
+    - [x] mySIMBL
+    - [x] iTerm
+    - [x] Opera
+    - [x] VirtualBox
+    - [x] JumpDesktop
 - [x] Batch 4: hegenberg
 - [x] Batch 5
   - [x] vmware (double check there are no traces left)
