@@ -206,6 +206,10 @@ done < <(IFS=$'\n' sort <<<"${allFailedPaths[*]}")
 unset IFS
 
 # Print results
+if [ -f "$OUT_PATH" ];
+then
+    rm "$OUT_PATH"
+fi
 for path in "${allFailedPathsSorted[@]}";
 do
     echo "$path" >> "$OUT_PATH"
@@ -230,3 +234,6 @@ for path in "${allPathsSorted[@]}";
 do
     echo "  $path"
 done
+
+# Remove temporary files
+rm "$FILE_PATH_TEMP"
