@@ -55,8 +55,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     :
 else
-    echo "Unsupported operating system."
-    return
+    echo "Unsupported operating system." || exit 1
 fi
 
 ################################################################################
@@ -151,7 +150,11 @@ if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
+        # :: >>> macOS at home - Midas project >>> ::
         cd ~/"Documents/midas" || exit 1
+        conda activate midas
+        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.bash"
+        # :: <<< macOS at home - Midas project <<< ::
     elif [[ "AHC-Mac-Admins-MacBook-Pro.local" == "$(hostname)" ]]; then
         # :: macOS at work ::
         # Run commands for the Dreambooth project

@@ -29,7 +29,6 @@ SERVER = None
 DATABASE = None
 
 
-
 if __name__ == "__main__":
     # Variables: Path construction: General
     runTimestamp = getTimestamp()
