@@ -67,8 +67,14 @@ fi
 ################################################################################
 
 if [[ $OSTYPE == "darwin"* ]]; then
-    :
+    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+        # :: macOS at home ::
+        PYTHONPATH_ADDENDUM_1="/Users/herman/Documents/midas/src"  # Add project "midas" to `PATH`
+        export PYTHONPATH="$PYTHONPATH:\
+$PYTHONPATH_ADDENDUM_1"
+    fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
+    # :: Linux ::
     PATH_ADDENDUM_1="/opt/mssql-tools18/bin"  # Add `sqlcmd` to `PATH`
     export PATH="$PATH:\
 $PATH_ADDENDUM_1"
