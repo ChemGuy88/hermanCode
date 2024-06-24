@@ -4,7 +4,7 @@ Test
 
 import datetime as dt
 
-from hermanCode.code.utilities import get_elapsed_time
+from hermanCode.code.get_elapsed_time import get_elapsed_time
 
 
 t1 = dt.datetime.now().timestamp()
