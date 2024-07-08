@@ -52,6 +52,11 @@ export HISTFILESIZE=2000  #  The maximum number of lines contained in the histor
 # OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
+    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+        # :: macOS at home ::
+        MIDAS_INSTALL_PATH="/Users/herman/Documents/midas"
+        export MIDAS_INSTALL_PATH
+    fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     :
 else
@@ -70,8 +75,10 @@ if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::
         PYTHONPATH_ADDENDUM_1="/Users/herman/Documents/midas/src"  # Add project "midas" to `PATH`
+        PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
         export PYTHONPATH="$PYTHONPATH:\
-$PYTHONPATH_ADDENDUM_1"
+$PYTHONPATH_ADDENDUM_1:\
+$PYTHONPATH_ADDENDUM_2"
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: Linux ::
@@ -151,7 +158,7 @@ alias vim='vi -S "$HERMANS_CODE_SHELL_PKG_PATH/Shell Package/vim/.vimrc"'
 # Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
-    getPgrep root find
+    getPgrep herman python
     alias ls="ls -lash"
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::

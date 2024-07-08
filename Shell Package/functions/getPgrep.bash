@@ -14,7 +14,7 @@ getPgrep_macOS() {
         echo "You must provide both the user and keyword arguments for getPgrep"
         return 1
     fi
-    pgrep -U "$1" -f "$2" | xargs --no-run-if-empty ps -o lstart -o pid -o pgid -o tty -o time -o command
+    pgrep -U "$1" -f "$2" | xargs --no-run-if-empty ps -o lstart -o pid -o pgid -o ppid -o tty -o time -o command
 }
 
 if [[ $OSTYPE == "darwin"* ]]; then
