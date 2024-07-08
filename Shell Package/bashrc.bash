@@ -159,7 +159,7 @@ alias vim='vi -S "$HERMANS_CODE_SHELL_PKG_PATH/Shell Package/vim/.vimrc"'
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     getPgrep herman python
-    alias ls="ls -lash"
+    alias lss="ls -lash"
     if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
@@ -177,7 +177,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: Linux ::
-    alias ls="ls -lashX"
+    alias lss="ls -lashX"
     conda activate idr-bian
     getPgrep herman .
     echo
