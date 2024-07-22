@@ -160,7 +160,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     getPgrep herman python
     alias lss="ls -lash"
-    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
         # :: >>> macOS at home - Midas project >>> ::
@@ -168,7 +168,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         conda activate midas
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.bash"
         # :: <<< macOS at home - Midas project <<< ::
-    elif [[ "AHC-Mac-Admins-MacBook-Pro.local" == "$(hostname)" ]]; then
+    elif [[ "$(hostname)" == "AHC-Mac-Admins-MacBook-Pro.local" ]]; then
         # :: macOS at work ::
         # Run commands for the Dreambooth project
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/dreambooth.bash"
