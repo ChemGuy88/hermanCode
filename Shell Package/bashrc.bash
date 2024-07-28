@@ -15,7 +15,7 @@ if [[ "$TheWorldIsFlat" = true ]]; then
         echo "${GRN}Continuing${NC} to load BASH RC."
     else
         echo "${RED}Aborting${NC} the load of BASH RC."
-        return
+        exit 1
     fi
 fi
 
@@ -114,7 +114,6 @@ then
 else
     PROMPT_CONDA_PREFIX="(${CONDA_DEFAULT_ENV}) "
 fi
-echo "$PROMPT_CONDA_PREFIX"
 
 export PS1="${PROMPT_CONDA_PREFIX}\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
 
@@ -153,7 +152,7 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 ### Conveniences ###############################################################
 ################################################################################
 
-alias vim='vi -S "$HERMANS_CODE_SHELL_PKG_PATH/Shell Package/vim/.vimrc"'
+alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 
 # Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then

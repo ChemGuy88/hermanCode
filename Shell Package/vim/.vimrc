@@ -1,4 +1,3 @@
-
 " >>> Useful settings from freecodecamp.org >>>
 " https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/
 " Disable compatibility with vi which can cause unexpected issues.
@@ -24,5 +23,6 @@ set number
 " >>> Herman's settings >>>
 set fileformats=unix
 set list
+" Note the below line only works if you do `vim FILE_PATH`. Otherwise you get an error.
 :e ++ff=unix
 " <<< Herman's settings <<<
