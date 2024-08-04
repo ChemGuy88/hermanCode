@@ -52,7 +52,7 @@ export HISTFILESIZE=2000  #  The maximum number of lines contained in the histor
 # OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
-    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
         # :: macOS at home ::
         MIDAS_INSTALL_PATH="/Users/herman/Documents/midas"
         export MIDAS_INSTALL_PATH
@@ -72,13 +72,18 @@ fi
 ################################################################################
 
 if [[ $OSTYPE == "darwin"* ]]; then
-    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
         # :: macOS at home ::
         PYTHONPATH_ADDENDUM_1="/Users/herman/Documents/midas/src"  # Add project "midas" to `PATH`
         PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
         export PYTHONPATH="$PYTHONPATH:\
 $PYTHONPATH_ADDENDUM_1:\
 $PYTHONPATH_ADDENDUM_2"
+    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
+        # :: macOS on MBP ::
+        PATH_ADDENDUM_1="/Users/$USER/.local/.bin"  # Custom user scripts
+        PATH="$PATH:\
+$PATH_ADDENDUM_1"
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: Linux ::
@@ -167,6 +172,12 @@ if [[ $OSTYPE == "darwin"* ]]; then
         conda activate midas
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.bash"
         # :: <<< macOS at home - Midas project <<< ::
+    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
+        # :: macOS on MBP ::
+        # :: >>> macOS on MBP - Meta Interview >>> ::
+        cd ~/"Documents/Meta Interview/Preparation Hub" || exit 1
+        conda activate herman-base
+        # :: <<< macOS on MBP - Meta Interview <<< ::
     elif [[ "$(hostname)" == "AHC-Mac-Admins-MacBook-Pro.local" ]]; then
         # :: macOS at work ::
         # Run commands for the Dreambooth project

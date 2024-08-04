@@ -31,11 +31,23 @@ marker1="$(cat "$fname1")"
 marker2="$(cat "$fname2")"
 marker_array=("$marker1" \
               "$marker2")
-echo " >>> These are the start and end markers >>>"
+echo " >>> These are the start and end markers before escaping >>>"
 for marker in "${marker_array[@]}"; do
     echo " - ${RED}$marker${NC}"
 done
-echo " <<< These are the start and end markers <<<"
+
+# Escape special characters in markers.
+marker1_escaped="$(printf "%q" "$marker1")"
+marker2_escaped="$(printf "%q" "$marker2")"
+marker_array_escaped=("$marker1_escaped" \
+                      "$marker2_escaped")
+echo " <<< These are the start and end markers before escaping <<<"
+echo " >>> These are the start and end markers after escaping >>>"
+for marker in "${marker_array_escaped[@]}"; do
+    echo " - ${RED}$marker${NC}"
+done
+echo " <<< These are the start and end markers after escaping <<<"
+
 # Iterate over code blocks
 while read -r fname;
 do
@@ -48,7 +60,7 @@ do
     echo "${BLU}$text_to_edit${NC}"
     echo " <<< This is the text to be edited <<<"
     echo ""
-    text_done="$(sed "/$marker1/,/$marker2/d" "$file_to_edit_path")"
+    text_done="$(sed "/$marker1_escaped/,/$marker2_escaped/d" "$file_to_edit_path")"
     echo "$text_done" > "$file_to_edit_path"
     text_done_read="$(cat "$file_to_edit_path")"
     if [ -z "$text_done_read" ]; then

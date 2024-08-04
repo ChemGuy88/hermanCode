@@ -8,13 +8,6 @@ nrl=$(tput sgr0)
 BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
-# Check if a script is being run as the super-user "SUDO".
-# This is necessary to create the script links
-if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this script as root or using \`sudo\`."
-    exit 1
-fi
-
 # Package paths
 HERMANS_CODE_SHELL_PKG_PATH="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; pwd -P )"  # Duplicated across package
 HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
@@ -133,15 +126,6 @@ echo "$CODE_BLOCK_BASH_LOGOUT" > "$CODE_BLOCKS_DIR/bash_logout"
 
 # <<< Code blocks insertion <<<
 
-# >>> Change ownership of created files >>>
-if [[ $SUDO_USER ]];
-then
-    chown -R "$SUDO_USER" "$install_records_dir"
-else
-    :
-fi
-# <<< Change ownership of created files <<<
-
 # >>> Add to `PATH` >>>
 # Get list of files to link
 MANUAL_ARRAY=("findTraces.bash" \
@@ -160,7 +144,12 @@ for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/macOS/uninstallers"/*
     done
     if [ "$counter" -gt 0 ]; then
         file_stem="${file_base_name%.*}"
-        ln -s "$file_path" "/usr/local/bin/$file_stem"
+        if [ -d "/Users/$USER/.local/bin" ]; then
+            :
+        else
+            mkdir -p "/Users/$USER/.local/bin"
+        fi
+        ln -s "$file_path" "/Users/$USER/.local/bin/$file_stem"
     else
         :
     fi

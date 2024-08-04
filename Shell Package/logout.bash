@@ -8,7 +8,7 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     :
-    if [[ "herman-imac.attlocal.net" == "$(hostname)" ]]; then
+    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
         # :: macOS at home ::
         # :: >>> macOS at home - Midas project >>> ::
         LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_out_midas.bash"
@@ -18,7 +18,10 @@ if [[ $OSTYPE == "darwin"* ]]; then
         fi
         # :: <<< macOS at home - Midas project <<< ::
         :
-    elif [[ "AHC-Mac-Admins-MacBook-Pro.local" == "$(hostname)" ]]; then
+    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
+        # :: macOS on MBP ::
+        :
+    elif [[ "$(hostname)" == "AHC-Mac-Admins-MacBook-Pro.local" ]]; then
         # :: macOS at work ::
         :
     else
