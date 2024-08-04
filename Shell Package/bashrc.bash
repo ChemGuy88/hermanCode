@@ -81,7 +81,7 @@ $PYTHONPATH_ADDENDUM_1:\
 $PYTHONPATH_ADDENDUM_2"
     elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
         # :: macOS on MBP ::
-        PATH_ADDENDUM_1="/Users/$USER/.local/.bin"  # Custom user scripts
+        PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts
         PATH="$PATH:\
 $PATH_ADDENDUM_1"
     fi
