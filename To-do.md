@@ -3,8 +3,6 @@
 # To-do
 
 - Consolidate my code
-- Track all coding projects
-- Delete old GitHub repositories
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
 
 ##  Consolidate my code
@@ -13,50 +11,34 @@
   - [ ] "Herman's Code" for non-work projects
   - [ ] DRAPI-Lemur for explicitely work-related projects
 
+# Done
+
 ## Track all coding projects
 
-I have code and coding-related files and folders throughout my computer. I should organize them. I can start by searching in these folders:
+- [x] Herman's iMac
+- [x] Work MBP
+    - /Users/herman/Documents/Professional Development
+        - AHCA - Code Search
+        - HelloWorld
+        - Herman's Code
+        - Homeless Problem
+        - Portfolio - Data Science Narrative
+        - Portfolio - Diabetes
+        - Portfolio - Indeed Company Rankings
+        - Portfolio - Recommender
+        - analyzeBloodPressure
+        - appleHealthExport
+        - applications
+        - dbooth
+        - hackerrank
+        - kaggle Used Cars Dataset
+        - portfolio
+        - stasia
+        - stasia1
+        - stasia2
+        - studentDebt
+        - triton
 
-- Herman's iMac
-  - /Users/herman
-  - /Users/herman/Documents
-  - /Users/herman/Documents/Herman's Code
-- Work MBP
-  - /Users/herman/Documents/Professional Development
-    - AHCA - Code Search
-    - HelloWorld
-    - Herman's Code
-    - Homeless Problem
-    - Portfolio - Data Science Narrative
-    - Portfolio - Diabetes
-    - Portfolio - Indeed Company Rankings
-    - Portfolio - Recommender
-    - analyzeBloodPressure
-    - appleHealthExport
-    - applications
-    - dbooth
-    - hackerrank
-    - kaggle Used Cars Dataset
-    - portfolio
-    - stasia
-    - stasia1
-    - stasia2
-    - studentDebt
-    - triton
-
-Maybe  I can try something like
-
-```bash
-find / -iname *.py
-```
-
-| Folder Name                 | X   | URI                                                               |
-| --------------------------- | --- | ----------------------------------------------------------------- |
-| Apple Health Blood Pressure | -   | /Users/herman/Documents/Herman's Code/Apple Health Blood Pressure |
-| .ssh.copy                   | -   | /Users/herman/Documents/Herman's Code/.ssh.copy                   |
-| .vim                        | -   | herman@pyspark:/home/herman/.vim/.vimrc                           |
-
-# Done
 
 ## Consolidate my code
 
