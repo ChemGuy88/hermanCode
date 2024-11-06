@@ -8,9 +8,69 @@ nrl=$(tput sgr0)
 BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
+usage0() {
+    cat <<USAGE
+This script installs the "Herman's Code" shell package to your system.
+
+$(basename "$0") -s <shell_name>
+
+    -s The shell name. Currently only \`bash\` or \`zsh\` as supported.
+USAGE
+}
+usage() {
+    usage0 1>&2
+    exit 1
+}
+
+while getopts ":s:" opt; do
+    case "${opt}" in
+        s) shell_name=${OPTARG};;
+        *) usage;;
+    esac
+done
+shift $((OPTIND -1))
+
+# >>> Argument confirmation >>>
+# `shell_name`
+if [[ "$shell_name" =~ (bash|zsh) ]]; then
+    :
+else
+    usage
+fi
+
+echo "'shell_name': $shell_name"
+# <<< Argument confirmation <<<
+
 # Package paths
 HERMANS_CODE_SHELL_PKG_PATH="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; pwd -P )"  # Duplicated across package
 HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
+
+# Define shell profile file names.
+if [[ "$shell_name" == "bash" ]]; then
+    shell_logout=".$shell_name"_logout
+elif [[ "$shell_name" == "zsh" ]]; then
+    shell_logout=".zlogout"
+fi
+shell_profile=".$shell_name"_profile  # profile file
+shell_rc=".$shell_name"rc  # RC file
+
+shell_profile_file_names_array=("$shell_logout" \
+                                "$shell_profile" \
+                                "$shell_rc")
+
+# Write shell profile file names to file
+code_block_file_names_file_path="$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Files.txt"
+code_block_file_names_dir="$(dirname "$code_block_file_names_file_path")"
+if [[ -d "$code_block_file_names_dir" ]]; then
+    :
+else
+    mkdir -p "$code_block_file_names_dir"
+fi
+
+touch "$code_block_file_names_file_path"
+for file_name in "${shell_profile_file_names_array[@]}"; do
+    echo "$file_name" >> "$code_block_file_names_file_path"
+done
 
 # Install directory definition
 install_records_dir="$HERMANS_CODE_SHELL_PKG_PATH/Install"
@@ -30,49 +90,49 @@ fi
 echo "$CODE_BLOCK_MARKER_START" > "$BLOCK_MARKERS_DIR/Marker - Start.txt"
 echo "$CODE_BLOCK_MARKER_END" > "$BLOCK_MARKERS_DIR/Marker - End.txt"
 
-# Code blocks creation: make `.bash_profile` call `.bashrc`.
-BASHRC_PATH="$HOME/.bashrc"
-CODE_BLOCK_BASH_PROFILE="$(cat <<CODE
+# Code blocks creation: make profile file call RC file.
+SHELLRC_PATH="$HOME/$shell_rc"
+CODE_BLOCK_SHELL_PROFILE="$(cat <<CODE
 
 $CODE_BLOCK_MARKER_START
 # Set "shellcheck" shell version
-# shellcheck shell=bash
+# shellcheck shell=$shell_name
 
-# Load ".bashrc"
-BASHRC_PATH="$BASHRC_PATH"
-if [ -f "\$BASHRC_PATH" ]; then
-    # shellcheck source="$BASHRC_PATH"
-	. "\$BASHRC_PATH"
+# Load "$shell_rc"
+SHELLRC_PATH="$SHELLRC_PATH"
+if [ -f "\$SHELLRC_PATH" ]; then
+    # shellcheck source="$SHELLRC_PATH"
+	. "\$SHELLRC_PATH"
 fi
 $CODE_BLOCK_MARKER_END
 CODE
 )"
 
-# Code blocks creation: make `.bashrc` call "Herman's Code" Shell package.
-HERMANS_CODE_BASHRC_PATH="$HERMANS_CODE_SHELL_PKG_PATH/bashrc.bash"
-CODE_BLOCK_BASHRC="$(cat <<CODE
+# Code blocks creation: make RC file call "Herman's Code" Shell package.
+HERMANS_CODE_SHELLRC_PATH="$HERMANS_CODE_SHELL_PKG_PATH/rc.sh"
+CODE_BLOCK_SHELLRC="$(cat <<CODE
 
 $CODE_BLOCK_MARKER_START
 # Set "shellcheck" shell version
-# shellcheck shell=bash
+# shellcheck shell=$shell_name
 
 # Load "Herman's Code" Shell package
-HERMANS_CODE_BASHRC_PATH="$HERMANS_CODE_BASHRC_PATH"
-if [ -f "\$HERMANS_CODE_BASHRC_PATH" ]; then
-    # shellcheck source="$HERMANS_CODE_BASHRC_PATH"
-	. "\$HERMANS_CODE_BASHRC_PATH"
+HERMANS_CODE_SHELLRC_PATH="$HERMANS_CODE_SHELLRC_PATH"
+if [ -f "\$HERMANS_CODE_SHELLRC_PATH" ]; then
+    # shellcheck source="$HERMANS_CODE_SHELLRC_PATH"
+	. "\$HERMANS_CODE_SHELLRC_PATH"
 fi
 $CODE_BLOCK_MARKER_END
 CODE
 )"
 
-# Code blocks creation: make `.bash_logout` call "Herman's Code" `logout.bash`.
-HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_SHELL_PKG_PATH/logout.bash"
-CODE_BLOCK_BASH_LOGOUT="$(cat <<CODE
+# Code blocks creation: make logout file call "Herman's Code" `logout.sh`.
+HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_SHELL_PKG_PATH/logout.sh"
+CODE_BLOCK_SHELL_LOGOUT="$(cat <<CODE
 
 $CODE_BLOCK_MARKER_START
 # Set "shellcheck" shell version
-# shellcheck shell=bash
+# shellcheck shell=$shell_name
 
 # Run logout commands
 HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_LOGOUT_PATH"
@@ -94,35 +154,35 @@ else
     mkdir -p "$CODE_BLOCKS_DIR"
 fi
 
-# Check if `.bash_profile` exists. If not, create it.
-BASH_PROFILE_PATH="$HOME/.bash_profile"
-if [ -f "$BASH_PROFILE_PATH" ];
+# Check if profile file exists. If not, create it.
+SHELL_PROFILE_PATH="$HOME/$shell_profile"
+if [ -f "$SHELL_PROFILE_PATH" ];
 then
-    echo "$CODE_BLOCK_BASH_PROFILE" >> "$BASH_PROFILE_PATH"
+    echo "$CODE_BLOCK_SHELL_PROFILE" >> "$SHELL_PROFILE_PATH"
 else
-    echo "$CODE_BLOCK_BASH_PROFILE" > "$BASH_PROFILE_PATH"
+    echo "$CODE_BLOCK_SHELL_PROFILE" > "$SHELL_PROFILE_PATH"
 fi
-echo "$CODE_BLOCK_BASH_PROFILE" > "$CODE_BLOCKS_DIR/bash_profile"
+echo "$CODE_BLOCK_SHELL_PROFILE" > "$CODE_BLOCKS_DIR/$shell_profile"
 
-# Check if `.bashrc` exists. If not, create it.
-BASHRC_PATH="$HOME/.bashrc"
-if [ -f "$BASHRC_PATH" ];
+# Check if RC file exists. If not, create it.
+SHELLRC_PATH="$HOME/$shell_rc"
+if [ -f "$SHELLRC_PATH" ];
 then
-    echo "$CODE_BLOCK_BASHRC" >> "$BASHRC_PATH"
+    echo "$CODE_BLOCK_SHELLRC" >> "$SHELLRC_PATH"
 else
-    echo "$CODE_BLOCK_BASHRC" > "$BASHRC_PATH"
+    echo "$CODE_BLOCK_SHELLRC" > "$SHELLRC_PATH"
 fi
-echo "$CODE_BLOCK_BASHRC" > "$CODE_BLOCKS_DIR/bashrc"
+echo "$CODE_BLOCK_SHELLRC" > "$CODE_BLOCKS_DIR/$shell_profile"
 
-# Check if `.bash_logout` exists. If not, create it.
-BASH_LOGOUT_PATH="$HOME/.bash_logout"
-if [ -f "$BASH_LOGOUT_PATH" ];
+# Check if logout file exists. If not, create it.
+SHELL_LOGOUT_PATH="$HOME/$shell_logout"
+if [ -f "$SHELL_LOGOUT_PATH" ];
 then
-    echo "$CODE_BLOCK_BASH_LOGOUT" >> "$BASH_LOGOUT_PATH"
+    echo "$CODE_BLOCK_SHELL_LOGOUT" >> "$SHELL_LOGOUT_PATH"
 else
-    echo "$CODE_BLOCK_BASH_LOGOUT" > "$BASH_LOGOUT_PATH"
+    echo "$CODE_BLOCK_SHELL_LOGOUT" > "$SHELL_LOGOUT_PATH"
 fi
-echo "$CODE_BLOCK_BASH_LOGOUT" > "$CODE_BLOCKS_DIR/bash_logout"
+echo "$CODE_BLOCK_SHELL_LOGOUT" > "$CODE_BLOCKS_DIR/$shell_profile"
 
 # <<< Code blocks insertion <<<
 
@@ -136,7 +196,7 @@ for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/macOS/uninstallers"/*
     file_base_name="$(basename -- "$file_path")"
     counter=0
     for array_value in "${MANUAL_ARRAY[@]}"; do
-        if [ "$file_base_name" == "$array_value" ]; then
+        if [[ "$file_base_name" == "$array_value" ]]; then
             counter=$((counter+1))
         else
             :
@@ -158,7 +218,7 @@ done
 
 echo "If you did not \`source\` the installation, you will have to restart your shell or run the below command:
 
-${BLU}source ~/.bash_profile${NC}
+${BLU}source ~/$shell_profile${NC}
 
 ${bld}End of installation${nrl}
 "

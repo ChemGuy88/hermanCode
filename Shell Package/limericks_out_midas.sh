@@ -8,9 +8,9 @@ else
     python "$MIDAS_INSTALL_PATH/data/reference/limericks/script_out.py"
     cd "$current_working_directory" || exit
     # << NOTE HACK: Hack block <<<
-    file_path="$MIDAS_INSTALL_PATH/data/reference/limericks/limericks_out.bash"
+    file_path="$MIDAS_INSTALL_PATH/data/reference/limericks/limericks_out.sh"
     if [ -f "$file_path" ]; then
-        # shellcheck source="/Users/herman/Documents/midas/data/reference/limericks/limericks_out.bash"
+        # shellcheck source="/Users/herman/Documents/midas/data/reference/limericks/limericks_out.sh"
         source "$file_path"  # NOQA: File is created dynamically by a Python process.
         rm "$file_path"
     fi
