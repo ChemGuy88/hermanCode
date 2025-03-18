@@ -4,7 +4,7 @@ A collection of templates and utility code used by Herman. Not really geared for
 
 ## Important files
 
-Files of the form `limericks_in_*.sh` contain now actual important information, but point to the files that have that information. The files `limeirkcs_in.sh` and `limeirkcs_out.sh` are reserved for future use, should the shell package need any such important information.
+Files of the form `limericks_in_*.sh` contain no actual important information, but point to the files that have that information. The files `limeirkcs_in.sh` and `limeirkcs_out.sh` are reserved for future use, should the shell package need any such important information.
 
 ## Computer name
 

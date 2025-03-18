@@ -19,10 +19,10 @@ These instructions are copied from the Apple Support guide [here](https://suppor
 
 <ol>
     <li>
-    On your Mac, choose Apple menu <img src="./images/SharedGlobalArt/IL_AppleLogo_11~dark.png"   width="10" title="" alt="IL_AppleLogo_11~dark"/> > System Settings, click General <img src="./images/SharedGlobalArt/AppIconTopic_General.png" width="10" alt="AppIconTopic_General" /> in the sidebar, then click Sharing. (You may need to scroll down.)
+    On your Mac, choose Apple menu <img src="../images/SharedGlobalArt/IL_AppleLogo_11~dark.png"   width="10" title="" alt="IL_AppleLogo_11~dark"/> > System Settings, click General <img src="../images/SharedGlobalArt/AppIconTopic_General.png" width="10" alt="AppIconTopic_General" /> in the sidebar, then click Sharing. (You may need to scroll down.)
     </li>
     <li>
-    Click <img src="./images/SharedGlobalArt/IL_InfoCircle.png" width="10" title="" alt="the Info button"/> next to Remote Login.
+    Click <img src="../images/SharedGlobalArt/IL_InfoCircle.png" width="10" title="" alt="the Info button"/> next to Remote Login.
     </li>
     <li>
     Turn on Remote Login.
@@ -37,7 +37,7 @@ These instructions are copied from the Apple Support guide [here](https://suppor
             </li>
             <li>
                 <p>
-<i>Choose who can log in to your computer</i>: Click the pop-up menu next to “Allow access for,” choose “Only these users,” click the <img src="./images/SharedGlobalArt/IL_InfoCircle.png" width="10" title="" alt="Add"/> button at the bottom of the list, select users who can log in remotely, then click Select.
+<i>Choose who can log in to your computer</i>: Click the pop-up menu next to “Allow access for,” choose “Only these users,” click the <img src="../images/SharedGlobalArt/IL_InfoCircle.png" width="10" title="" alt="Add"/> button at the bottom of the list, select users who can log in remotely, then click Select.
                 </p>
                 <p>
 Users & Groups includes all the users of your Mac. Network Users and Network Groups include people on your network.
@@ -131,7 +131,7 @@ ssh-copy-id -i ~"/.ssh/identity_files/Herman's Computer"
 ssh host1
 ```
 
-## Instructions: Password-less SSH on a remote network **TODO**
+## Instructions: Password-less SSH on a remote network
 
 1. Enable [port forwarding for SSH](.%2FPort%20Forwarding.md)
 2. If using a port besides 22, make sure the host is [listening on your custom port](.%2FSet%20SSH%20to%20listen%20on%20custom%20ports.md).
