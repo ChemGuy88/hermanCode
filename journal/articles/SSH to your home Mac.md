@@ -8,8 +8,8 @@ Last published: ...
  -->
 
 A tutorial on how to SSH from one mac to another. We describe variations on the theme as follows:
-    -  without using passwords on subsequent logins.
-    -  On the same WiFi or not, i.e., at home or not.
+  -  without using passwords on subsequent logins.
+  -  on the same WiFi or not, i.e., at home or not.
 
 ## Pre-requisites
 
