@@ -7,7 +7,10 @@ if [ -f "$LIMERICKS_OUT_PATH" ]; then
 fi
 
 # Specific logout procedures
-source "Shell Package/constants.sh"
+CONSTANTS_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/constants.sh"
+# shellcheck source="Shell Package/constants.sh"
+source "$CONSTANTS_PATH"
+
 
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::

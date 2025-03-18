@@ -40,9 +40,6 @@ fi
 ### Constants: Define values ###################################################
 ################################################################################
 
-# Meta-constants
-source "Shell Package/constants.sh"
-
 # Package paths
 if [[ "$SHELL" = "/bin/zsh" ]]; then
     this_file_path="${(%):-%N}"  # ZSH syntax
@@ -57,6 +54,11 @@ export HERMANS_CODE_INSTALL_PATH
 
 # BASH configurations
 export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
+
+# Machine names
+CONSTANTS_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/constants.sh"
+# shellcheck source="Shell Package/constants.sh"
+source "$CONSTANTS_PATH"
 
 # OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
@@ -155,6 +157,8 @@ if [ -f "$LIMERICKS_IN_PATH" ]; then
     # shellcheck source="Shell Package/limericks_in.sh"
     source "$LIMERICKS_IN_PATH"
 fi
+
+# Note, we import machine names, but they are not in this block. They are imported earlier in the run commands
 
 ################################################################################
 ######################################################## Constants: Imported ###
