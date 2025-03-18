@@ -11,6 +11,8 @@ A tutorial on how to SSH from one mac to another. We describe variations on the 
   -  without using passwords on subsequent logins.
   -  on the same WiFi or not, i.e., at home or not.
 
+For a reminder on how SSH works, see [here](./SSH%20Flowchart.md).
+
 ## Pre-requisites
 
 ### Allow remote logins to you Mac
@@ -133,15 +135,6 @@ ssh host1
 
 ## Instructions: Password-less SSH on a remote network
 
-1. Enable [port forwarding for SSH](.%2FPort%20Forwarding.md)
-2. If using a port besides 22, make sure the host is [listening on your custom port](.%2FSet%20SSH%20to%20listen%20on%20custom%20ports.md).
+1. Enable [port forwarding for SSH](./Port%20Forwarding.md)
+2. If using a port besides 22, make sure the host is [listening on your custom port](./Set%20SSH%20to%20listen%20on%20custom%20ports.md).
 3. Repeat steps 1 to 4 for [**Password-less SSH on a local network**](#instructions-password-less-ssh-on-a-local-network)
-
-## Notes
-
-### SSH Flowchart
-
-1. Your computer, the client, checks its `known_hosts` file to see if the host has been visited before.
-2. The host checks if your computer's public key exists in its `authorized_keys` file.
-   1. If it is not, the client is prompted for a password for authentication.
-   2. If it is, the client is not prompted for a password, and authentication is scucessfull.

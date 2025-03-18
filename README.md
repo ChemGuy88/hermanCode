@@ -8,4 +8,4 @@ Files of the form `limericks_in_*.sh` contain no actual important information, b
 
 ## Computer name
 
-The computer name is used in this package to know what machine is in operation. To standardize computer names see the journal article [Computer Name](journal%2Farticles%2FComputer%20Name.md).
+The computer name is used in this package to know what machine is in operation. To standardize computer names see the journal article [Computer Name](journal/articles/Computer%20Name.md).
