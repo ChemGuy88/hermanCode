@@ -40,6 +40,9 @@ fi
 ### Constants: Define values ###################################################
 ################################################################################
 
+# Meta-constants
+source "Shell Package/constants.sh"
+
 # Package paths
 if [[ "$SHELL" = "/bin/zsh" ]]; then
     this_file_path="${(%):-%N}"  # ZSH syntax
@@ -58,7 +61,7 @@ export HISTFILESIZE=2000  #  The maximum number of lines contained in the histor
 # OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
-    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
+    if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         MIDAS_INSTALL_PATH="/Users/herman/Documents/midas"
         export MIDAS_INSTALL_PATH
@@ -78,25 +81,20 @@ fi
 ################################################################################
 
 if [[ $OSTYPE == "darwin"* ]]; then
-    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
+    if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         PYTHONPATH_ADDENDUM_1="/Users/herman/Documents/midas/src"  # Add project "midas" to `PATH`
         PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
         export PYTHONPATH="$PYTHONPATH:\
 $PYTHONPATH_ADDENDUM_1:\
 $PYTHONPATH_ADDENDUM_2"
-    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Air.local") ]]; then
+    elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
         PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts
-        PATH_ADDENDUM_2="/Library/PostgreSQL/17/bin"  # postgresql command-line utility
+        PATH_ADDENDUM_2="/opt/homebrew/opt/postgresql@16/bin"  # postgresql command-line utility
         export PATH="$PATH:\
 $PATH_ADDENDUM_1:\
 $PATH_ADDENDUM_2"
-    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
-        # :: macOS on MBA ::
-        PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts
-        export PATH="$PATH:\
-$PATH_ADDENDUM_1"
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: Linux ::
@@ -181,12 +179,17 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
 alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 
+# Set zsh options
+if [[ "$SHELL" = "/bin/zsh" ]]; then
+    setopt INTERACTIVECOMMENTS
+fi
+
 # Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
-    getPgrep herman python
     alias lss="ls -lash"
-    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
+    getPgrep herman python
+    if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
         # :: >>> macOS at home - Midas project >>> ::
@@ -194,7 +197,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         conda activate midas
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.sh"
         # :: <<< macOS at home - Midas project <<< ::
-    elif [[ "$(hostname)" =~ ("Hermans-Air.attlocal.net"|"Hermans-MacBook-Air.local") ]]; then
+    elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
         eval "$(/opt/homebrew/bin/brew shellenv)"  # Add brew to PATH.
         # :: >>> macOS on MBA - Meta Interview >>> ::
@@ -204,8 +207,8 @@ if [[ $OSTYPE == "darwin"* ]]; then
         fi
         # :: <<< macOS on MBA - Meta Interview <<< ::
         # :: >>> macOS on MBA - Amazon Web Services >>> ::
-        if [[ 1 = 1 ]]; then
-            cd "/Users/herman/Documents/AWS Certification/02 - AWS Technical Essentials Part 1" || exit 1
+        if [[ 1 = 2 ]]; then
+            cd "/Users/herman/Documents/AWS Certification/03 - AWS Technical Essentials Part 2" || exit 1
             conda activate herman-awstut
             source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_aws.sh"
         fi
@@ -213,25 +216,44 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # :: >>> macOS on MBA - LeetCode >>> ::
         if [[ 1 = 2 ]]; then
             cd ~/"Documents/LeetCode" || exit 1
+            source "secrets.sh"
             conda activate herman-leetcode
         fi
         # :: <<< macOS on MBA - LeetCode <<< ::
+        # :: >>> macOS on MBA - Herman's Code >>> ::
+        if [[ 1 = 1 ]]; then
+            cd ~/"Documents/Git Repositories/Herman's Code" || exit 1
+            conda activate herman-base
+        fi
+        # :: <<< macOS on MBA - Herman's Code <<< ::
+        # :: >>> macOS on MBA - Focus Image >>> ::
+        if [[ 1 = 2 ]]; then
+            cd ~/"Documents/Focus Image - LeetCode" || exit 1
+            conda activate herman-covis
+        fi
+        # :: <<< macOS on MBA - Focus Image <<< ::
+        # :: >>> macOS on MBA - contacts >>> ::
+        if [[ 1 = 2 ]]; then
+            cd ~/"Documents/contacts" || exit 1
+            conda activate herman-ctc
+        fi
+        # :: <<< macOS on MBA - contacts <<< ::
+        # :: >>> macOS on MBA - JavaScript Development >>> ::
+        if [[ 1 = 2 ]]; then
+            cd "/Users/herman/Documents/User JavaScript and CSS" || exit 1
+            conda activate herman-javascript
+        fi
+        # :: <<< macOS on MBA - JavaScript Development <<< ::
     else
         echo "Unsupported machine."
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
-    # :: Linux ::
+    # :: >>> Linux >>> ::
     alias lss="ls -lashX"
-    conda activate idr-bian
     getPgrep herman .
-    echo
-    df -h /data/herman/Projects
-    echo
-    du -sh /data/herman/Projects
-    cd "/data/herman/Documents/Git Repositories/Herman Code" || return
-    cd "/data/herman/Mounted Drives/UF Health Shared Drive/SHANDS/SHARE/DSS/IDR Data Requests/ACTIVE RDRs/Xu/IRB202202722" || return
+    # :: <<< Linux <<< ::
 else
-    echo "Unsupported machine."
+    echo "Unsupported operating system."
     return
 fi
 

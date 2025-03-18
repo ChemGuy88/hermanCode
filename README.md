@@ -1,12 +1,11 @@
 # README
 
-A collection of templates and utility code used by Herman.
-# mySettings
+A collection of templates and utility code used by Herman. Not really geared for publication, but rather for his personal use.
 
-## 2022/10/24
+## Important files
 
-Separate customizations into `.bashrc` and `.bashprofile`, depending on context. Change based on recommendations from [this article](https://linuxize.com/post/bashrc-vs-bash-profile/).
+Files of the form `limericks_in_*.sh` contain now actual important information, but point to the files that have that information. The files `limeirkcs_in.sh` and `limeirkcs_out.sh` are reserved for future use, should the shell package need any such important information.
 
-## 2021/01/17
+## Computer name
 
-tox.ini goes in the home directory. The [documentation](https://flake8.pycqa.org/en/latest/user/configuration.html) says it should go in `~/.config/flake8` but actually, after trial and error, I see that on my MBP it goes in `~/`.
+The computer name is used in this package to know what machine is in operation. To standardize computer names see the journal article [Computer Name](journal%2Farticles%2FComputer%20Name.md).

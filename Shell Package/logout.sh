@@ -7,11 +7,12 @@ if [ -f "$LIMERICKS_OUT_PATH" ]; then
 fi
 
 # Specific logout procedures
+source "Shell Package/constants.sh"
 
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     :
-    if [[ "$(hostname)" =~ ("herman-imac.attlocal.net"|"herman-imac.local") ]]; then
+    if [[ "$(hostname)" =~ ("$MACHINE_NAME_HERMANS_IMAC") ]]; then
         # :: macOS at home ::
         # :: >>> macOS at home - Midas project >>> ::
         LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_out_midas.sh"
@@ -21,7 +22,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         fi
         # :: <<< macOS at home - Midas project <<< ::
         :
-    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Air.local") ]]; then
+    elif [[ "$(hostname)" =~ ("$MACHINE_NAME_HERMANS_MBA") ]]; then
         # :: macOS on MBA ::
         # :: >>> macOS on MBA - AWS Tutorial >>> ::
         LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_out_aws.sh"
@@ -30,12 +31,6 @@ if [[ $OSTYPE == "darwin"* ]]; then
             source "$LIMERICKS_OUT_PATH"
         fi
         # :: <<< macOS at home - Midas project <<< ::
-    elif [[ "$(hostname)" =~ ("Hermans-MacBook-Pro.local") ]]; then
-        # :: macOS on MBP ::
-        :
-    elif [[ "$(hostname)" == "AHC-Mac-Admins-MacBook-Pro.local" ]]; then
-        # :: macOS at work ::
-        :
     else
         echo "Unsupported machine."
     fi
