@@ -1,11 +1,5 @@
 # Virtual Environments
 
-# Midas
-
-- coinbase-advanced-py
-- websocket-client
-- rel (registered event listener)
-
 # `herman-awstut`
 
 AWS Tutorial environment
@@ -42,6 +36,19 @@ conda create -n herman-base autopep8 bs4 flake8 ipython matplotlib numpy opencv 
 ```zsh
 conda create -n herman-leetcode autopep8 bs4 flake8 ipython matplotlib numpy pandas pyarrow python=3.12 pyyaml seaborn selenium sqlalchemy=2.0 sqlalchemy-redshift -c conda-forge -c defaults
 ```
+
+# `herman-midas`
+
+```zsh
+conda create -n herman-midas coinbase-advanced-py gh python=3.12 websocket-client -c conda-forge && \
+conda activate herman-midas && \
+python -m pip install --user rel
+```
+
+Package installation documentation
+- [gh](https://github.com/cli/cli#installation)
+- [rel](https://pypi.org/project/rel/) (registered event listener)
+- [websocket-client](https://websocket-client.readthedocs.io/en/latest/installation.html)
 
 # `herman-javascript`
 
