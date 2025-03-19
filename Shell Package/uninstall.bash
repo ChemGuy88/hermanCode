@@ -36,8 +36,8 @@ BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
 # Load start and end markers from data directory
-HERMANS_CODE_INSTALL_PATH="/Users/herman/Documents/Git Repositories/Herman's Code"
-HERMANS_CODE_SHELL_PKG_PATH="/Users/herman/Documents/Git Repositories/Herman's Code/Shell Package"
+HERMANS_CODE_INSTALL_PATH="/Users/$USER/Documents/Git Repositories/Herman's Code"
+HERMANS_CODE_SHELL_PKG_PATH="/Users/$USER/Documents/Git Repositories/Herman's Code/Shell Package"
 fname1="$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - Start.txt"
 fname2="$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - End.txt"
 marker1="$(cat "$fname1")"
