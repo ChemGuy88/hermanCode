@@ -71,7 +71,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     :
 else
-    echo "Unsupported operating system." || exit 1
+    echo "Unsupported operating system." || return
 fi
 
 ################################################################################
@@ -197,7 +197,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # :: macOS at home ::
         eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
         # :: >>> macOS at home - Midas project >>> ::
-        cd ~/"Documents/midas" || exit 1
+        cd ~/"Documents/midas" || return
         conda activate midas
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.sh"
         # :: <<< macOS at home - Midas project <<< ::
@@ -206,45 +206,45 @@ if [[ $OSTYPE == "darwin"* ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"  # Add brew to PATH.
         # :: >>> macOS on MBA - Meta Interview >>> ::
         if [[ 1 = 2 ]]; then
-            cd ~/"Documents/Meta Interview/Preparation Hub" || exit 1
+            cd ~/"Documents/Meta Interview/Preparation Hub" || return
             conda activate herman-base
         fi
         # :: <<< macOS on MBA - Meta Interview <<< ::
         # :: >>> macOS on MBA - Amazon Web Services >>> ::
         if [[ 1 = 2 ]]; then
-            cd "/Users/herman/Documents/AWS Certification/03 - AWS Technical Essentials Part 2" || exit 1
+            cd "/Users/herman/Documents/AWS Certification/03 - AWS Technical Essentials Part 2" || return
             conda activate herman-awstut
             source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_aws.sh"
         fi
         # :: <<< macOS on MBA - Amazon Web Services <<< ::
         # :: >>> macOS on MBA - LeetCode >>> ::
         if [[ 1 = 2 ]]; then
-            cd ~/"Documents/LeetCode" || exit 1
+            cd ~/"Documents/LeetCode" || return
             source "secrets.sh"
             conda activate herman-leetcode
         fi
         # :: <<< macOS on MBA - LeetCode <<< ::
         # :: >>> macOS on MBA - Herman's Code >>> ::
         if [[ 1 = 1 ]]; then
-            cd ~/"Documents/Git Repositories/Herman's Code" || exit 1
+            cd ~/"Documents/Git Repositories/Herman's Code" || return
             conda activate herman-base
         fi
         # :: <<< macOS on MBA - Herman's Code <<< ::
         # :: >>> macOS on MBA - Focus Image >>> ::
         if [[ 1 = 2 ]]; then
-            cd ~/"Documents/Focus Image - LeetCode" || exit 1
+            cd ~/"Documents/Focus Image - LeetCode" || return
             conda activate herman-covis
         fi
         # :: <<< macOS on MBA - Focus Image <<< ::
         # :: >>> macOS on MBA - contacts >>> ::
         if [[ 1 = 2 ]]; then
-            cd ~/"Documents/contacts" || exit 1
+            cd ~/"Documents/contacts" || return
             conda activate herman-ctc
         fi
         # :: <<< macOS on MBA - contacts <<< ::
         # :: >>> macOS on MBA - JavaScript Development >>> ::
         if [[ 1 = 2 ]]; then
-            cd "/Users/herman/Documents/User JavaScript and CSS" || exit 1
+            cd "/Users/herman/Documents/User JavaScript and CSS" || return
             conda activate herman-javascript
         fi
         # :: <<< macOS on MBA - JavaScript Development <<< ::
