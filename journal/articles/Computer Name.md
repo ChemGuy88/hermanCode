@@ -43,28 +43,42 @@ The [`man` page for `hostname`](https://ss64.com/mac/hostname.html) is aware of 
 > When you open a new Terminal window, the prompt will begin with the hostname and this may appear differently if you are connected to a WiFi network compared to opening a new Terminal when disconnected.
 > 
 > A DHCP server can provide a hostname to a client, along with an IP address, and the client system hostname will be changed to whatever the DHCP server sends.
-> 
-> If a NetBIOSName has been configured, (it is typically set to = the hostname) the value is stored in a preference file:
-> $ defaults read /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName
-> 
-> You can set the NetBIOS name with defaults or in System Preferences ➞ Network ➞ active network port ➞ Advanced ➞ WINS tab.
+>
+> ...
 > 
 > To keep the hostname between reboots, run scutil --set HostName name-of-host.
 
-I experiment with modifying the **com.apple.smb.server.plist** file and decided to change the NetBIOSName to a lowercase version of `HostName`
+I permanently changed the `hostname` values according to ["Shell Package/constants.sh"](../../Shell%20Package/constants.sh).
+
+For more information try `defaults read <domain> <key>`:
 
 ```zsh
-$ defaults read /Library/Preferences/SystemConfiguration/com.apple.smb.server
+$ defaults read /Library/Preferences/SystemConfiguration/preferences System
 > {
->     DOSCodePage = 437;
->     NetBIOSName = "Hermans-Air";
->     ServerDescription = "Herman\\U2019s MacBook Air";
+>     Network =     {
+>         HostNames =         {
+>             LocalHostName = "Hermans-MacBook-Air";
+>         };
+>     };
+>     System =     {
+>         ComputerName = "Herman\\U2019s MacBook Air";
+>         ComputerNameEncoding = 0;
+>         HostName = "herman-mba";
+>     };
 > }
-$ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName 'hermans-mba'
-$ defaults read /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName
-> hermans-mba
 ```
 
-## Update: 3/18/2025
+And you can probably restore the domain information using `scutil`:
 
-For some reason when I exited Terminal the logout procedure did not work because the hostname was not recognize as one of the expected values. The logout procedure was expecting `Hermans-MacBook-Air.local` but it got `Hermans-MacBook-Air`. This means that since I wrote this article the hostname was reset. The only thing that has changed is that I'm now on a different WiFI network, although it's still one from AT&T. I will run `defaults write` again and set the value to `hermans-mba`.
+```zsh
+$ scutil --dns
+> DNS configuration
+> 
+> resolver #1
+>   search domain[0] : attlocal.net
+>   nameserver[0] : 2600:1700:3870:d770::1
+>   nameserver[1] : 192.168.1.254
+>   if_index : 11 (en0)
+>   flags    : Request A records, Request AAAA records
+>   reach    : 0x00020002 (Reachable,Directly Reachable Address)
+```

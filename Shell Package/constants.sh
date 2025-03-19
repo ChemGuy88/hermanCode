@@ -1,2 +1,2 @@
 MACHINE_NAME_HERMANS_IMAC="herman-imac"
-MACHINE_NAME_HERMANS_MBA="Hermans-MacBook-Air"
+MACHINE_NAME_HERMANS_MBA="herman-mba"

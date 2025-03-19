@@ -217,7 +217,10 @@ done
 # <<< Add to `PATH` <<<
 
 # TODO: Set computer name. See "journal/articles/Computer Name.md"
-echo "You might want to set your computer name."
+echo "You might want to set your computer name:
+
+sudo scutil --set "HostName" <computer-name>
+"
 
 echo "If you did not \`source\` the installation, you will have to restart your shell or run the below command:
 
