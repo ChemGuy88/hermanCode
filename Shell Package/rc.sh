@@ -8,13 +8,13 @@ NC=$'\e[0m'
 
 TheWorldIsFlat=false  # Change this to `true` to gate-keep the gate keeper.
 if [[ "$TheWorldIsFlat" = true ]]; then
-    read -p -r "Do you want to ${RED}continue${NC} loading BASH run commands? [Y/n]: " confirm
+    read -p -r "Do you want to ${RED}continue${NC} loading shell run commands? [Y/n]: " confirm
 
     if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
         :
-        echo "${GRN}Continuing${NC} to load BASH RC."
+        echo "${GRN}Continuing${NC} to load shell RC."
     else
-        echo "${RED}Aborting${NC} the load of BASH RC."
+        echo "${RED}Aborting${NC} the load of shell RC."
         exit 1
     fi
 fi
@@ -25,10 +25,10 @@ fi
 # See https://unix.stackexchange.com/a/505642/399435
 
 if [[ $- == *i*  ]]; then
-    :  # Continue reading BASH RC
-    echo "Detected ${GRN}interactive${NC} mode. ${GRN}Continuing${NC} to load BASH RC."
+    :  # Continue reading shell RC
+    echo "Detected ${GRN}interactive${NC} mode. ${GRN}Continuing${NC} to load shell RC."
 else
-    # echo "Detected ${RED}non-interactive${NC} mode. ${RED}Aborting${NC} the load of BASH RC."
+    # echo "Detected ${RED}non-interactive${NC} mode. ${RED}Abort${NC} loading of shell RC."
     return
 fi
 
@@ -65,7 +65,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
     export BASH_SILENCE_DEPRECATION_WARNING=1
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        MIDAS_INSTALL_PATH="/Users/herman/Documents/midas"
+        MIDAS_INSTALL_PATH="/Users/$USER/Documents/midas"
         export MIDAS_INSTALL_PATH
     fi
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
@@ -85,7 +85,7 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        PYTHONPATH_ADDENDUM_1="/Users/herman/Documents/midas/src"  # Add project "midas" to `PATH`
+        PYTHONPATH_ADDENDUM_1="/Users/$USER/Documents/midas/src"  # Add project "midas" to `PATH`
         PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
         export PYTHONPATH="$PYTHONPATH:\
 $PYTHONPATH_ADDENDUM_1:\

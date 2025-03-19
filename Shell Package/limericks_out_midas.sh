@@ -10,7 +10,7 @@ else
     # << NOTE HACK: Hack block <<<
     file_path="$MIDAS_INSTALL_PATH/data/reference/limericks/limericks_out.sh"
     if [ -f "$file_path" ]; then
-        # shellcheck source="/Users/herman/Documents/midas/data/reference/limericks/limericks_out.sh"
+        # shellcheck source="/Users/$USER/Documents/midas/data/reference/limericks/limericks_out.sh"
         source "$file_path" || echo "Safety mechanism failed."  # NOQA: File is created dynamically by a Python process.
         rm "$file_path"
     fi
