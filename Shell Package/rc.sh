@@ -202,7 +202,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         fi
         # :: >>> macOS at home - Midas project >>> ::
         cd ~/"Documents/midas" || return
-        conda activate midas
+        conda activate herman-midas
         source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.sh"
         # :: <<< macOS at home - Midas project <<< ::
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
