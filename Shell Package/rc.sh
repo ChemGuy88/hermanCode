@@ -195,7 +195,11 @@ if [[ $OSTYPE == "darwin"* ]]; then
     getPgrep herman python
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        eval "$(/usr/local/bin/brew shellenv)"  # Formerly in ".bash_profile"
+        # Add brew to PATH, formely in ".bash_profile"
+        USER_HOMEBREW_INSTALLATION="/usr/local/bin/brew"
+        if [[ -f "$USER_HOMEBREW_INSTALLATION" ]]; then
+            eval "$($USER_HOMEBREW_INSTALLATION shellenv)"
+        fi
         # :: >>> macOS at home - Midas project >>> ::
         cd ~/"Documents/midas" || return
         conda activate midas
@@ -203,7 +207,11 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # :: <<< macOS at home - Midas project <<< ::
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
-        eval "$(/opt/homebrew/bin/brew shellenv)"  # Add brew to PATH.
+        # Add brew to PATH, formely in ".bash_profile"
+        SYSTEM_HOMEBREW_INSTALLATION="/opt/homebrew/bin/brew"
+        if [[ -f "$SYSTEM_HOMEBREW_INSTALLATION" ]]; then
+            eval "$($SYSTEM_HOMEBREW_INSTALLATION shellenv)"
+        fi
         # :: >>> macOS on MBA - Meta Interview >>> ::
         if [[ 1 = 2 ]]; then
             cd ~/"Documents/Meta Interview/Preparation Hub" || return
