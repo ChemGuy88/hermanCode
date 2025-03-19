@@ -114,6 +114,9 @@ for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/macOS/uninstallers"/*
     fi
 done
 
+# Remove linked files
+echo "Don't forget to remove linked files."
+
 # Run bash logout
 LOGOUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/logout.sh"
 echo "Running logout procedure: \"$LOGOUT_PATH\"
