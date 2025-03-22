@@ -61,14 +61,14 @@ Package purpose
 | package              | purpose   |
 | -------------------- | --------- |
 | coinbase-advanced-py | essential |
-| drapi-lemur          | utility   |
 | gh                   | utility   |
+| herman_code          | utility   |
 | humanfriendly        | utility   |
 | ipython              | utility   |
-| pandas               | essential |
+| pandas               | utility   |
 | rel                  | TBD       |
 | typing_extensions    | redundant |
-| websocket-client     | essential |
+| websocket-client     | utility   |
 
 # `herman-javascript`
 
