@@ -87,9 +87,14 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # :: macOS at home ::
         PYTHONPATH_ADDENDUM_1="/Users/$USER/Documents/midas/src"  # Add project "midas" to `PATH`
         PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
-        export PYTHONPATH="$PYTHONPATH:\
+        if [ -z "${my_variable+x}" ]; then
+            export PYTHONPATH="$PYTHONPATH:\
 $PYTHONPATH_ADDENDUM_1:\
 $PYTHONPATH_ADDENDUM_2"
+        else
+            export PYTHONPATH="$PYTHONPATH_ADDENDUM_1:\
+$PYTHONPATH_ADDENDUM_2"
+        fi
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
         PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts
