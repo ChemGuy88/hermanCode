@@ -1,5 +1,5 @@
 """
-__init__ file for "hermanCode" package
+__init__ file for "herman_code" package
 """
 
 import logging
