@@ -4,6 +4,7 @@
 
 - Consolidate my code
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
+- Dichotomize shell package into zsh and BASH. For example, rc.sh can check if it's being executed by zsh or bash, and then calls rc.zsh or rc.bash, as appropriate.
 
 ##  Consolidate my code
 
