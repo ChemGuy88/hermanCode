@@ -14,6 +14,12 @@ conda create -n herman-awstut python=3.12
 conda create -n herman-base autopep8 bs4 flake8 ipython matplotlib numpy pandas pyarrow python=3.12 pyyaml seaborn selenium sqlalchemy -c conda-forge -c defaults
 ```
 
+# `herman-build`
+
+```zsh
+conda create -n herman-build build ipython python=3.11 twine -c conda-forge -c defaults
+```
+
 # `herman-ctc`
 
 Herman's iCloud Contacts address book.
@@ -40,8 +46,9 @@ conda create -n herman-leetcode autopep8 bs4 flake8 ipython matplotlib numpy pan
 # `herman-midas`
 
 ```zsh
-conda create -n herman-midas coinbase-advanced-py gh python=3.12 websocket-client -c conda-forge && \
+conda create -n herman-midas coinbase-advanced-py gh humanfriendly ipython pandas python=3.12 websocket-client -c conda-forge && \
 conda activate herman-midas && \
+python -m pip install --user drapi-lemur
 python -m pip install --user rel
 ```
 
@@ -49,6 +56,19 @@ Package installation documentation
 - [gh](https://github.com/cli/cli#installation)
 - [rel](https://pypi.org/project/rel/) (registered event listener)
 - [websocket-client](https://websocket-client.readthedocs.io/en/latest/installation.html)
+
+Package purpose
+| package              | purpose   |
+| -------------------- | --------- |
+| coinbase-advanced-py | essential |
+| drapi-lemur          | utility   |
+| gh                   | utility   |
+| humanfriendly        | utility   |
+| ipython              | utility   |
+| pandas               | essential |
+| rel                  | TBD       |
+| typing_extensions    | redundant |
+| websocket-client     | essential |
 
 # `herman-javascript`
 
