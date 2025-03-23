@@ -8,8 +8,6 @@ from os.path import dirname
 
 PATH = Path(dirname(__file__)).absolute()
 
-__version__ = "1.0.00"
-
 # Logging choices
 logging_choices_numeric_min = min(logging.getLevelNamesMapping().values())
 logging_choices_numeric_max = max(logging.getLevelNamesMapping().values())

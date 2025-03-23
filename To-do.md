@@ -4,13 +4,17 @@
 
 - Consolidate my code
 - Clean up Dropbox folder: Move everything out. Do not use Dropbox
-- Dichotomize shell package into zsh and BASH. For example, rc.sh can check if it's being executed by zsh or bash, and then calls rc.zsh or rc.bash, as appropriate.
+- Shell Package
+  - Dichotomize shell package into zsh and BASH. For example, rc.sh can check if it's being executed by zsh or bash, and then calls rc.zsh or rc.bash, as appropriate.
+  - Improve installation: add `pypi.username` and `pypi.password` to `$HOME/.pypirc` according to [PyPI](https://pypi.org/help/#apitoken). See [.pypirc]("Shell Package/Install/templates/.pypirc")
+
+
 
 ##  Consolidate my code
 
 - [ ] Segregate code
-  - [ ] "Herman's Code" for non-work projects
-  - [ ] DRAPI-Lemur for explicitely work-related projects
+  - [x] "Herman's Code" for non-work projects
+  - [x] DRAPI-Lemur for explicitely work-related projects
 
 # Done
 

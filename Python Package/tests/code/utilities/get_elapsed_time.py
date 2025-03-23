@@ -4,7 +4,7 @@ Test
 
 import datetime as dt
 
-from hermanCode.code.get_elapsed_time import get_elapsed_time
+from herman_code.code.utilities import get_elapsed_time
 
 
 t1 = dt.datetime.now().timestamp()
@@ -73,4 +73,4 @@ for el, check in zip(LIST_OF_STARTING_TIMES, LIST_OF_CHECKS):
 """
     print(result_message)
     results_list.append(result)
-print(f"Percentage of test passed: {sum(results_list)/len(results_list):0.2%}")
+print(f"Percentage of test passed: {sum(results_list) / len(results_list):0.2%}")

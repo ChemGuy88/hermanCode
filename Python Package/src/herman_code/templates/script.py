@@ -9,10 +9,10 @@ from pathlib import Path
 import pandas as pd
 from sqlalchemy import URL
 # Local packages
-from drapi import __version__ as drapiVersion
-from drapi.code.drapi.drapi import (choosePathToLog,
-                                    getTimestamp,
-                                    makeDirPath)
+from herman_code import __version__ as drapiVersion
+from herman_code.code import (choosePathToLog,
+                              getTimestamp,
+                              makeDirPath)
 
 # Arguments: Main
 pass

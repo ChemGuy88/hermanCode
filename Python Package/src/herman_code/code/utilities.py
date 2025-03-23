@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import (Tuple,
                     Union)
 
-from hermanCode import logging_choices_string
+from herman_code import logging_choices_string
 
 
 def choose_path_to_log(path: Path,

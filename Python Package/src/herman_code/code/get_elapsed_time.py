@@ -47,8 +47,8 @@ def get_elapsed_time(t1: float,
     """
     Returns the elapsed time in the format `Y M W D hh:mm:ss`.
     NOTE: This function uses the statistical average for units of time. That means:
-        Month = 4.3 weeks
-        Year = 364.25 days
+        1 month = 4.3 weeks
+        1 year = 364.25 days
     """
     time_elapsed_float = t1 - t0
     dt0 = dt.datetime.fromtimestamp(0)
