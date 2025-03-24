@@ -192,7 +192,7 @@ alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 if [[ "$SHELL" = "/bin/zsh" ]]; then
     setopt INTERACTIVECOMMENTS
     # source hatch tab completion
-    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/.hatch-complete.sh"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/.hatch-complete.zsh"
 fi
 
 # Machine-Specific conveniences
