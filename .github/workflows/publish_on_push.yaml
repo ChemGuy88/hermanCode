@@ -42,7 +42,7 @@ jobs:
             - name: Publish distribution 📦 to PyPI
               uses: pypa/gh-action-pypi-publish@release/v1
               with:
-                packages-dir: Python Package/dist/
+                packages-dir: "Python Package/dist/"
     publish-to-testpypi:
         name: Publish Herman's Code distribution 📦 to TestPyPI
         needs:
