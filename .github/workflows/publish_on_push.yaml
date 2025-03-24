@@ -22,7 +22,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: python-package-distributions
-                path: python_package/dist/
+                path: Python Package/dist/
     publish-to-pypi:
         name: Publish Herman's Code distribution 📦 to PyPI
         needs:
