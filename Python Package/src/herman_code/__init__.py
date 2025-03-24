@@ -6,6 +6,9 @@ import logging
 from pathlib import Path
 from os.path import dirname
 
+from herman_code import __about__
+
+__version__ = __about__.__version__
 PATH = Path(dirname(__file__)).absolute()
 
 # Logging choices
