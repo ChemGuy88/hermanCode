@@ -22,7 +22,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: python-package-distributions
-                path: dist/
+                path: Python Package/dist/
     publish-to-pypi:
         name: Publish Herman's Code distribution 📦 to PyPI
         needs:
@@ -38,9 +38,11 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                 name: python-package-distributions
-                path: dist/
+                path: Python Package/dist/
             - name: Publish distribution 📦 to PyPI
               uses: pypa/gh-action-pypi-publish@release/v1
+              with:
+                packages-dir: Python Package/dist/
     publish-to-testpypi:
         name: Publish Herman's Code distribution 📦 to TestPyPI
         needs:
@@ -59,7 +61,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: python-package-distributions
-            path: dist/
+            path: Python Package/dist/
         - name: Publish distribution 📦 to TestPyPI
           uses: pypa/gh-action-pypi-publish@release/v1
           with:
