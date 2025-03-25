@@ -192,6 +192,8 @@ alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 if [[ "$SHELL" = "/bin/zsh" ]]; then
     setopt INTERACTIVECOMMENTS
     # source hatch tab completion
+    autoload -Uz compinit
+    compinit
     source "$HERMANS_CODE_INSTALL_PATH/Shell Package/.hatch-complete.zsh"
 fi
 
@@ -199,7 +201,7 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     alias lss="ls -lash"
-    getPgrep herman python
+    getPgrep "$USER" python
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         # Add brew to PATH, formely in ".bash_profile"
