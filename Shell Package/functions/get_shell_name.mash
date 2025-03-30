@@ -1,0 +1,39 @@
+# Tries to deduce the shell that invoked the function
+# H/t https://stackoverflow.com/a/11097703/5478086
+
+get_shell_name_0 () {
+    result_0="$(ps -p "$$" -o comm=)"
+
+    if expr "$result_0" : '[-]*bash'; then
+        result=bash
+    elif expr "$result_0" : '[-]*sh'; then
+        result=sh
+    elif expr "$result_0" : '[-]*zsh'; then
+        result=zsh
+    else
+        echo "MASH: Warning: Could not deduce invoking shell" >&2
+        result=""
+    fi
+    echo "$result"
+}
+
+get_shell_name () {
+
+    temp_filename="temp.txt"
+
+    get_shell_name_0 >> "$temp_filename"
+
+    exec 3<"$temp_filename"
+
+    while read -r -u 3 line; do
+        result="$line"
+    done
+
+    exec 3<&-
+
+    rm "$temp_filename"
+
+    echo "$result"
+}
+
+get_shell_name

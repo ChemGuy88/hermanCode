@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# shellcheck source="Shell Package/functions/functions.bash"
-source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
+if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
+    echo "$(basename "$0"): Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required functions."
+    return
+else
+    # shellcheck source="Shell Package/functions/functions.bash"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
+fi
 
 RED=$'\e[0;31m'
 NC=$'\e[0m'

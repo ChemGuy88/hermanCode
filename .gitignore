@@ -1,5 +1,6 @@
 # >>> [start] Things added by Herman >>>
 **/logs/*
+**/temp/*
 **/Code Blocks/*
 **/*.7z
 **/.DS_Store
@@ -17,6 +18,7 @@
 data/*
 documents/*
 Shell Package/Install/Code Blocks/*
+test.bash
 # <<< [end] Things added by Herman <<<
 
 # Byte-compiled / optimized / DLL files

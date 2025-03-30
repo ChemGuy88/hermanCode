@@ -1,0 +1,28 @@
+#!/bin/mash
+
+# bash test
+result_bash="$(bash -c 'source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash"')"
+
+if [ "$result_bash" = "bash" ]; then
+    echo " ✅ Test 1: Expected \"bash\", got \"$result_bash\""
+else
+    echo " ❌ Test 1: Expected \"bash\", got \"$result_bash\""
+fi
+
+# shell test
+result_sh="$(sh -c 'source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash"')"
+
+if [ "$result_sh" = "sh" ]; then
+    echo " ✅ Test 2: Expected \"sh\", got \"$result_sh\""
+else
+    echo " ❌ Test 2: Expected \"sh\", got \"$result_sh\""
+fi
+
+# zsh test
+result_zsh="$(zsh -c 'source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash"')"
+
+if [ "$result_zsh" = "zsh" ]; then
+    echo " ✅ Test 3: Expected \"zsh\", got \"$result_zsh\""
+else
+    echo " ❌ Test 3: Expected \"zsh\", got \"$result_zsh\""
+fi
