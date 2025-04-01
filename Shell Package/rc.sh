@@ -56,7 +56,7 @@ export HERMANS_CODE_INSTALL_PATH
 export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
 
 # Machine names
-CONSTANTS_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/constants.sh"
+CONSTANTS_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/constants/constants.mash"
 # shellcheck source="Shell Package/constants.sh"
 source "$CONSTANTS_PATH"
 
@@ -85,9 +85,9 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        PYTHONPATH_ADDENDUM_1="/Users/$USER/Documents/midas/src"  # Add project "midas" to `PATH`
+        PYTHONPATH_ADDENDUM_1="/Users/$USER/Documents/Git Repositories/midas/src"  # Add project "midas" to `PATH`
         PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
-        if [ -z "${my_variable+x}" ]; then
+        if [ -z "${PYTHONPATH+x}" ]; then
             export PYTHONPATH="$PYTHONPATH:\
 $PYTHONPATH_ADDENDUM_1:\
 $PYTHONPATH_ADDENDUM_2"
@@ -194,7 +194,7 @@ if [[ "$SHELL" = "/bin/zsh" ]]; then
     # source hatch tab completion
     autoload -Uz compinit
     compinit
-    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/.hatch-complete.zsh"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/.hatch-complete/.hatch-complete.mash"
 fi
 
 # Machine-Specific conveniences
@@ -212,7 +212,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # :: >>> macOS at home - Midas project >>> ::
         cd ~/"Documents/midas" || return
         conda activate herman-midas
-        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_midas.sh"
+        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_in_midas/limericks_in_midas.mash"
         # :: <<< macOS at home - Midas project <<< ::
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
@@ -231,7 +231,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         if [[ 1 = 2 ]]; then
             cd "/Users/herman/Documents/AWS Certification/03 - AWS Technical Essentials Part 2" || return
             conda activate herman-awstut
-            source "$HERMANS_CODE_INSTALL_PATH/Shell Package/limericks_in_aws.sh"
+            source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_in_aws/limericks_in_aws.mash"
         fi
         # :: <<< macOS on MBA - Amazon Web Services <<< ::
         # :: >>> macOS on MBA - LeetCode >>> ::

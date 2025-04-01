@@ -33,9 +33,8 @@ _hatch_completion() {
 
 if [[ $zsh_eval_context[-1] == loadautofunc ]]; then
     # autoload from fpath, call function directly
-    _hatch_completion "$@"
+    _hatch_completion
 else
     # eval/source/. command, register function for later
     compdef _hatch_completion hatch
 fi
-

@@ -1,0 +1,14 @@
+#!/usr/bin/env mash
+
+if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
+    echo "MASH: Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required files."
+    return
+fi
+
+shell_name=$(source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash")
+
+if [ "$shell_name" = "bash" -o "$shell_name" = "sh" -o "$shell_name" = "zsh" ]; then
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/constants/constants.sh"
+else
+    echo "MASH: Warning: Unsupported shell \"$shell_name\"."
+fi

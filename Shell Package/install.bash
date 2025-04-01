@@ -126,8 +126,8 @@ $CODE_BLOCK_MARKER_END
 CODE
 )"
 
-# Code blocks creation: make logout file call "Herman's Code" `logout.sh`.
-HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_SHELL_PKG_PATH/logout.sh"
+# Code blocks creation: make logout file call "Herman's Code" `logout.mash`.
+HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_SHELL_PKG_PATH/rc/logout/logout.mash"
 CODE_BLOCK_SHELL_LOGOUT="$(cat <<CODE
 
 $CODE_BLOCK_MARKER_START
@@ -139,6 +139,8 @@ HERMANS_CODE_LOGOUT_PATH="$HERMANS_CODE_LOGOUT_PATH"
 if [ -f "\$HERMANS_CODE_LOGOUT_PATH" ]; then
     # shellcheck source="$HERMANS_CODE_LOGOUT_PATH"
 	. "\$HERMANS_CODE_LOGOUT_PATH"
+else
+    echo "MASH: Warning: ($LINENO): Safety mechanism failed."
 fi
 $CODE_BLOCK_MARKER_END
 CODE
