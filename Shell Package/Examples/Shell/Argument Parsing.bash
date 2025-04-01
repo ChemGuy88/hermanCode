@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # h/t to https://stackoverflow.com/questions/7529856/retrieving-multiple-arguments-for-a-single-option-using-getopts-in-bash
 # h/t to https://stackoverflow.com/questions/16483119/an-example-of-how-to-use-getopts-in-bash
 

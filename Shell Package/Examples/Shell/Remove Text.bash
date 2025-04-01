@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example of how to remove text from a path containing forward slashes.
 

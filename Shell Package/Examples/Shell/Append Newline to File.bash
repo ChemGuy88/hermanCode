@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example of how to append a newline to a file. This is relevant because a 
 # file is defined as ending with an empty line, and a line, in turn is 

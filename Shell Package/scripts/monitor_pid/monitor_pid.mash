@@ -1,4 +1,4 @@
-#!/bin/mash
+#!/usr/bin/env mash
 
 if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
     echo "MASH: Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required files."

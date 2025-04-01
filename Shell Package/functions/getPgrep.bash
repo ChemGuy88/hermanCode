@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 
 getPgrep_Linux() {
     if [ -z "$1" ] && [ -z "$2" ];

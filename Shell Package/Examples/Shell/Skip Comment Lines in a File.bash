@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example of how to skip comment lines in a file, that is,
 # lines starting with a "#" character.

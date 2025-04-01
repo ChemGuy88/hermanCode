@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Monitors a set of PIDs.
 
 if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
@@ -11,7 +11,7 @@ fi
 pseudo_man() {
     # A function that mimics a `man` page.`
     cat <<USAGE
-This script monitors a set of process IDs \`pid\` by calling \`ps\` with all options every five minutes.
+This script monitors a set of process IDs \`pid\` by periodically calling \`ps\` with all options.
 
 $(basename "$0") -h
 $(basename "$0") [-btv] -p pid[,pid[...]] [-f snapshot_frequency] [-o out_path]

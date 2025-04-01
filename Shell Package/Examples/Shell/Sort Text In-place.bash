@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This is an example of how to sort text in-place instead of saving it to a file.
 

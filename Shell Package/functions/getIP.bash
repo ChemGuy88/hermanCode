@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 HauriIP() {
     # h/t to https://stackoverflow.com/a/13322667/5478086

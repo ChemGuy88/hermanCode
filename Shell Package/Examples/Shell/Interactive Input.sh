@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # An example of a reading input interactively from the command line.
 # In this example we are adding integers.

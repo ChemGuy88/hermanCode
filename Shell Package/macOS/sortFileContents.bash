@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 dataDir="$1"
 toDir="$dataDir/Sorted"

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 getTimestamp() {
     date "+%Y-%m-%d %H-%M-%S"

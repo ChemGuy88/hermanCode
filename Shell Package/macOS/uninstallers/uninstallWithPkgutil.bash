@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 RED=$'\e[0;31m'
 NC=$'\e[0m'

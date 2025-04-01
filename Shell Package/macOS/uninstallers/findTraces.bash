@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
     echo "$(basename "$0"): Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required functions."

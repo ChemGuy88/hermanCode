@@ -1,4 +1,4 @@
-#!/bin/mash
+#!/usr/bin/env mash
 
 # bash test
 result_bash="$(bash -c 'source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash"')"

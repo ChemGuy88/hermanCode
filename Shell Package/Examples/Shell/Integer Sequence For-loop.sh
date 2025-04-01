@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Example for-loop. In this case, we're iterating over a sequence of
 # integers from 1 to `N`, where `N` is the input`
