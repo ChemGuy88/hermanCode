@@ -109,7 +109,7 @@ CODE
 )"
 
 # Code blocks creation: make RC file call "Herman's Code" Shell package.
-HERMANS_CODE_SHELLRC_PATH="$HERMANS_CODE_SHELL_PKG_PATH/rc.sh"
+HERMANS_CODE_SHELLRC_PATH="$HERMANS_CODE_SHELL_PKG_PATH/rc/login/login.mash"
 CODE_BLOCK_SHELLRC="$(cat <<CODE
 
 $CODE_BLOCK_MARKER_START
