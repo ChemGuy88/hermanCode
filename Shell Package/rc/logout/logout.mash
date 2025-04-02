@@ -8,11 +8,11 @@ fi
 shell_name=$(source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash")
 
 if [ "$shell_name" = "bash" ]; then
-    bash "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.bash"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.bash"
 elif [ "$shell_name" = "sh" ]; then
-    sh "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.sh"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.sh"
 elif [ "$shell_name" = "zsh" ]; then
-    zsh "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.zsh"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.zsh"
 else
     echo "MASH: Warning: Unsupported shell \"$shell_name\"."
 fi

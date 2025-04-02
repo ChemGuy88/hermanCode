@@ -16,7 +16,7 @@
 **/*.zip
 data/*
 documents/*
-Shell Package/Install/Code Blocks/*
+Shell Package/install/Code Blocks/*
 test.*sh
 # Go to the bottom for exceptions
 # <<< [end] Things added by Herman <<<

@@ -36,6 +36,11 @@ fi
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Gate-keeping <<<
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
+    echo "MASH: Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required files."
+    return
+fi
+
 ################################################################################
 ### Constants: Define values ###################################################
 ################################################################################
@@ -47,10 +52,6 @@ if [[ "$SHELL" = "/bin/zsh" ]]; then
 elif [[ "$SHELL" = "/bin/bash" ]]; then
     HERMANS_CODE_SHELL_PKG_PATH="${BASH_SOURCE[0]%/*}"
 fi
-
-HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
-
-export HERMANS_CODE_INSTALL_PATH
 
 # BASH configurations
 export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file

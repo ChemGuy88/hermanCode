@@ -90,38 +90,31 @@ done < <(cat "$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Files.
 MANUAL_ARRAY=("findTraces.bash" \
               "processTraces.bash" \
               "uninstallFromFileList.bash")
+echo "Removing script links."
+counter=$((0))
 for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/_modules/uninstaller"/*; do
-    :
-    file_base_name="$(basename -- "$file_path")"
-    counter=0
-    for array_value in "${MANUAL_ARRAY[@]}"; do
-        if [ "$file_base_name" = "$array_value" ]; then
-            counter=$((counter+1))
+    file_stem="${file_base_name%.*}"
+    file_path_to_remove="/Users/$USER/.local/bin/$file_stem"
+    if [ -f "$file_path_to_remove" ]; then
+        counter+=$(($counter + 1))
+        echo -n "  - $file_path_to_remove"
+        rm "$file_path_to_remove"
+        if [ "$?" ]; then
+            echo " ❌"
         else
-            :
+            echo " ✅"
         fi
-    done
-    if [ "$counter" -gt 0 ]; then
-        file_stem="${file_base_name%.*}"
-        file_path_to_remove="/Users/$USER/.local/bin/$file_stem"
-        if [ -f "$file_path_to_remove" ]; then
-            rm "$file_path_to_remove"
-        else
-            :
-        fi
-    else
-        :
     fi
 done
-
-# Remove linked files
-echo "Don't forget to remove linked files."
+if [ $counter -eq 0 ]; then
+    echo "No script links to remove."
+fi
 
 # Run bash logout
-LOGOUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/logout.sh"
+LOGOUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/logout.mash"
 echo "Running logout procedure: \"$LOGOUT_PATH\"
 "
-# shellcheck source="Shell Package/logout.sh"
+# shellcheck source="Shell Package/logout/logout.mash"
 source "$LOGOUT_PATH"
 
 echo "You will need to restart your shell for the uninstallation effects to be complete.

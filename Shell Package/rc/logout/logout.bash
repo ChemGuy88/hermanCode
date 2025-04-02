@@ -2,7 +2,7 @@
 
 # General logout procedure
 
-LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/logout/limericks_out.sh"
+LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_out/limericks_out.mash"
 if [ -f "$LIMERICKS_OUT_PATH" ]; then
     # shellcheck source="Shell Package/limericks_out.sh"
     source "$LIMERICKS_OUT_PATH" || echo "MASH: Warning: ($LINENO): Safety mechanism failed."

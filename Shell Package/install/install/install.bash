@@ -6,6 +6,7 @@
 bld=$(tput bold)
 nrl=$(tput sgr0)
 BLU=$'\e[0;34m'
+GRN=$'\e[0;32m'
 NC=$'\e[0m'
 
 usage0() {
@@ -59,7 +60,7 @@ shell_profile_file_names_array=("$shell_logout" \
                                 "$shell_rc")
 
 # Write shell profile file names to file
-code_block_file_names_file_path="$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Files.txt"
+code_block_file_names_file_path="$HERMANS_CODE_INSTALL_PATH/Shell Package/install/Code Block Files.txt"
 code_block_file_names_dir="$(dirname "$code_block_file_names_file_path")"
 if [[ -d "$code_block_file_names_dir" ]]; then
     :
@@ -73,7 +74,7 @@ for file_name in "${shell_profile_file_names_array[@]}"; do
 done
 
 # Install directory definition
-install_records_dir="$HERMANS_CODE_SHELL_PKG_PATH/Install"
+install_records_dir="$HERMANS_CODE_SHELL_PKG_PATH/install"
 
 # >>> Code blocks creation >>>
 # Code blocks creation: Load start and end markers from data directory
@@ -117,6 +118,8 @@ $CODE_BLOCK_MARKER_START
 # shellcheck shell=$shell_name
 
 # Load "Herman's Code" Shell package
+HERMANS_CODE_INSTALL_PATH="$HERMANS_CODE_INSTALL_PATH"
+export HERMANS_CODE_INSTALL_PATH
 HERMANS_CODE_SHELLRC_PATH="$HERMANS_CODE_SHELLRC_PATH"
 if [ -f "\$HERMANS_CODE_SHELLRC_PATH" ]; then
     # shellcheck source="$HERMANS_CODE_SHELLRC_PATH"
@@ -226,7 +229,7 @@ sudo scutil --set "HostName" <computer-name>
 
 echo "If you did not \`source\` the installation, you will have to restart your shell or run the below command:
 
-${BLU}source ~/$shell_profile${NC}
+${GRN}source ~/$shell_profile${NC}
 
 ${bld}End of installation${nrl}
 "

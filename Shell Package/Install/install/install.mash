@@ -1,0 +1,29 @@
+#!/usr/bin/env mash
+
+HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
+
+get_shell_name () {
+    result_0="$(ps -p "$$" -o comm=)"
+
+    if expr "$result_0" : '[-]*bash' 1>/dev/null; then
+        result=bash
+    elif expr "$result_0" : '[-]*sh' 1>/dev/null; then
+        result=sh
+    elif expr "$result_0" : '[-]*zsh' 1>/dev/null; then
+        result=zsh
+    else
+        echo "MASH: Warning: Could not deduce invoking shell." >&2
+        result=""
+    fi
+    echo "$result"
+}
+
+shell_name=$(get_shell_name)
+
+if [ "$shell_name" = "bash" ]; then
+    bash "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/install/install.bash" "$@"
+elif [ "$shell_name" = "zsh" ]; then
+    zsh "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/install/install.zsh" "$@"
+else
+    echo "MASH: Warning: Unsupported shell \"$shell_name\"."
+fi
