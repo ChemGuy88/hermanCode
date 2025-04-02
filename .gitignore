@@ -18,7 +18,7 @@
 data/*
 documents/*
 Shell Package/Install/Code Blocks/*
-test.bash
+test.*sh
 # Go to the bottom for exceptions
 # <<< [end] Things added by Herman <<<
 
