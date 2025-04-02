@@ -11,8 +11,8 @@ GRN=$'\e[0;32m'
 RED=$'\e[0;31m'
 NC=$'\e[0m'
 
-FILE_PATH_1="Shell Package/macOS/Examples/Data/File with Final Newline.txt"
-FILE_PATH_2="Shell Package/macOS/Examples/Data/File with No Final Newline.txt"
+FILE_PATH_1="Shell Package/Examples/Shell/File with Final Newline.txt"
+FILE_PATH_2="Shell Package/Examples/Shell/File with No Final Newline.txt"
 
 FILE_PATH_ARRAY=("$FILE_PATH_1" "$FILE_PATH_2")
 

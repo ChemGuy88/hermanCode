@@ -193,7 +193,7 @@ echo "$CODE_BLOCK_SHELL_LOGOUT" > "$CODE_BLOCKS_DIR/$shell_profile"
 MANUAL_ARRAY=("findTraces.bash" \
               "processTraces.bash" \
               "uninstallFromFileList.bash")
-for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/macOS/uninstallers"/*; do
+for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/_modules/uninstaller"/*; do
     :
     file_base_name="$(basename -- "$file_path")"
     counter=0
