@@ -8,7 +8,7 @@ fi
 shell_name=$(source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash")
 
 if [ "$shell_name" = "bash" -o "$shell_name" = "sh" -o "$shell_name" = "zsh" ]; then
-    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_out/limericks_out.sh"
+    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_in/limericks_in.sh"
 else
     echo "MASH: Warning: Unsupported shell \"$shell_name\"."
 fi

@@ -1,3 +1,4 @@
+# For files added to `assume-unchaged`, see ...
 # >>> [start] Things added by Herman >>>
 **/logs/*
 **/temp/*
@@ -13,8 +14,6 @@
 !**/Data/**/*.txt
 **/*.xlsx
 **/*.zip
-**/limericks_in.sh
-**/limericks_out.sh
 data/*
 documents/*
 Shell Package/Install/Code Blocks/*
