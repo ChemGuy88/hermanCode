@@ -203,6 +203,10 @@ if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     alias lss="ls -lash"
     getPgrep "$USER" python
+    echo ""
+    pcpu="$(ps -ax -o %cpu | awk '{s+=$1} END {print s "%"}')"
+    pmem="$(ps -ax -o %mem | awk '{s+=$1} END {print s "%"}')"
+    echo "CPU usage: $pcpu\nRAM usage: $pmem"
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         # Add brew to PATH, formely in ".bash_profile"
