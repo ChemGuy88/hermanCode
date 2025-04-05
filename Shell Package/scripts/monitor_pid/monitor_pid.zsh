@@ -63,7 +63,7 @@ monitoring_loop() {
             time_current="$time_current_min:$time_current_sec ($time_current_epoc_sec)"  # For debugging
             echo "\`time_current\`: $time_current | \`time_previous\`: $time_previous"
         fi
-        if [ $(( $time_current_epoc_sec % 30 )) = 0 -a $time_current_epoc_sec -gt $time_previous_epoc_sec ]; then
+        if [ $(( $time_current_epoc_sec % $snapshot_frequency )) = 0 -a $time_current_epoc_sec -gt $time_previous_epoc_sec ]; then
             echo " >>> Snapshot Monitoring at $(getTimestamp) >>>"
             eval $command_string
             echo " <<< Snapshot Monitoring at $(getTimestamp) <<<"
@@ -87,7 +87,6 @@ while getopts "bf:ho:p:tv" opt; do
         p) pid_string_0="$pid_string_0,$OPTARG";;
         t) test_mode="TRUE";;
         v) verbose="TRUE";;
-        *) usage;;
     esac
 done
 shift $((OPTIND -1))
@@ -108,13 +107,19 @@ elif [ "${pid_array[*]}" ] && [ "$help_flag" ]; then
     exit 2
 fi
 
-echo "Argument confirmation:"
+# Store monitoring parameters
+message="Argument confirmation:"
+echo "$message"
+monitoring_parameters="$message"  # Initialize `monitoring_parameters`
 
 # Form 1 confirmation
 if [ -z "$help_flag" ]; then
     :
 else
-    echo "  \`help_flag\`: \"$help_flag\""
+    message="  \`help_flag\`: \"$help_flag\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
 # Form 2 validation and confirmation
@@ -132,17 +137,25 @@ else
         fi
     done
     # Confirmation
-    echo "  \`pid_array\`:"
+    message_1="  \`pid_array\`:"
     for val in "${pid_array[@]}"; do
-        echo "    - $val"
+        message_2="    - $val"
+        message_1="$message_1\n$message_2"
     done
+    echo "$message_1"
+    monitoring_parameters="$monitoring_parameters\n$message_1"
+    unset message_1
+    unset message_2
 fi
 
 # Argument `-b`
 if [ -z "$bg_mode" ]; then
     :
 else
-    echo "  \`bg_mode\`: \"$bg_mode\""
+    message="  \`bg_mode\`: \"$bg_mode\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
 # Argument `-f`
@@ -157,7 +170,10 @@ else
         exit 3
     fi
 fi
-echo "  \`snapshot_frequency\`: \"$snapshot_frequency\""
+message="  \`snapshot_frequency\`: \"$snapshot_frequency\""
+echo "$message"
+monitoring_parameters="$monitoring_parameters\n$message"
+unset message
 
 # Argument `-o`
 if [ -z "$out_path" ]; then
@@ -165,19 +181,28 @@ if [ -z "$out_path" ]; then
 else
     out_path="$out_path"
 fi
-echo "  \`out_path\`: \"$out_path\""
+message="  \`out_path\`: \"$out_path\""
+echo "$message"
+monitoring_parameters="$monitoring_parameters\n$message"
+unset message
 
 # Argument `-t`
 if [ -z "$test_mode" ]; then
     :
 else
-    echo "  \`test_mode\`: \"$test_mode\""
+    message="  \`test_mode\`: \"$test_mode\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 # Argument `-v`
 if [ -z "$verbose" ]; then
     :
 else
-    echo "  \`verbose\`: \"$verbose\""
+    message="  \`verbose\`: \"$verbose\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
 # <<< Argument confirmation <<<
@@ -188,7 +213,10 @@ if [ "$help_flag" = "TRUE" ]; then
     pseudo_man
 # Form 2
 elif [ -z "$help_flag" ]; then
-    echo "Monitoring pids..."
+    message="Preparing for monitoring process."
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 # <<< Form selection <<<
 
@@ -197,47 +225,86 @@ keywords_list=$(echo "$(ps -L)" | tr '\n' ' ')
 keywords_array=(${(@s: :)keywords_list})
 
 if [ "$verbose" = "TRUE" ]; then
-    echo "\`keywords_list\`:
+    message="\`keywords_list\`:
         \"$keywords_list\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
-command_string_0="ps"
+command_string_1="ps -f"  # The `-f` flag allows us to bypass the terminal width limit, and extends the output length to about 60,000 characters. See `man ps` for details.
 
 # Add options to command string
+# We first append fields that do not contain spaces.
+# We then append the `lstat` field which contains a known amount of spaces
+# We finally add only one of `command` or `args`, since they are equivalent and have an unknown number of spaces.
+num_keywords_used=0
 for keyword in "${keywords_array[@]}"; do
-   command_string_0="$command_string_0 -o $keyword"
+    if [[ ! "$keyword" =~ "lstart|args|comm" ]]; then
+        command_string_1="$command_string_1 -o $keyword"
+        num_keywords_used=$(($num_keywords_used + 1))
+    fi
+done
+for keyword in "${keywords_array[@]}"; do
+    if [[ "$keyword" =~ "lstart" ]]; then
+        command_string_1="$command_string_1 -o $keyword"
+        num_keywords_used=$(($num_keywords_used + 1))
+    fi
+done
+for keyword in "${keywords_array[@]}"; do
+    if [[ "$keyword" =~ "command|args" ]]; then
+        command_string_1="$command_string_1 -o $keyword"
+        num_keywords_used=$(($num_keywords_used + 1))
+        break
+    fi
 done
 
 if [ "$verbose" = "TRUE" ]; then
-    echo "\`command_string_0\`:
-        \"$command_string_0\""
+    message="\`num_keywords_used\`: \"$num_keywords_used\"
+\`command_string_1\`:
+    \"$command_string_1\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
 # Add PID[s] to command strings
-command_string_0="$command_string_0 -p $pid_string"
+command_string_2="$command_string_1 -p $pid_string"
 
 if [ "$verbose" = "TRUE" ]; then
-    echo "\`command_string_0\`:
-        \"$command_string_0\""
+    message="\`command_string_2\`:
+    \"$command_string_2\""
+    echo "$message"
+    monitoring_parameters="$monitoring_parameters\n$message"
+    unset message
 fi
 
 # Use test mode or not
 if [ "$test_mode" = "TRUE" ]; then
     command_string="echo \"This is a test message for process IDs $pid_string\""
 else
-    command_string="$command_string_0"
+    command_string="$command_string_2"
 fi
 # <<< Construct command string <<<
 
 # Execute command string
-echo "Monitoring process IDs $pid_string"
+message="Beginning monitoring process.
+ >>> Monitoring Parameters >>>
+num_keywords_used=$num_keywords_used
+ <<< Monitoring Parameters <<<"
+echo "$message"
+monitoring_parameters="$monitoring_parameters\n$message"
+unset message
 if [ "$bg_mode" = "TRUE" ]; then
     temp_path_monitoring_loop="$HERMANS_CODE_INSTALL_PATH/temp/monitoring_loop.zsh"
     mkdir -p "$(dirname "$temp_path_monitoring_loop")"
     export -f monitoring_loop > "$temp_path_monitoring_loop"
     echo "" >> "$temp_path_monitoring_loop"
     echo "monitoring_loop '$command_string' '$snapshot_frequency'" >> "$temp_path_monitoring_loop"
-    nohup zsh "$temp_path_monitoring_loop" &> "$out_path" &
+    # Initialize file `out_path` with monitoring parameters
+    echo "$monitoring_parameters" > "$out_path"
+    # Execute monitor
+    nohup zsh "$temp_path_monitoring_loop" &>> "$out_path" &
 else
     monitoring_loop "$command_string" "$snapshot_frequency"
 fi

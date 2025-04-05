@@ -8,7 +8,7 @@ fi
 shell_name=$(source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash")
 
 if [ "$shell_name" = "bash" ]; then
-    bash "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/monitor_pid/monitor_pid.bash" "$@"
+    echo "MASH: Error: Sorry, this function has been deprecated for BASH."
 elif [ "$shell_name" = "zsh" ]; then
     zsh "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/monitor_pid/monitor_pid.zsh" "$@"
 else
