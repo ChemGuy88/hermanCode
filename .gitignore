@@ -11,6 +11,7 @@
 **/*.pdf
 **/*.tsv
 **/*.txt
+**/*.text
 !**/Data/**/*.txt
 **/*.xlsx
 **/*.zip
