@@ -9,7 +9,7 @@ You can monitor the total resource consumption of a system by piping `ps` into `
 ```zsh
 ps -ax -o %cpu | awk '{s+=$1} END {print s "%"}'
 # for RAM, use
-ps -ax -o %mem | awk '{s+=$1} END {print s "%}'
+ps -ax -o %mem | awk '{s+=$1} END {print s "%"}'
 ```
 
 Note that the documentation for `ps` is confusing, and one might think that `-A` is not the same as `-ax`, but in practice it is. This is partially explained in a [SuperUser post](https://superuser.com/a/902017). The post only explains the discrepancy for BASH and Unix environments, but it's possible that other environments have the discrepancy because for similar reasons; We can demonstrate by counting the number of processes using the `ps` variable names with special meanings. Note we subtract by one because we want don't want to count the header from `ps`.
