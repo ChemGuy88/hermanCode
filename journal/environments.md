@@ -48,7 +48,7 @@ conda create -n herman-leetcode autopep8 bs4 flake8 ipython matplotlib numpy pan
 ```zsh
 conda create -n herman-midas coinbase-advanced-py gh humanfriendly ipython pandas python=3.12 websocket-client -c conda-forge && \
 conda activate herman-midas && \
-python -m pip install --user drapi-lemur
+python -m pip install --user herman-code
 python -m pip install --user rel
 ```
 
