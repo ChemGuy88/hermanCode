@@ -11,10 +11,10 @@ from pathlib import Path
 import pandas as pd
 from sqlalchemy import URL
 # Local packages
-from herman_code import __version__ as drapiVersion
-from herman_code.code import (choosePathToLog,
-                              getTimestamp,
-                              makeDirPath)
+from herman_code import __version__ as hc_version
+from herman_code.code.utilities import (choose_path_to_log,
+                                        get_timestamp,
+                                        make_dir_path)
 
 if __name__ == "__main__":
     # >>> `Argparse` arguments >>>
@@ -24,47 +24,51 @@ if __name__ == "__main__":
     pass
 
     # Arguments: Meta-parameters
-    parser.add_argument("--LOG_LEVEL",
+    parser.add_argument("--log_level",
                         default=10,
                         type=int,
                         help="""Increase output verbosity. See "logging" module's log level for valid values.""")
 
     # Arguments: SQL connection settings
-    parser.add_argument("--SERVER",
+    parser.add_argument("--driver_name",
                         type=str,
                         help="")
-    parser.add_argument("--DATABASE",
+    parser.add_argument("--server",
                         type=str,
                         help="")
-    parser.add_argument("--USER_DOMAIN",
+    parser.add_argument("--database",
                         type=str,
                         help="")
-    parser.add_argument("--USERNAME",
+    parser.add_argument("--user_domain",
+                        type=str,
+                        help="")
+    parser.add_argument("--username",
                         default=os.environ["USER"],
                         type=str,
                         help="")
-    parser.add_argument("--USER_ID",
+    parser.add_argument("--user_id",
                         default=None,
                         help="")
-    parser.add_argument("--USER_PWD",
+    parser.add_argument("--user_pwd",
                         default=None,
                         help="")
 
-    argNamespace = parser.parse_args()
+    arg_namespace = parser.parse_args()
 
     # Parsed arguments: Main
     pass
 
     # Parsed arguments: Meta-parameters
-    LOG_LEVEL = argNamespace.LOG_LEVEL
+    log_level = arg_namespace.log_level
 
     # Parsed arguments: SQL connection settings
-    SERVER = argNamespace.SERVER
-    DATABASE = argNamespace.DATABASE
-    USER_DOMAIN = argNamespace.USER_DOMAIN
-    USERNAME = argNamespace.USERNAME
-    USER_ID = argNamespace.USER_ID
-    USER_PWD = argNamespace.USER_PWD
+    driver_name = arg_namespace.driver_name
+    server = arg_namespace.server
+    database = arg_namespace.database
+    user_domain = arg_namespace.user_domain
+    username = arg_namespace.username
+    user_id = arg_namespace.user_id
+    user_pwd = arg_namespace.user_pwd
     # <<< `Argparse` arguments <<<
 
     # >>> Argument checks >>>
@@ -73,84 +77,84 @@ if __name__ == "__main__":
     # <<< Argument checks <<<
 
     # Variables: Path construction: General
-    runTimestamp = getTimestamp()
-    thisFilePath = Path(__file__)
-    thisFileStem = thisFilePath.stem
-    currentWorkingDir = Path(os.getcwd()).absolute()
-    projectDir = currentWorkingDir
-    dataDir = projectDir.joinpath("data")
-    if dataDir:
-        inputDataDir = dataDir.joinpath("input")
-        intermediateDataDir = dataDir.joinpath("intermediate")
-        outputDataDir = dataDir.joinpath("output")
-        if intermediateDataDir:
-            runIntermediateDir = intermediateDataDir.joinpath(thisFileStem, runTimestamp)
-        if outputDataDir:
-            runOutputDir = outputDataDir.joinpath(thisFileStem, runTimestamp)
-    logsDir = projectDir.joinpath("logs")
-    if logsDir:
-        runLogsDir = logsDir.joinpath(thisFileStem)
-    sqlDir = projectDir.joinpath("sql")
+    run_timestamp = get_timestamp()
+    this_file_path = Path(__file__)
+    this_file_stem = this_file_path.stem
+    current_working_dir = Path(os.getcwd()).absolute()
+    project_dir = current_working_dir
+    data_dir = project_dir.joinpath("data")
+    if data_dir:
+        input_data_dir = data_dir.joinpath("input")
+        intermediate_data_dir = data_dir.joinpath("intermediate")
+        output_data_dir = data_dir.joinpath("output")
+        if intermediate_data_dir:
+            run_intermediate_dir = intermediate_data_dir.joinpath(this_file_stem, run_timestamp)
+        if output_data_dir:
+            run_output_dir = output_data_dir.joinpath(this_file_stem, run_timestamp)
+    logs_dir = project_dir.joinpath("logs")
+    if logs_dir:
+        run_logs_dir = logs_dir.joinpath(this_file_stem)
+    sql_dir = project_dir.joinpath("sql")
 
     # Variables: Path construction: Project-specific
     pass
 
     # Variables: SQL Parameters
-    if USER_ID:
-        userID = USER_ID[:]
+    if user_id:
+        user_id = user_id[:]
     else:
-        userID = fr"{USER_DOMAIN}\{USERNAME}"
-    if USER_PWD:
-        userPwd = USER_PWD
+        user_id = fr"{user_domain}\{username}"
+    if user_pwd:
+        user_pwd = user_pwd
     else:
         raise Exception("Need password.")
-    connectionString = URL.create(drivername="mssql+pymssql",
-                                  username=userID,
-                                  password=userPwd,
-                                  host=SERVER,
-                                  database=DATABASE)
+    connection_string = URL.create(drivername=driver_name,
+                                   username=user_id,
+                                   password=user_pwd,
+                                   host=server,
+                                   database=database)
 
     # Variables: Other
     pass
 
     # Directory creation: General
-    makeDirPath(runIntermediateDir)
-    makeDirPath(runOutputDir)
-    makeDirPath(runLogsDir)
+    make_dir_path(run_intermediate_dir)
+    make_dir_path(run_output_dir)
+    make_dir_path(run_logs_dir)
 
     # Logging block
-    logpath = runLogsDir.joinpath(f"log {runTimestamp}.log")
-    logFormat = logging.Formatter("""[%(asctime)s][%(levelname)s](%(funcName)s): %(message)s""")
+    logpath = run_logs_dir.joinpath(f"log {run_timestamp}.log")
+    log_format = logging.Formatter("""[%(asctime)s][%(levelname)s](%(funcName)s): %(message)s""")
 
     logger = logging.getLogger(__name__)
 
-    fileHandler = logging.FileHandler(logpath)
-    fileHandler.setLevel(9)
-    fileHandler.setFormatter(logFormat)
+    file_handler = logging.FileHandler(logpath)
+    file_handler.setLevel(9)
+    file_handler.setFormatter(log_format)
 
-    streamHandler = logging.StreamHandler()
-    streamHandler.setLevel(LOG_LEVEL)
-    streamHandler.setFormatter(logFormat)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(log_level)
+    stream_handler.setFormatter(log_format)
 
-    logger.addHandler(fileHandler)
-    logger.addHandler(streamHandler)
+    logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)
 
     logger.setLevel(9)
 
-    logger.info(f"""Begin running "{choosePathToLog(path=thisFilePath, rootPath=projectDir)}".""")
-    logger.info(f"""DRAPI-Lemur version is "{drapiVersion}".""")
-    logger.info(f"""All other paths will be reported in debugging relative to the current working directory: "{choosePathToLog(path=projectDir, rootPath=projectDir)}".""")
+    logger.info(f"""Begin running "{choose_path_to_log(path=this_file_path, root_path=project_dir)}".""")
+    logger.info(f"""Herman's Code version is "{hc_version}".""")
+    logger.info(f"""All other paths will be reported in debugging relative to the current working directory: "{choose_path_to_log(path=project_dir, root_path=project_dir)}".""")
 
-    argList = argNamespace._get_args() + argNamespace._get_kwargs()
-    argListString = pprint.pformat(argList)  # TODO Remove secrets from list to print, e.g., passwords.
-    logger.info(f"""Script arguments:\n{argListString}""")
+    arg_list = arg_namespace._get_args() + arg_namespace._get_kwargs()
+    arg_list_string = pprint.pformat(arg_list)  # TODO Remove secrets from list to print, e.g., passwords.
+    logger.info(f"""Script arguments:\n{arg_list_string}""")
 
     # >>> Begin script body >>>
 
     _ = pd
 
     # Output location summary
-    logger.info(f"""Script output is located in the following directory: "{choosePathToLog(path=runOutputDir, rootPath=projectDir)}".""")
+    logger.info(f"""Script output is located in the following directory: "{choose_path_to_log(path=run_output_dir, root_path=project_dir)}".""")
 
     # <<< End script body <<<
-    logger.info(f"""Finished running "{choosePathToLog(path=thisFilePath, rootPath=projectDir)}".""")
+    logger.info(f"""Finished running "{choose_path_to_log(path=this_file_path, root_path=project_dir)}".""")

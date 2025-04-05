@@ -9,10 +9,10 @@ from pathlib import Path
 import pandas as pd
 from sqlalchemy import URL
 # Local packages
-from herman_code import __version__ as drapiVersion
-from herman_code.code import (choosePathToLog,
-                              getTimestamp,
-                              makeDirPath)
+from herman_code import __version__ as hc_version
+from herman_code.code.utilities import (choose_path_to_log,
+                                        get_timestamp,
+                                        make_dir_path)
 
 # Arguments: Main
 pass
@@ -21,6 +21,7 @@ pass
 LOG_LEVEL = "INFO"
 
 # Arguments: SQL parameters
+DRIVER_NAME = None
 USER_ID = None
 USER_PWD = None
 USER_DOMAIN = None
@@ -31,73 +32,73 @@ DATABASE = None
 
 if __name__ == "__main__":
     # Variables: Path construction: General
-    runTimestamp = getTimestamp()
-    thisFilePath = Path(__file__)
-    thisFileStem = thisFilePath.stem
-    currentWorkingDir = Path(os.getcwd()).absolute()
-    projectDir = currentWorkingDir
-    dataDir = projectDir.joinpath("data")
-    if dataDir:
-        inputDataDir = dataDir.joinpath("input")
-        intermediateDataDir = dataDir.joinpath("intermediate")
-        outputDataDir = dataDir.joinpath("output")
-        if intermediateDataDir:
-            runIntermediateDir = intermediateDataDir.joinpath(thisFileStem, runTimestamp)
-        if outputDataDir:
-            runOutputDir = outputDataDir.joinpath(thisFileStem, runTimestamp)
-    logsDir = projectDir.joinpath("logs")
-    if logsDir:
-        runLogsDir = logsDir.joinpath(thisFileStem)
-    sqlDir = projectDir.joinpath("sql")
+    run_timestamp = get_timestamp()
+    this_file_path = Path(__file__)
+    this_file_stem = this_file_path.stem
+    current_working_dir = Path(os.getcwd()).absolute()
+    project_dir = current_working_dir
+    data_dir = project_dir.joinpath("data")
+    if data_dir:
+        input_data_dir = data_dir.joinpath("input")
+        intermediate_data_dir = data_dir.joinpath("intermediate")
+        output_data_dir = data_dir.joinpath("output")
+        if intermediate_data_dir:
+            run_intermediate_dir = intermediate_data_dir.joinpath(this_file_stem, run_timestamp)
+        if output_data_dir:
+            run_output_dir = output_data_dir.joinpath(this_file_stem, run_timestamp)
+    logs_dir = project_dir.joinpath("logs")
+    if logs_dir:
+        run_logs_dir = logs_dir.joinpath(this_file_stem)
+    sql_dir = project_dir.joinpath("sql")
 
     # Variables: Path construction: Project-specific
     pass
 
     # Variables: SQL Parameters
     if USER_ID:
-        userID = USER_ID[:]
+        user_id = USER_ID[:]
     else:
-        userID = fr"{USER_DOMAIN}\{USERNAME}"
+        user_id = fr"{USER_DOMAIN}\{USERNAME}"
     if USER_PWD:
-        userPwd = USER_PWD
+        user_pwd = USER_PWD
     else:
         raise Exception("Need password.")
-    connectionString = URL.create(drivername="mssql+pymssql",
-                                  username=userID,
-                                  password=userPwd,
-                                  host=SERVER,
-                                  database=DATABASE)
+    connection_string = URL.create(drivername=DRIVER_NAME,
+                                   username=user_id,
+                                   password=user_pwd,
+                                   host=SERVER,
+                                   database=DATABASE)
 
     # Variables: Other
     pass
 
     # Directory creation: General
-    makeDirPath(runIntermediateDir)
-    makeDirPath(runOutputDir)
-    makeDirPath(runLogsDir)
+    make_dir_path(run_intermediate_dir)
+    make_dir_path(run_output_dir)
+    make_dir_path(run_logs_dir)
 
     # Logging block
-    logpath = runLogsDir.joinpath(f"log {runTimestamp}.log")
-    logFormat = logging.Formatter("""[%(asctime)s][%(levelname)s](%(funcName)s): %(message)s""")
+    logpath = run_logs_dir.joinpath(f"log {run_timestamp}.log")
+    log_format = logging.Formatter("""[%(asctime)s][%(levelname)s](%(funcName)s): %(message)s""")
 
     logger = logging.getLogger(__name__)
 
-    fileHandler = logging.FileHandler(logpath)
-    fileHandler.setLevel(9)
-    fileHandler.setFormatter(logFormat)
+    file_handler = logging.FileHandler(logpath)
+    file_handler.setLevel(9)
+    file_handler.setFormatter(log_format)
 
-    streamHandler = logging.StreamHandler()
-    streamHandler.setLevel(LOG_LEVEL)
-    streamHandler.setFormatter(logFormat)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(LOG_LEVEL)
+    stream_handler.setFormatter(log_format)
 
-    logger.addHandler(fileHandler)
-    logger.addHandler(streamHandler)
+    logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)
 
     logger.setLevel(9)
 
-    logger.info(f"""Begin running "{choosePathToLog(path=thisFilePath, rootPath=projectDir)}".""")
-    logger.info(f"""DRAPI-Lemur version is "{drapiVersion}".""")
-    logger.info(f"""All other paths will be reported in debugging relative to the current working directory: "{choosePathToLog(path=projectDir, rootPath=projectDir)}".""")
+    logger.info(f"""Begin running "{choose_path_to_log(path=this_file_path, root_path=project_dir)}".""")
+    logger.info(f"""Herman's Code version is "{hc_version}".""")
+    logger.info(f"""All other paths will be reported in debugging relative to the current working directory: "{choose_path_to_log(path=project_dir, root_path=project_dir)}".""")
     logger.info(f"""Script arguments:
 
 
@@ -113,7 +114,7 @@ if __name__ == "__main__":
     _ = pd
 
     # Output location summary
-    logger.info(f"""Script output is located in the following directory: "{choosePathToLog(path=runOutputDir, rootPath=projectDir)}".""")
+    logger.info(f"""Script output is located in the following directory: "{choose_path_to_log(path=run_output_dir, root_path=project_dir)}".""")
 
     # <<< End script body <<<
-    logger.info(f"""Finished running "{choosePathToLog(path=thisFilePath, rootPath=projectDir)}".""")
+    logger.info(f"""Finished running "{choose_path_to_log(path=this_file_path, root_path=project_dir)}".""")
