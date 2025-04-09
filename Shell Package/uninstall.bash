@@ -38,10 +38,10 @@ NC=$'\e[0m'
 # Define important variables
 if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
     HERMANS_CODE_INSTALL_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null || return 2>&1; cd .. ; pwd -P )"
-    HERMANS_CODE_SHELL_PKG_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package"
 else
     :
 fi
+HERMANS_CODE_SHELL_PKG_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package"
 
 # Load start and end markers from data directory
 fname1="$HERMANS_CODE_SHELL_PKG_PATH/install/data/output/code_block_markers/marker_start.txt"
@@ -93,27 +93,34 @@ do
 done < <(cat "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/data/output/files/files.txt") || return
 
 # Uninstall symbolic links
-MANUAL_ARRAY=("findTraces.bash" \
-              "processTraces.bash" \
-              "uninstallFromFileList.bash")
 echo "Removing script links."
-counter=$((0))
-for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/_modules/uninstaller"/*; do
+counter_1=$((0))
+counter_2=$((0))
+for file_path in "$HERMANS_CODE_INSTALL_PATH/Shell Package/scripts/_modules/uninstaller"/*;
+do
+    file_base_name="$(basename -- "$file_path")"
     file_stem="${file_base_name%.*}"
     file_path_to_remove="/Users/$USER/.local/bin/$file_stem"
+    echo -n "  - $file_path_to_remove"
     if [ -f "$file_path_to_remove" ]; then
-        counter+=$(($counter + 1))
         echo -n "  - $file_path_to_remove"
+        counter_1=$(($counter_1 + 1))
         rm "$file_path_to_remove"
         if [ "$?" ]; then
-            echo " ❌"
+            echo " ✅ Removed"
         else
-            echo " ✅"
+            echo " ❌ Failed to remove"
         fi
+    else
+        counter_2=$(($counter_2 + 1))
+        echo " ✳️ N/A."
     fi
 done
-if [ $counter -eq 0 ]; then
-    echo "No script links to remove."
+if [ $counter_1 -eq 0 ]; then
+    echo -e "ℹ️ No script links to remove.\n"
+fi
+if [ $counter_2 -gt 0 ]; then
+    echo -e "✳️ The file was not removed because it was not found. This probably means it was not installed, which is normal for some files.\n"
 fi
 
 # Run bash logout
