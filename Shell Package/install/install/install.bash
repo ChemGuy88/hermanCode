@@ -43,7 +43,7 @@ echo "'shell_name': $shell_name"
 # <<< Argument confirmation <<<
 
 # Package paths
-HERMANS_CODE_SHELL_PKG_PATH="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; pwd -P )"  # Duplicated across package
+HERMANS_CODE_SHELL_PKG_PATH="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; cd ../.. ; pwd -P )"  # Duplicated across package
 HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
 
 # Define shell profile file names.
@@ -60,7 +60,7 @@ shell_profile_file_names_array=("$shell_logout" \
                                 "$shell_rc")
 
 # Write shell profile file names to file
-code_block_file_names_file_path="$HERMANS_CODE_INSTALL_PATH/Shell Package/install/Code Block Files.txt"
+code_block_file_names_file_path="$HERMANS_CODE_INSTALL_PATH/Shell Package/install/data/output/files/files.txt"
 code_block_file_names_dir="$(dirname "$code_block_file_names_file_path")"
 if [[ -d "$code_block_file_names_dir" ]]; then
     :
@@ -68,28 +68,33 @@ else
     mkdir -p "$code_block_file_names_dir"
 fi
 
-touch "$code_block_file_names_file_path"
+if [ -f "$code_block_file_names_file_path" ]; then
+    rm "$code_block_file_names_file_path"
+else
+    touch "$code_block_file_names_file_path"
+fi
+
 for file_name in "${shell_profile_file_names_array[@]}"; do
     echo "$file_name" >> "$code_block_file_names_file_path"
 done
 
 # Install directory definition
-install_records_dir="$HERMANS_CODE_SHELL_PKG_PATH/install"
+install_records_dir="$HERMANS_CODE_SHELL_PKG_PATH/install/data/output"
 
 # >>> Code blocks creation >>>
 # Code blocks creation: Load start and end markers from data directory
-CODE_BLOCK_MARKER_START="$(cat "$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - Start.txt")"
-CODE_BLOCK_MARKER_END="$(cat "$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - End.txt")"
+CODE_BLOCK_MARKER_START="$(cat "$HERMANS_CODE_SHELL_PKG_PATH/install/data/input/code_block_markers/marker_start.txt")"
+CODE_BLOCK_MARKER_END="$(cat "$HERMANS_CODE_SHELL_PKG_PATH/install/data/input/code_block_markers/marker_end.txt")"
 
-BLOCK_MARKERS_DIR="$install_records_dir/Code Block Markers"
+BLOCK_MARKERS_DIR="$install_records_dir/code_block_markers"
 if [[ -d "$BLOCK_MARKERS_DIR" ]]; then
     :
 else
     mkdir -p "$BLOCK_MARKERS_DIR"
 fi
 
-echo "$CODE_BLOCK_MARKER_START" > "$BLOCK_MARKERS_DIR/Marker - Start.txt"
-echo "$CODE_BLOCK_MARKER_END" > "$BLOCK_MARKERS_DIR/Marker - End.txt"
+echo "$CODE_BLOCK_MARKER_START" > "$BLOCK_MARKERS_DIR/marker_start.txt"
+echo "$CODE_BLOCK_MARKER_END" > "$BLOCK_MARKERS_DIR/marker_end.txt"
 
 # Code blocks creation: make profile file call RC file.
 SHELLRC_PATH="$HOME/$shell_rc"
@@ -152,7 +157,7 @@ CODE
 
 # >>> Code blocks insertion >>>
 # Make directory for code blocks.
-CODE_BLOCKS_DIR="$install_records_dir/Code Blocks"
+CODE_BLOCKS_DIR="$install_records_dir/code_blocks"
 if [[ -d "$CODE_BLOCKS_DIR" ]]; then
     :
 else
@@ -177,7 +182,7 @@ then
 else
     echo "$CODE_BLOCK_SHELLRC" > "$SHELLRC_PATH"
 fi
-echo "$CODE_BLOCK_SHELLRC" > "$CODE_BLOCKS_DIR/$shell_profile"
+echo "$CODE_BLOCK_SHELLRC" > "$CODE_BLOCKS_DIR/$shell_rc"
 
 # Check if logout file exists. If not, create it.
 SHELL_LOGOUT_PATH="$HOME/$shell_logout"
@@ -187,7 +192,7 @@ then
 else
     echo "$CODE_BLOCK_SHELL_LOGOUT" > "$SHELL_LOGOUT_PATH"
 fi
-echo "$CODE_BLOCK_SHELL_LOGOUT" > "$CODE_BLOCKS_DIR/$shell_profile"
+echo "$CODE_BLOCK_SHELL_LOGOUT" > "$CODE_BLOCKS_DIR/$shell_logout"
 
 # <<< Code blocks insertion <<<
 
@@ -224,12 +229,12 @@ done
 # TODO: Set computer name. See "journal/articles/Computer Name.md"
 echo "You might want to set your computer name:
 
-sudo scutil --set "HostName" <computer-name>
+  ${GRN}sudo scutil --set "HostName" <computer-name>${NC}
 "
 
-echo "If you did not \`source\` the installation, you will have to restart your shell or run the below command:
+echo "Restart your shell or source your shell profile:
 
-${GRN}source ~/$shell_profile${NC}
+  ${GRN}source ~/$shell_profile${NC}
 
 ${bld}End of installation${nrl}
 "

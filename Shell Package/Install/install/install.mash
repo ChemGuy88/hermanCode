@@ -1,7 +1,5 @@
 #!/usr/bin/env mash
 
-HERMANS_CODE_INSTALL_PATH="$(dirname "$HERMANS_CODE_SHELL_PKG_PATH")"
-
 get_shell_name () {
     result_0="$(ps -p "$$" -o comm=)"
 
@@ -18,12 +16,15 @@ get_shell_name () {
     echo "$result"
 }
 
-shell_name=$(get_shell_name)
+shell_name="$(get_shell_name)"
 
+# NOTE Do not `source`, or the `shell_name` variable will be inherited.
 if [ "$shell_name" = "bash" ]; then
+    HERMANS_CODE_INSTALL_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null || return 2>&1 ; cd ../../.. ; pwd -P )"
     bash "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/install/install.bash" "$@"
 elif [ "$shell_name" = "zsh" ]; then
-    zsh "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/install/install.zsh" "$@"
+    HERMANS_CODE_INSTALL_PATH="$(cd -- "$(dirname -- "$0")" >/dev/null || return 2>&1 ; cd ../../.. ; pwd -P )"
+    echo "MASH: Warning: Unsupported shell \"$shell_name\"."
 else
     echo "MASH: Warning: Unsupported shell \"$shell_name\"."
 fi

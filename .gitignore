@@ -2,7 +2,6 @@
 # >>> [start] Things added by Herman >>>
 **/logs/*
 **/temp/*
-**/Code Blocks/*
 **/*.7z
 **/.DS_Store
 **/*.bat
@@ -17,7 +16,7 @@
 **/*.zip
 data/*
 documents/*
-Shell Package/install/Code Blocks/*
+Shell Package/install/data/output/*
 test.*sh
 # Go to the bottom for exceptions
 # <<< [end] Things added by Herman <<<

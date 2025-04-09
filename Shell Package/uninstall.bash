@@ -35,12 +35,18 @@ GRN=$'\e[0;32m'
 BLU=$'\e[0;34m'
 NC=$'\e[0m'
 
+# Define important variables
+if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
+    HERMANS_CODE_INSTALL_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null || return 2>&1; cd .. ; pwd -P )"
+    HERMANS_CODE_SHELL_PKG_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package"
+else
+    :
+fi
+
 # Load start and end markers from data directory
-HERMANS_CODE_INSTALL_PATH="/Users/$USER/Documents/Git Repositories/Herman's Code"
-HERMANS_CODE_SHELL_PKG_PATH="/Users/$USER/Documents/Git Repositories/Herman's Code/Shell Package"
-fname1="$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - Start.txt"
-fname2="$HERMANS_CODE_SHELL_PKG_PATH/Data/Install/Code Block Markers/Marker - End.txt"
-marker1="$(cat "$fname1")"
+fname1="$HERMANS_CODE_SHELL_PKG_PATH/install/data/output/code_block_markers/marker_start.txt"
+fname2="$HERMANS_CODE_SHELL_PKG_PATH/install/data/output/code_block_markers/marker_end.txt"
+marker1="$(cat "$fname1")"  || return
 marker2="$(cat "$fname2")"
 marker_array=("$marker1" \
               "$marker2")
@@ -84,7 +90,7 @@ do
         echo "${GRN}$text_done_read${NC}"
         echo " <<< This is the text after editing <<<"
     fi
-done < <(cat "$HERMANS_CODE_INSTALL_PATH/Shell Package/Install/Code Block Files.txt")
+done < <(cat "$HERMANS_CODE_INSTALL_PATH/Shell Package/install/data/output/files/files.txt") || return
 
 # Uninstall symbolic links
 MANUAL_ARRAY=("findTraces.bash" \
