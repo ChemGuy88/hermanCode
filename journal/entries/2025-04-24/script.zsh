@@ -6,7 +6,7 @@
 echo "This script must be run as sudo. Hit [enter] to continue or else quit."
 read -r -u 0 response
 if [[ -z "$response" ]]; then
-    :
+    echo "Running script..."
 else
     exit 1
 fi
