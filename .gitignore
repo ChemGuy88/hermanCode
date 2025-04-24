@@ -175,5 +175,5 @@ cython_debug/
 #.idea/
 
 # >>> [start] Things added by Herman >>>
-!journal/2025-03-31/data zip/**/*
+!journal/entries/2025-03-31/data zip/**/*.*
 # <<< [end] Things added by Herman <<<
