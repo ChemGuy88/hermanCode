@@ -5,7 +5,8 @@ Useful functions.
 import datetime as dt
 import os
 from pathlib import Path
-from typing import (Tuple,
+from typing import (Literal,
+                    Tuple,
                     Union)
 
 from herman_code import logging_choices_string
@@ -69,5 +70,10 @@ def successive_parents(path_obj: Path,
     return path_obj, num_levels
 
 
-def get_timestamp():
-    return dt.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+def get_timestamp(mode: Literal["date", "time"] = "time"):
+    if mode == "date":
+        return dt.datetime.now().strftime("%Y-%m-%d")
+    elif mode == "time":
+        return dt.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    else:
+        raise Exception("Option must be one of {date, time}.")

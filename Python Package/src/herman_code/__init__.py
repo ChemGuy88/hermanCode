@@ -7,6 +7,7 @@ from pathlib import Path
 from os.path import dirname
 
 from herman_code import __about__
+from herman_code.classes import SecretString
 
 __version__ = __about__.__version__
 PATH = Path(dirname(__file__)).absolute()

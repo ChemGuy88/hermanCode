@@ -176,6 +176,7 @@ fi
 
 # shellcheck source="Shell Package/functions/functions.bash"
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/monitor_snapshot.zsh"
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getIP.bash"
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
@@ -189,14 +190,7 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
 alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 
-# Set zsh options
-if [[ "$SHELL" = "/bin/zsh" ]]; then
-    setopt INTERACTIVECOMMENTS
-    # source hatch tab completion
-    autoload -Uz compinit
-    compinit
-    source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/.hatch-complete/.hatch-complete.mash"
-fi
+setopt INTERACTIVECOMMENTS
 
 # Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
@@ -204,24 +198,26 @@ if [[ $OSTYPE == "darwin"* ]]; then
     alias lss="ls -lash"
     getPgrep "$USER" python
     echo ""
-    pcpu="$(("$(ps -ax -o %cpu | awk '{s+=$1} END {print s }')" / $(sysctl -n hw.ncpu)))"
-    pmem="$(ps -ax -o %mem | awk '{s+=$1} END {print s }')"
-    printf "CPU usage: %.2f %%\nRAM usage: %.2f %%\n" $pcpu $pmem
+    monitor_snapshot
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        # Add brew to PATH, formely in ".bash_profile"
+        # Add brew to PATH
         USER_HOMEBREW_INSTALLATION="/usr/local/bin/brew"
         if [[ -f "$USER_HOMEBREW_INSTALLATION" ]]; then
             eval "$($USER_HOMEBREW_INSTALLATION shellenv)"
         fi
+        if [[ "$USER" = "herman" ]]; then
+            conda activate herman-base
         # :: >>> macOS at home - Midas project >>> ::
-        cd ~/"Documents/midas" || return
-        conda activate herman-midas
-        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_in_midas/limericks_in_midas.mash"
+        elif [[ "$USER" = "midas" ]]; then
+            cd ~/"Documents/midas" || return
+            conda activate herman-midas
+            source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_in_midas/limericks_in_midas.mash"
         # :: <<< macOS at home - Midas project <<< ::
+        fi
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
-        # Add brew to PATH, formely in ".bash_profile"
+        # Add brew to PATH
         SYSTEM_HOMEBREW_INSTALLATION="/opt/homebrew/bin/brew"
         if [[ -f "$SYSTEM_HOMEBREW_INSTALLATION" ]]; then
             eval "$($SYSTEM_HOMEBREW_INSTALLATION shellenv)"
@@ -282,6 +278,18 @@ else
     echo "Unsupported operating system."
     return
 fi
+
+# >>> source hatch tab completion >>>
+# >>> source hatch tab completion >>> Hatch, Homebrew >>>
+# This block must be called after `brew shellenv`, so keep that in mind when moving it.
+autoload -Uz compinit
+compinit -u
+# <<< source hatch tab completion <<< Hatch, Homebrew <<<
+# >>> source hatch tab completion >>> Hatch >>>
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/.hatch-complete/.hatch-complete.mash"
+# <<< source hatch tab completion <<< Hatch <<<
+# <<< source hatch tab completion <<<
+
 
 
 ################################################################################

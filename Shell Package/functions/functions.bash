@@ -4,6 +4,10 @@ getTimestamp() {
     date "+%Y-%m-%d %H-%M-%S"
 }
 
+getDatestamp() {
+    date "+%Y-%m-%d"
+}
+
 getDirectorySizes () {
     if [[ -z "$1" ]]; then
         return

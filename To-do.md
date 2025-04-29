@@ -5,9 +5,9 @@
 - [ ] Consolidate my code
 - [ ] Clean up Dropbox folder: Move everything out. Do not use Dropbox
 - [ ] Shell Package
-  - [ ] Improve installation: add `pypi.username` and `pypi.password` to `$HOME/.pypirc` according to [PyPI](https://pypi.org/help/#apitoken). See [.pypirc]("Shell Package/install/templates/.pypirc")
-
-
+  - [ ] Improve installation
+    - [ ] Add *homebrew*, because we need it for `pstree`.
+    - [ ] Add `pypi.username` and `pypi.password` to `$HOME/.pypirc` according to [PyPI](https://pypi.org/help/#apitoken). See [.pypirc]("Shell Package/install/templates/.pypirc")
 
 ##  Consolidate my code
 
