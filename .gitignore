@@ -15,6 +15,7 @@
 !**/data/**/*.text
 **/*.xlsx
 **/*.zip
+COMMIT_EDITMSG
 data/*
 documents/*
 Shell Package/install/data/output/*

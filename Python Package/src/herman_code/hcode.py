@@ -26,6 +26,10 @@ def mf_1():
     print("Be strong!")
 
 
+# Argparse constants
+TEXT_HELP_V = "The verbosity level, a non-negative integer."
+
+
 if __name__ == "__main__":
     # >>> Argument parsing >>>
     parser = argparse.ArgumentParser()
@@ -34,7 +38,7 @@ if __name__ == "__main__":
     parser.add_argument("--log_level",
                         default=10,
                         type=int,
-                        help="""Increase output verbosity. See "logging" module's log level for valid values.""")
+                        help="""Increase log verbosity. See "logging" module's log level for valid values.""")
 
     # Subparsing
     subparsers = parser.add_subparsers(required=True)
@@ -49,25 +53,28 @@ if __name__ == "__main__":
     parser_parse_git_cmt = subparsers.add_parser(name=PARSER_PARSE_GIT_CMT_NAME,
                                                help="Parses a Git commit `COMMIT_EDITMSG` file.")
     parser_parse_git_cmt.add_argument("file_path",
-                                    help="The path to the COMMIT_EDITMSG file.")
+                                      help="The path to the COMMIT_EDITMSG file.")
     parser_parse_git_cmt.add_argument("-v",
-                                    type=int,
-                                    help="The verbosity level, a non-negative integer.")
+                                      type=int,
+                                      default=0,
+                                      help=TEXT_HELP_V)
     parser_parse_git_cmt.set_defaults(func=mf_2,
-                                    _command=PARSER_PARSE_GIT_CMT_NAME)
+                                      _command=PARSER_PARSE_GIT_CMT_NAME)
 
     # ::: Arguments: Command "Check Git commit message file" :::
     PARSER_CHK_GIT_CMT_NAME = "chk_git_cmt"
     parser_chk_git_cmt = subparsers.add_parser(name=PARSER_CHK_GIT_CMT_NAME,
                                                help="Checks if a Git commit `COMMIT_EDITMSG` file is descriptive enough.")
-    parser_chk_git_cmt.add_argument("file_path",
+    parser_chk_git_cmt.add_argument("-fp",
+                                    "--file_path",
+                                    default="COMMIT_EDITMSG",
                                     help="The path to the COMMIT_EDITMSG file.")
     parser_chk_git_cmt.add_argument("-v",
                                     type=int,
-                                    help="The verbosity level, a non-negative integer.")
+                                    default=0,
+                                    help=TEXT_HELP_V)
     parser_chk_git_cmt.set_defaults(func=mf_3,
-                                    _command=PARSER_CHK_GIT_CMT_NAME,
-                                    v=0)
+                                    _command=PARSER_CHK_GIT_CMT_NAME)
 
     # ::: Arguments: Command "Tests" :::
     PARSER_TESTS_NAME = "tests"

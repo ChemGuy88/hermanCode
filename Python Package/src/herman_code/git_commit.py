@@ -59,20 +59,36 @@ GitCommitEditMsgParts = Literal["1_title",
                                 "3_list",
                                 "4_boilerplate",
                                 "5_branch",
-                                "6_remote_branch",
-                                "7_staged",
-                                "8_not_staged",
-                                "9_not_tracked"]
+                                "6_branch_status",
+                                "7_remote_branch",
+                                "8_num_commits",
+                                "9_staged",
+                                "10_not_staged",
+                                "11_not_tracked"]
 git_commit_editmsg_parts = get_args(GitCommitEditMsgParts)
-KEY_TITLE         = git_commit_editmsg_parts[0]
-KEY_TEXT          = git_commit_editmsg_parts[1]
-KEY_LIST          = git_commit_editmsg_parts[2]
-KEY_BOILERPLATE   = git_commit_editmsg_parts[3]
-KEY_BRANCH        = git_commit_editmsg_parts[4]
-KEY_REMOTE_BRANCH = git_commit_editmsg_parts[5]
-KEY_STAGED        = git_commit_editmsg_parts[6]
-KEY_NOT_STAGED    = git_commit_editmsg_parts[7]
-KEY_NOT_TRACKED   = git_commit_editmsg_parts[8]
+KEY_TITLE_0         = "title"
+KEY_TEXT_0          = "text"
+KEY_LIST_0          = "list"
+KEY_BOILERPLATE_0   = "boilerplate"
+KEY_BRANCH_0        = "branch"
+KEY_BRANCH_STATUS_0 = "branch_status"
+KEY_REMOTE_BRANCH_0 = "remote_branch"
+KEY_NUM_COMMITS_0   = "num_commits"
+KEY_STAGED_0        = "staged"
+KEY_NOT_STAGED_0    = "not_staged"
+KEY_NOT_TRACKED_0   = "not_tracked"
+
+KEY_TITLE_1         = git_commit_editmsg_parts[0]
+KEY_TEXT_1          = git_commit_editmsg_parts[1]
+KEY_LIST_1          = git_commit_editmsg_parts[2]
+KEY_BOILERPLATE_1   = git_commit_editmsg_parts[3]
+KEY_BRANCH_1        = git_commit_editmsg_parts[4]
+KEY_BRANCH_STATUS_1 = git_commit_editmsg_parts[5]
+KEY_REMOTE_BRANCH_1 = git_commit_editmsg_parts[6]
+KEY_NUM_COMMITS_1   = git_commit_editmsg_parts[7]
+KEY_STAGED_1        = git_commit_editmsg_parts[8]
+KEY_NOT_STAGED_1    = git_commit_editmsg_parts[9]
+KEY_NOT_TRACKED_1   = git_commit_editmsg_parts[10]
 
 type ParsedGitCommitEditMsg = Dict[GitCommitEditMsgParts, Any]
 
@@ -88,14 +104,21 @@ PATTERN_COMMIT_EDITMSG = r"""(?msx:
                              # Capture all the whitespace between the last list element 
                              # and the boilerplate
                              (?:\W+)
-                             (?P<boilerplate>\#\ Please\ enter\ the\ commit\ message\ for\ your\ changes.\ Lines\ starting\n
-                             \#\ with\ '\#'\ will\ be\ ignored,\ and\ an\ empty\ message\ aborts\ the\ commit.\n
-                             \#\n
+                             (?P<boilerplate>
+                             \#\ Please\ enter\ the\ commit\ message\ for\ your\ changes\.\ Lines\ starting\n
+                             \#\ with\ '\#'\ will\ be\ ignored,\ and\ an\ empty\ message\ aborts\ the\ commit\.\n
+                             \#\n)
                              \#\ On\ branch\ 
-                             )
                              (?P<branch>.+)\n
-                             \#\ Your\ branch\ is\ up\ to\ date\ with\ '
-                             (?P<remote_branch>.+)'\.\n
+                             \#\ Your\ branch\ is\ 
+                             (?P<branch_status>.+)\ 
+                             (?:with|of)\ '
+                             (?P<remote_branch>.+)'
+                             (\ by\ 
+                             (?P<num_commits>\d+)
+                             \ commit[s]?)?
+                             \.\n
+                             (\#\ \ \ \(use\ "git\ push"\ to\ publish\ your\ local\ commits\)\n)?
                              \#\n
                              \#\ Changes\ to\ be\ committed:\n
                              (?P<staged>.+?)
@@ -474,27 +497,37 @@ def parse_git_commit_editmsg(filepath: Path,
 
     # ::: 1 ::: Unpack results
     if parts:
-        title         = parts["title"]
-        text          = parts["text"]
-        list_         = parts["list"]
-        boilerplate   = parts["boilerplate"]
-        branch        = parts["branch"]
-        remote_branch = parts["remote_branch"]
-        staged        = parts["staged"]
-        not_staged    = parts["not_staged"]
-        not_tracked   = parts["not_tracked"]
+        title         = parts[KEY_TITLE_0]
+        text          = parts[KEY_TEXT_0]
+        list_         = parts[KEY_LIST_0]
+        boilerplate   = parts[KEY_BOILERPLATE_0]
+        branch        = parts[KEY_BRANCH_0]
+        remote_branch = parts[KEY_REMOTE_BRANCH_0]
+        staged        = parts[KEY_STAGED_0]
+        not_staged    = parts[KEY_NOT_STAGED_0]
+        not_tracked   = parts[KEY_NOT_TRACKED_0]
 
-        results = {KEY_TITLE: title,
-                   KEY_TEXT: text,
-                   KEY_LIST: list_,
-                   KEY_BOILERPLATE: boilerplate,
-                   KEY_BRANCH: branch,
-                   KEY_REMOTE_BRANCH: remote_branch,
-                   KEY_STAGED: staged,
-                   KEY_NOT_STAGED: not_staged,
-                   KEY_NOT_TRACKED: not_tracked}
+        results = {KEY_TITLE_1: title,
+                   KEY_TEXT_1: text,
+                   KEY_LIST_1: list_,
+                   KEY_BOILERPLATE_1: boilerplate,
+                   KEY_BRANCH_1: branch,
+                   KEY_REMOTE_BRANCH_1: remote_branch,
+                   KEY_STAGED_1: staged,
+                   KEY_NOT_STAGED_1: not_staged,
+                   KEY_NOT_TRACKED_1: not_tracked}
+
+        is_commit_format_2 = KEY_BRANCH_STATUS_0 in parts.keys() and KEY_NUM_COMMITS_0 in parts.keys()
+        if is_commit_format_2:
+            branch_status = parts["branch_status"]
+            num_commits   = parts["num_commits"]
+
+            results[KEY_BRANCH_STATUS_1] = branch_status
+            results[KEY_NUM_COMMITS_1]   = num_commits
+
     else:
-        raise Exception("Could not parse the selected file.")
+        fp = Path(filepath).absolute()
+        raise Exception(f"Could not parse the selected file: {fp}")
     
     if verbose > 0:
         pprint(results)
@@ -502,12 +535,12 @@ def parse_git_commit_editmsg(filepath: Path,
     # ::: 2 ::: Parse list
     list_parsed = parse_list(string_=list_,
                              verbose=verbose-1)
-    results[KEY_LIST] = list_parsed
+    results[KEY_LIST_1] = list_parsed
 
     # ::: 3 ::: Parse staged files
     pattern_2 = re.compile(pattern=PATTERN_EDITMSG_TRACKED)
     staged_parsed = pattern_2.findall(string=staged)
-    results[KEY_STAGED] = staged_parsed
+    results[KEY_STAGED_1] = staged_parsed
 
     # ::: 4 ::: Parsed files not staged
     if not_staged:
@@ -515,7 +548,7 @@ def parse_git_commit_editmsg(filepath: Path,
         not_staged_parsed = pattern_3.findall(string=not_staged)
     else:
         not_staged_parsed = None
-    results[KEY_NOT_STAGED] = not_staged_parsed
+    results[KEY_NOT_STAGED_1] = not_staged_parsed
 
     # ::: 5 ::: Parse untracked files
     if not_tracked:
@@ -523,7 +556,7 @@ def parse_git_commit_editmsg(filepath: Path,
         not_tracked_parsed = pattern_3.findall(string=not_tracked)
     else:
         not_tracked_parsed = None
-    results[KEY_NOT_TRACKED] = not_tracked_parsed
+    results[KEY_NOT_TRACKED_1] = not_tracked_parsed
 
     return results
 
@@ -535,8 +568,8 @@ def check_git_commit_editmsg(filepath: Path,
     parsed_message = parse_git_commit_editmsg(filepath=filepath,
                                               verbose=verbose-1)
 
-    staged_parsed = parsed_message[KEY_STAGED]
-    list_parsed   = parsed_message[KEY_LIST]
+    staged_parsed = parsed_message[KEY_STAGED_1]
+    list_parsed   = parsed_message[KEY_LIST_1]
 
     # Get list of files from parsed commit message list
     files_from_list = get_files_from_parsed_list(list_parsed_x=list_parsed)
