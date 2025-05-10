@@ -587,3 +587,17 @@ def check_git_commit_editmsg(filepath: Path,
 
     # Return results
     return result_short, result_medium, result_long
+
+
+def mf_1(args):
+    """
+    """
+    return parse_git_commit_editmsg(filepath=args.file_path,
+                                    verbose=args.v)
+
+
+def mf_2(args):
+    """
+    """
+    return check_git_commit_editmsg(filepath=args.file_path,
+                                    verbose=args.v)

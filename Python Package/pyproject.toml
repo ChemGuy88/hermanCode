@@ -30,6 +30,10 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+
+hcode = "herman_code.scripts:hcode"
+
 [project.urls]
 Documentation = "https://github.com/ChemGuy88/hermanCode#readme"
 Issues = "https://github.com/ChemGuy88/hermanCode/issues"
@@ -37,6 +41,13 @@ Source = "https://github.com/ChemGuy88/hermanCode"
 
 [tool.hatch.version]
 path = "src/herman_code/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+
+include = [
+  "/src",
+  "/tests",
+]
 
 [tool.hatch.envs.default]
 dependencies = [

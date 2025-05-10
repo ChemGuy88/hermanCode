@@ -17,7 +17,7 @@ conda create -n herman-base autopep8 bs4 flake8 ipython matplotlib numpy pandas 
 # `herman-build`
 
 ```zsh
-conda create -n herman-build build ipython python=3.11 twine -c conda-forge -c defaults
+conda create -n herman-build python-build hatch ipython python=3.12 twine -c conda-forge -c defaults
 ```
 
 # `herman-ctc`
@@ -46,10 +46,16 @@ conda create -n herman-leetcode autopep8 bs4 flake8 ipython matplotlib numpy pan
 # `herman-midas`
 
 ```zsh
-conda create -n herman-midas coinbase-advanced-py gh humanfriendly ipython pandas python=3.12 websocket-client -c conda-forge && \
+conda create -n herman-midas coinbase-advanced-py gh humanfriendly ipython pandas python=3.12 requests requests-mock termcolor websocket-client -c anaconda -c conda-forge && \
 conda activate herman-midas && \
 python -m pip install --user herman-code
-python -m pip install --user rel
+```
+
+You can also install `coinbase-advanced-py` in editable form:
+
+```zsh
+git clone $repo_url dir_name  # Clone it from Coinbase or from a fork
+python -m pip install -e dirname
 ```
 
 Package installation documentation
@@ -58,17 +64,18 @@ Package installation documentation
 - [websocket-client](https://websocket-client.readthedocs.io/en/latest/installation.html)
 
 Package purpose
-| package              | purpose   |
-| -------------------- | --------- |
-| coinbase-advanced-py | essential |
-| gh                   | utility   |
-| herman_code          | utility   |
-| humanfriendly        | utility   |
-| ipython              | utility   |
-| pandas               | utility   |
-| rel                  | TBD       |
-| typing_extensions    | redundant |
-| websocket-client     | utility   |
+| package              | purpose   | Note                                                                                         |
+| -------------------- | --------- | -------------------------------------------------------------------------------------------- |
+| coinbase-advanced-py | essential |                                                                                              |
+| gh                   | utility   |                                                                                              |
+| herman_code          | utility   |                                                                                              |
+| humanfriendly        | utility   |                                                                                              |
+| ipython              | utility   |                                                                                              |
+| pandas               | utility   |                                                                                              |
+| requests             | coinbase  | For `coinbase-advanced-py`, because for some reason it doesn't automatically include it.     |
+| requests-mock        | coinbase  | Used for running the tests in the Coinbase repo, if you cloned it and want to contribute.    |
+| termcolor            | utility   |                                                                                              |
+| websocket-client     | TBD       | This is used for my implementation of a WebSocket. Might not be necessary if you use the WebSocket client from `coinbase-advanced-py`. |
 
 # `herman-javascript`
 

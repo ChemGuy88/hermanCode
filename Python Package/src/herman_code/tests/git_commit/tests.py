@@ -105,7 +105,7 @@ def test_parse_git_commit_editmsg(verbose: int = 0):
         print("Test battery failed ❌")
 
 
-def manly_function(args):
+def mf_1(args):
     """
     """
     test_parse_git_commit_editmsg(args.v)
