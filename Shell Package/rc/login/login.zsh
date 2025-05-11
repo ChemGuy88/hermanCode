@@ -53,8 +53,8 @@ elif [[ "$SHELL" = "/bin/bash" ]]; then
     HERMANS_CODE_SHELL_PKG_PATH="${BASH_SOURCE[0]%/*}"
 fi
 
-# BASH configurations
-export HISTFILESIZE=2000  #  The maximum number of lines contained in the history file
+# Shell configurations
+export HISTFILESIZE=4000  #  The maximum number of lines contained in the history file
 
 # Machine names
 CONSTANTS_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/constants/constants.mash"
@@ -189,14 +189,17 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 ################################################################################
 
 alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
+alias history='echo "Using \`history\` alias."; history -100 -1'
 
 setopt INTERACTIVECOMMENTS
+
+get_pgrep_command="python"
 
 # Machine-Specific conveniences
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     alias lss="ls -lash"
-    getPgrep "$USER" python
+    getPgrep "$USER" "$get_pgrep_command"
     echo ""
     monitor_snapshot
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
@@ -272,7 +275,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "linux-gnu"* ]]; then
     # :: >>> Linux >>> ::
     alias lss="ls -lashX"
-    getPgrep herman .
+    getPgrep "$USER" "$get_pgrep_command"
     # :: <<< Linux <<< ::
 else
     echo "Unsupported operating system."
