@@ -19,12 +19,16 @@ if expr "$OSTYPE" : darwin\* 1>/dev/null; then
     # :: macOS ::
     if expr "$(hostname)" : "$MACHINE_NAME_HERMANS_IMAC" 1>/dev/null; then
         # :: macOS at home ::
-        # :: >>> macOS at home - Midas project >>> ::
-        LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_out_midas/limericks_out_midas.mash"
-        if [ -f "$LIMERICKS_OUT_PATH" ]; then
-            source "$LIMERICKS_OUT_PATH" || echo "MASH: Warning: ($LINENO): Safety mechanism failed."
-        else
-            echo "MASH: Info: ($LINENO): Safety mechanism absent."
+        if expr "$USER" : "herman" 1>/dev/null; then
+            :
+        elif expr "$USER" : "midas" 1>/dev/null; then
+            # :: >>> macOS at home - Midas project >>> ::
+            LIMERICKS_OUT_PATH="$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/limericks_out_midas/limericks_out_midas.mash"
+            if [ -f "$LIMERICKS_OUT_PATH" ]; then
+                source "$LIMERICKS_OUT_PATH" || echo "MASH: Warning: ($LINENO): Safety mechanism failed."
+            else
+                echo "MASH: Info: ($LINENO): Safety mechanism absent."
+            fi
         fi
         # :: <<< macOS at home - Midas project <<< ::
     elif expr "$(hostname)" : "$MACHINE_NAME_HERMANS_MBA" 1>/dev/null; then

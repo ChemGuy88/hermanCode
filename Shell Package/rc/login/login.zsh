@@ -199,18 +199,20 @@ get_pgrep_command="python"
 if [[ $OSTYPE == "darwin"* ]]; then
     # :: macOS ::
     alias lss="ls -lash"
+
     getPgrep "$USER" "$get_pgrep_command"
     echo ""
     monitor_snapshot
+
+    # Add brew to PATH
+    USER_HOMEBREW_INSTALLATION="/usr/local/bin/brew"
+    if [[ -f "$USER_HOMEBREW_INSTALLATION" ]]; then
+        eval "$($USER_HOMEBREW_INSTALLATION shellenv)"
+    fi
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        # Add brew to PATH
-        USER_HOMEBREW_INSTALLATION="/usr/local/bin/brew"
-        if [[ -f "$USER_HOMEBREW_INSTALLATION" ]]; then
-            eval "$($USER_HOMEBREW_INSTALLATION shellenv)"
-        fi
         if [[ "$USER" = "herman" ]]; then
-            conda activate herman-base
+            :
         # :: >>> macOS at home - Midas project >>> ::
         elif [[ "$USER" = "midas" ]]; then
             cd ~/"Documents/midas" || return
@@ -220,11 +222,6 @@ if [[ $OSTYPE == "darwin"* ]]; then
         fi
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
-        # Add brew to PATH
-        SYSTEM_HOMEBREW_INSTALLATION="/opt/homebrew/bin/brew"
-        if [[ -f "$SYSTEM_HOMEBREW_INSTALLATION" ]]; then
-            eval "$($SYSTEM_HOMEBREW_INSTALLATION shellenv)"
-        fi
         # :: >>> macOS on MBA - Meta Interview >>> ::
         if [[ 1 = 2 ]]; then
             cd ~/"Documents/Meta Interview/Preparation Hub" || return
