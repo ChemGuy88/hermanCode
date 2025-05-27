@@ -86,7 +86,7 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        if [[ "$USER" == "herman" ]]; then
+        if [[ "$USER" == "herman" || "$USER" == "midas" ]]; then
             # >>> PATH >>>
             PATH_ADDENDUM_1="/usr/local/opt/postgresql@16/bin"
             if if [ -n "${PATH+x}" ]; then
