@@ -14,6 +14,14 @@ conda create -n herman-awstut python=3.12
 conda create -n herman-base autopep8 bs4 flake8 ipython matplotlib numpy pandas pyarrow python=3.12 pyyaml seaborn selenium sqlalchemy -c conda-forge -c defaults
 ```
 
+# `herman-pdf`
+
+For the IDR, Inc. job interview.
+
+```zsh
+conda create -n herman-pdf autopep8 bs4 flake8 ipython matplotlib numpy pandas pyarrow pypdf python=3.12 seaborn selenium sqlalchemy -c conda-forge -c defaults
+```
+
 # `herman-build`
 
 ```zsh
