@@ -86,19 +86,32 @@ fi
 if [[ $OSTYPE == "darwin"* ]]; then
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
-        PYTHONPATH_ADDENDUM_1="/Users/$USER/Documents/Git Repositories/midas/src"  # Add project "midas" to `PATH`
-        PYTHONPATH_ADDENDUM_2="$HERMANS_CODE_INSTALL_PATH/Python Package/src"  # Add project "Herman's Code (Python Package)" to `PATH`
-        if [ -z "${PYTHONPATH+x}" ]; then
-            export PYTHONPATH="$PYTHONPATH:\
-$PYTHONPATH_ADDENDUM_1:\
-$PYTHONPATH_ADDENDUM_2"
-        else
-            export PYTHONPATH="$PYTHONPATH_ADDENDUM_1:\
-$PYTHONPATH_ADDENDUM_2"
+        if [[ "$USER" == "herman" ]]; then
+            # >>> PATH >>>
+            PATH_ADDENDUM_1="/usr/local/opt/postgresql@16/bin"
+            if if [ -n "${PATH+x}" ]; then
+                export PATH="$PATH:\
+$PATH_ADDENDUM_1"
+            else
+                export PATH="$PATH_ADDENDUM_1"
+                :
+            fi
+            # <<< PATH <<<
+            # >>> PYTHONPATH >>>
+            # PYTHONPATH_ADDENDUM_1="path/to/somewhere"
+            if [ -n "${PYTHONPATH+x}" ]; then
+                :
+#                 export PYTHONPATH="$PYTHONPATH:\
+# $PYTHONPATH_ADDENDUM_1"
+            else
+                # export PYTHONPATH="$PYTHONPATH_ADDENDUM_1"
+                :
+            fi
+            # <<< PYTHONPATH <<<
         fi
     elif [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_MBA" ]]; then
         # :: macOS on MBA ::
-        PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts
+        PATH_ADDENDUM_1="/Users/$USER/.local/bin"  # Custom user scripts from Herman's Code
         PATH_ADDENDUM_2="/opt/homebrew/opt/postgresql@16/bin"  # postgresql command-line utility
         export PATH="$PATH:\
 $PATH_ADDENDUM_1:\
