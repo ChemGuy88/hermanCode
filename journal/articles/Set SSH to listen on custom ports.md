@@ -7,7 +7,7 @@
   - If editing
     - `sudo vim /etc/ssh/sshd_config`
 
-Add however many additional lines you want in the form `Port X`, where `X` is the port number. The default is 22. Here is an excerpt of the part of the file we will be editing, based on the OpenBSD version of the file (v 1.104 2021/07/02 05:11:21)
+Add however many additional lines you want in the form `Port X`, where `X` is the port number. The default is 22. Here is an excerpt of the part of the file we will be editing, based on the *OpenBSD* version of the file (*v 1.104 2021/07/02 05:11:21*)
 
 ```text
 # explicitly set.  Options that appear multiple times keep the first value set,
@@ -60,3 +60,15 @@ sudo lsof -i -P | grep LISTEN | grep :1024
 ```
 
 where `1024` is the port number from our example. If you added multiple ports and want to check each one, you will need to run the above command with each different port number.
+
+Once you have confirmed the new configuration file is in order, [re-launch the SSH daemon](https://superuser.com/questions/478035/command-line-ssh-restart-mac-osx-mountain-lion).
+
+```shell
+sudo launchctl kickstart -k system/com.openssh.sshd
+```
+
+or something similar like
+
+```shell
+sudo launchctl bootout 
+```
