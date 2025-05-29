@@ -1,0 +1,20 @@
+#!/usr/bin/env mash
+
+monitor_snapshot () {
+    if [ -z "$HERMANS_CODE_INSTALL_PATH" ]; then
+        echo "MASH: Error: The environment variable \`HERMANS_CODE_INSTALL_PATH\` was not found. This is necessary to locate the required files."
+        return
+    fi
+
+    shell_name=$(source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/get_shell_name.mash")
+
+    if [ "$shell_name" = "bash" ]; then
+        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/monitor_snapshot/monitor_snapshot.bash"
+        monitor_snapshot
+    elif [ "$shell_name" = "zsh" ]; then
+        source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/monitor_snapshot/monitor_snapshot.zsh"
+        monitor_snapshot
+    else
+        echo "MASH: Warning: Unsupported shell \"$shell_name\"."
+    fi
+}

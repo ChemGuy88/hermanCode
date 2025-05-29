@@ -45,8 +45,7 @@ fi
 ################################################################################
 
 # Package paths
-this_file_path="${(%):-%N}"  # ZSH syntax
-HERMANS_CODE_SHELL_PKG_PATH="$(dirname "$this_file_path")"
+HERMANS_CODE_SHELL_PKG_PATH="${BASH_SOURCE[0]%/*}"
 
 # Shell configurations
 export HISTFILESIZE=4000  #  The maximum number of lines contained in the history file
@@ -58,6 +57,7 @@ source "$CONSTANTS_PATH"
 
 # OS-specific values
 if [[ $OSTYPE == "darwin"* ]]; then
+    export BASH_SILENCE_DEPRECATION_WARNING=1
     if [[ "$(hostname -s)" == "$MACHINE_NAME_HERMANS_IMAC" ]]; then
         # :: macOS at home ::
         MIDAS_INSTALL_PATH="/Users/$USER/Documents/midas"
@@ -127,9 +127,11 @@ fi
 ### Constants: Custom Prompts ##################################################
 ################################################################################
 
-custom_prompt="$PROMPT_CONDA_PREFIX%F{cyan}%t%f [%F{magenta}%i%f] %F{9}%1d%f %F{green}%B-->%f%b "
-export PROMPT="$custom_prompt"
-
+CYAN="\[$(tput setaf 4)\]"
+ATOMGREEN="\[$(tput setaf 114)\]"
+RESET="\[$(tput sgr0)\]"
+custom_prompt="$PROMPT_CONDA_PREFIX\@ [\#] ${CYAN}\W${RESET}${ATOMGREEN} -->${RESET} "
+export PS1="$custom_prompt"
 
 ################################################################################
 ################################################## Constants: Custom Prompts ###
@@ -157,7 +159,7 @@ fi
 
 # shellcheck source="Shell Package/functions/..."
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/functions.bash"
-source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/monitor_snapshot/monitor_snapshot.zsh"
+source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/monitor_snapshot/monitor_snapshot.mash"
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getIP.bash"
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
@@ -171,8 +173,6 @@ source "$HERMANS_CODE_INSTALL_PATH/Shell Package/functions/getPgrep.bash"
 
 alias vim='vi -S "$HERMANS_CODE_INSTALL_PATH/Shell Package/vim/.vimrc"'
 alias hist='echo "Using \`history\` alias."; history -100 -1'
-
-setopt INTERACTIVECOMMENTS
 
 get_pgrep_command="python"
 
@@ -261,17 +261,8 @@ else
 fi
 
 # >>> source hatch tab completion >>>
-# >>> source hatch tab completion >>> Hatch, Homebrew >>>
-# This block must be called after `brew shellenv`, so keep that in mind when moving it.
-autoload -Uz compinit
-compinit -u
-# <<< source hatch tab completion <<< Hatch, Homebrew <<<
-# >>> source hatch tab completion >>> Hatch >>>
 source "$HERMANS_CODE_INSTALL_PATH/Shell Package/rc/.hatch-complete/.hatch-complete.mash"
-# <<< source hatch tab completion <<< Hatch <<<
 # <<< source hatch tab completion <<<
-
-
 
 ################################################################################
 ############################################################### Conveniences ###

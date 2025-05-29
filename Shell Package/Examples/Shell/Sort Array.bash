@@ -20,9 +20,9 @@ allArrays+=("${array3[@]}")
 
 # Show array elements
 echo " >>> Array ${bld}${GRN}before${nrl}${NC} sorting >>>"
-for path in "${allArrays[@]}";
+for arrayElement in "${allArrays[@]}";
 do
-    echo "  $path"
+    echo "  $arrayElement"
 done
 echo " <<< Array ${bld}${GRN}before${nrl}${NC} sorting <<<"
 
@@ -36,8 +36,8 @@ done < <(printf '%s\n' "${allArrays[@]}" | sort)
 
 # Check work
 echo " >>> Array ${bld}${RED}after${nrl}${NC} sorting >>>"
-for path in "${allArraysSorted[@]}";
+for arrayElement in "${allArraysSorted[@]}";
 do
-    echo "  $path"
+    echo "  $arrayElement"
 done
 echo " <<< Array ${bld}${RED}after${nrl}${NC} sorting <<<"

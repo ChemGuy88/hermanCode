@@ -20,4 +20,10 @@ Today I read that the POSIX form of testing if a variable is set is
 if [ -n "${VARIABLE+x}" ]
 ```
 
+Conversely, the test to see if a variable is *unset* would be
+
+```shell
+if [ -z "${VARIABLE+x}" ]
+```
+
 More interesting is its explanation from the [*Unix & Linux StackExchange*](https://unix.stackexchange.com/a/755682/399435).
