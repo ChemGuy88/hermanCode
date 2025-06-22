@@ -8,12 +8,6 @@ AWS Tutorial environment
 conda create -n herman-awstut python=3.12
 ```
 
-# `herman-base`
-
-```zsh
-conda create -n herman-base autopep8 bs4 flake8 ipython matplotlib numpy pandas pyarrow python=3.12 pyyaml seaborn selenium sqlalchemy -c conda-forge -c defaults
-```
-
 # `herman-pdf`
 
 For the IDR, Inc. job interview.
